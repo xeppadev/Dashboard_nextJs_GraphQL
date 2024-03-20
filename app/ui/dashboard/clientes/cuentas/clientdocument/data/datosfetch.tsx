@@ -1,0 +1,51 @@
+
+export const data = [
+  {
+    id: "728ed52f",
+    cliente: "Minera Antamina",
+    contrato: "CON-1211013",
+    registro: "2023-11-20T21:19:12.997+00:00",
+    vencimiento: "2023-11-20T21:19:12.997+00:00",
+    state: "activo",
+  },
+  {
+    id: "728er3421",
+    cliente: "Minera Antamina",
+    contrato: "CON-1214523",
+    registro: "2023-11-20T21:19:12.997+00:00",
+    vencimiento: "2023-11-20T21:19:12.997+00:00",
+    state: "pendiente",
+  },
+  {
+    id: "728e14d52f",
+    cliente: "Minera Yanacocha",
+    contrato: "CON-1216223",
+    registro: "2023-11-15T14:35:28.185+00:00",
+    vencimiento: "2023-11-15T14:35:28.185+00:00",
+    state: "activo",
+  },
+  {
+    id: "728ed59f",
+    cliente: "Minera Yanacocha",
+    contrato: "CON-1216223",
+    registro: "2023-11-03T05:15:53.256+00:00",
+    vencimiento: "2023-11-03T05:15:53.256+00:00",
+    state: "activo",
+  },
+  {
+    id: "778ed52f",
+    cliente: "Minera Yanacocha",
+    contrato: "CON-1216223",
+    registro: "2023-11-15T14:35:28.185+00:00",
+    vencimiento: "2023-11-15T14:35:28.185+00:00",
+    state: "activo",
+  },
+  {
+    id: "7281d52f",
+    cliente: "Minera Chinalco",
+    contrato: "CON-1216223",
+    registro: "2023-11-15T14:35:28.185+00:00",
+    vencimiento: "2023-11-15T14:35:28.185+00:00",
+    state: "pendiente",
+  },
+];
