@@ -6,10 +6,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DataTableRowActions } from "../../clientes/listar/table/data-table-row-actions";
+import { DataTableRowActions } from "../../clientes/listar/data-table-row-actions";
 import { DialogEdit } from "./accionedit";
 import { PersonalDto } from "@/src/generated/graphql";
-import { getInitials } from "@/app/lib/utils/utils";
+import { getInitials,SalarioMasReciente } from "@/app/lib/utils/utils";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -51,7 +51,7 @@ export const columns: ColumnDef<Regist>[] = [
 
       return (
         <Link
-          href={`/dashboard/clientes/cuentas/${column._id}`}
+          href={`/dashboard/personal/cuentas/${column._id}`}
           className="flex item-center min-w-[180px] "
         >
           <div className="flex space-x-4 justify-center  ">
@@ -94,16 +94,11 @@ export const columns: ColumnDef<Regist>[] = [
     },
     cell: ({ row }) => {
       const column = row.original;
+      const salario = SalarioMasReciente(column.salarioFecha);
       return (
         <div className="flex max-w-fit items-center font-bold bg-freelance text-[#2970FF]  text-xs px-1.5 py-1 rounded-md">
-         S/{
-            column.salarioFecha
-              ?.slice()
-              .sort(
-                (a, b) =>
-                  new Date(b!.fecha).getTime() - new Date(a!.fecha).getTime()
-              )[0]?.salario
-          }
+          S/. {salario}
+          
         </div>
       );
     },

@@ -62,7 +62,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           />
           <label
             htmlFor={props.id || props.name}
-            className="absolute top-0 left-3 transition-all duration-200 pointer-events-none text-sm material-label bg-white dark:bg-card Z-40"
+            className="absolute bottom-7 left-3 transition-all duration-200 pointer-events-none text-sm material-label bg-white dark:bg-card Z-40"
           >
               {placeholder} 
           </label>

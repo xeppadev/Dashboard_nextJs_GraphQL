@@ -1,7 +1,7 @@
 "use client";
 import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchemaClient } from "./formulario/schema";
+import { formSchemaClient } from "./schema";
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
 import { SolarTrashBinTrashBold, IcRoundAdd } from "@/app/lib/icons";
 import { Textarea } from "@/components/ui/textarea";
@@ -71,9 +71,12 @@ export function AccountForm({
   function handleAddContact() {
     append({
       name: "",
-      alias: "",
+      username: "",
       email: "",
-      contraseña: "",
+      password: "",
+      clienteAsociado: "",
+      nivelUser: "",
+      
     });
   }
 

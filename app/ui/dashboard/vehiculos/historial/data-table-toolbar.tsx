@@ -1,13 +1,11 @@
 "use client";
 
-import { Cross2Icon } from "@radix-ui/react-icons";
+
 import { Table } from "@tanstack/react-table";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-import { placas, states } from "./data/data";
-
-import CalendarComponent from "../../clientes/cuentas/clientdocument/calendar";
+// import CalendarComponent from "../../clientes/cuentas/clientContratos/calendar";
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
 }
@@ -51,14 +49,14 @@ export function DataTableToolbar2<TData>({
         )}
       </div>
       <div className="w-full flex flex-col lg:flex-row lg:w-[46%] space-x-0 lg:space-x-4 space-y-3 lg:space-y-0">
-        <CalendarComponent 
+        {/* <CalendarComponent 
           classname={"w-full xl:w-1/2"}
           descripcion={"Fecha Inicio"}
           />
         <CalendarComponent
          classname={"w-full xl:w-1/2"}
          descripcion={"Fecha Termino"}
-                />
+                /> */}
         </div>
         <Input
           placeholder="Filter Placas..."

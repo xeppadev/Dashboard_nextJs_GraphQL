@@ -64,7 +64,13 @@ export const FormFieldate: React.FC<FieldValues> = ({
                 <Calendar
                   mode="single"
                   selected={field.value}
-                  onSelect={field.onChange}
+                  onSelect={(date) => {
+                   if(date){
+                    date.setMinutes(date.getTimezoneOffset() - date.getMinutes() );
+                    const dateString = format(date, "yyyy-MM-dd'T'HH:mm:ss.SSS-05:00");
+                    field.onChange(dateString);
+                    }
+                  }}
                   disabled={(date) => date < new Date("1900-01-01")}
                   initialFocus
                 />

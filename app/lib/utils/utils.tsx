@@ -1,9 +1,12 @@
 import { differenceInDays, parseISO } from "date-fns";
 import { ContratoDto } from "@/src/generated/graphql";
+import { SalarioFechaDto } from "@/src/generated/graphql";
 export type Maybe<T> = T | null;
 type StatusComponentProps = {
   contratos?: Maybe<Array<Maybe<ContratoDto>>>;
 };
+
+
 
 export const StatusComponent: React.FC<StatusComponentProps> = ({
   contratos,
@@ -82,4 +85,28 @@ export function getInitials(name: string): string {
       ? `${names[0].charAt(0)}${names[1].charAt(0)}`
       : names[0].charAt(0);
   return initials.toUpperCase();
+}
+
+export function processColumn(column: string) {
+  const fileName =
+  column.replace(/[\\/]/g, "/").split("/").pop() || "";
+
+  const fileType = fileName.split(".").pop() || "";
+
+  return { fileName, fileType };
+}
+
+// Esta función toma un array de objetos salarioFecha y devuelve el salario más reciente
+export function SalarioMasReciente(salarioFecha: Maybe<Maybe<SalarioFechaDto>[]> | undefined): number | undefined {
+  if (!salarioFecha || salarioFecha.length === 0) {
+    return 
+  }
+
+  const salarioMasReciente = salarioFecha
+    .slice()
+    .sort(
+      (a, b) => new Date(b!.fecha).getTime() - new Date(a!.fecha).getTime()
+    )[0];
+
+  return salarioMasReciente?.salario;
 }

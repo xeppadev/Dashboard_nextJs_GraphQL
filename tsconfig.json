@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/ui/dashboard/clientes/cuentas/clientdocument", "app/ui/dashboard/clientes/cuentas/clientgeneral"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/ui/dashboard/clientes/cuentas/clientContratos", "app/ui/dashboard/clientes/cuentas/clientgeneral"],
   "exclude": ["node_modules"]
 }

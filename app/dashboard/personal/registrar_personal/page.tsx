@@ -1,4 +1,4 @@
-import FormClientes from "@/app/ui/dashboard/personal/registroForm";
+import FormPersonal from "@/app/ui/dashboard/personal/registrar/formularioPersonal";
 
 
 export default function RegistrarPer() {
@@ -9,7 +9,7 @@ export default function RegistrarPer() {
         Registrar Nuevo Personal
       </h2>
       </div>
-        <FormClientes />
+        <FormPersonal/>
       
     
   </div>

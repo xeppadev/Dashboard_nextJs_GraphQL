@@ -1,4 +1,4 @@
-import FormCliente from "@/app/ui/dashboard/clientes/registrar/tabsregis";
+import FormCliente from "@/app/ui/dashboard/clientes/registrar/formularioCliente";
 import Breadcrumbs from "@/app/ui/components/breadcrumbs";
 
 export default function RegistarCli() {

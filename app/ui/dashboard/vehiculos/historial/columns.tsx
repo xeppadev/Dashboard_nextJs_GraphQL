@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
 import { DialogEdit } from "../../personal/listar/accionedit";
-import { DataTableRowActions } from "../../clientes/listar/table/data-table-row-actions";
+import { DataTableRowActions } from "../../clientes/listar/data-table-row-actions";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";

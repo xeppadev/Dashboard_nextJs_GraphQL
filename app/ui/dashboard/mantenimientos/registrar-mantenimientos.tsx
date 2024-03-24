@@ -14,7 +14,7 @@ import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
 import MantenimienForm from "./formul-mantenimientos";
 import { Car, Plus } from "lucide-react";
-import CalendarComponent from "../clientes/cuentas/clientdocument/calendar";
+import CalendarComponent from "../clientes/cuentas/clientContratos/calendar";
 import { ScrollProduct } from "./scroll-mantenimientos";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";

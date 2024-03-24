@@ -13,7 +13,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
-import CalendarComponent from "../../clientes/cuentas/clientdocument/calendar";
+import CalendarComponent from "../../clientes/cuentas/clientContratos/calendar";
 import { ScrollAreaDemo } from "./scrollproveedor";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export default function Facturas() {

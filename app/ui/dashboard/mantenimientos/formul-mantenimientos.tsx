@@ -55,25 +55,7 @@ function MantenimienForm({ buttonText }: AccountFormProps) {
 
   const onSubmit = (data: AccountFormValues) => {
     console.log(data);
-    // const formData = new FormData();
-    // formData.append("type", data.type);
-    // formData.append("dob", data.dob.toString());
-    // formData.append("numerodocumento", data.numerodocumento);
-    // formData.append("minera", data.minera);
-    // formData.append("bio", data.bio);
-    // formData.append("file", selectedFile as Blob);
-    // formData.append("items", JSON.stringify(data.items));
-    // const res = await fetch("/api/form", {
-    //   method: "POST",
-    //   body: formData,
-    // });
-
-    // if (res.ok) {
-    //   toast({
-    //     description: `usuario  registrado con éxito`,
-    //     action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
-    //   });
-    // }
+   
   };
 
   return (

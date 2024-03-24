@@ -22,7 +22,7 @@ import {
 } from "@/components/ui/table";
 import { DataTableToolbar2 } from "../dashboard/vehiculos/historial/data-table-toolbar";
 
-import { DataTablePagination } from "../dashboard/clientes/listar/table/data-table-pagination";
+import { DataTablePagination } from "../dashboard/clientes/listar/data-table-pagination";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];

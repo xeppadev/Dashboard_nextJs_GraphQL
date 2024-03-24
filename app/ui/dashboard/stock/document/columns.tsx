@@ -8,7 +8,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DataTableRowActions } from "../../clientes/listar/table/data-table-row-actions";
+import { DataTableRowActions } from "../../clientes/listar/data-table-row-actions";
 import { DialogEdit } from "../listar/accionesedit";
 
 // This type is used to define the shape of our data.

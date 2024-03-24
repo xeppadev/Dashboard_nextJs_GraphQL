@@ -10,10 +10,11 @@ import {
 } from "@/components/ui/card";
 import { AlertDialogDemo } from "./dialogdelete";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import AccountForm from "../../registrar/formularidocument";
+import {FormularioChange} from "./formuCambiarDatos";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
-export default function Main({ user }: { user?: string }) {
+import { ClienteDto } from "@/src/generated/graphql";
+export default function Main({ data }: { data: ClienteDto }) {
   return (
     <div className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-5 ">
       <Card className="flex flex-col justify-between bg-background  lg:w-[75%]    xl:w-1/4">
@@ -32,10 +33,10 @@ export default function Main({ user }: { user?: string }) {
               <AvatarFallback />
             </Avatar>
           </div>
-          <CardTitle className="whitespace-nowrap overflow-hidden ">
-            Minera Barrick Peru SAC
+          <CardTitle className="whitespace-nowrap  ">
+            {data.nombreCliente}
           </CardTitle>
-          <Badge className="text-xs dark:text-white">id: {user}</Badge>
+          <Badge className="text-xs dark:text-white">id: {data._id}</Badge>
         </CardContent>
 
         <CardFooter className="flex flex-col justify-center space-y-10 ">
@@ -56,59 +57,8 @@ export default function Main({ user }: { user?: string }) {
           <CardTitle> Datos del Cliente</CardTitle>
         </CardHeader>
         <CardContent>
-          <AccountForm
-            fields={[
-              {
-                name: "name",
-                label: "Nombre del Cliente",
-                placeholder: "Nombre",
-
-                className: "w-full",
-              },
-              {
-                name: "ruc",
-                label: "Numero de RUC",
-                placeholder: "RUC",
-
-                className: "w-full",
-              },
-              {
-                name: "address",
-                label: "Direccion de Cliente",
-                placeholder: "Direccion",
-
-                className: "w-full",
-              },
-              {
-                name: "contacto",
-                label: "Nombre de Contacto",
-                placeholder: "Nombre de Contacto",
-
-                className: "w-full",
-              },
-              {
-                name: "numero",
-                label: "Numero de Contacto",
-                placeholder: "Numero de Contacto",
-
-                className: "w-full",
-              },
-              {
-                name: "email",
-                label: "Correo de Contacto",
-                placeholder: "Email",
-
-                className: "w-full",
-              },
-              {
-                name: "dob",
-                label: "Fecha de Cambio",
-                placeholder: "Elegir una fecha",
-                className: "w-full",
-              },
-            ]}
-            buttonText="Guardar Cambios"
-          />
+          <FormularioChange  data={data}/>
+          
         </CardContent>
       </Card>
     </div>

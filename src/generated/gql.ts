@@ -14,9 +14,14 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 const documents = {
     "\n  query Buscar_Clientes($nombreCliente: String!) {\n    buscar_Clientes(nombreCliente: $nombreCliente) {\n      _id\n      contratos {\n        fechaFin\n        fechaInicio\n        numeroContrato\n      }\n      direccion\n      documentos\n      email\n      nombre\n      nombreCliente\n      numeroContacto\n      rubro\n      ruc\n    }\n  }\n": types.Buscar_ClientesDocument,
-    "\n  mutation CreateUser($cliente: ClienteInput!) {\n    crear_Cliente(cliente: $cliente)\n  }\n": types.CreateUserDocument,
-    "\n  query Buscar_Pesonal($nombre: String!) {\n  buscar_Pesonal(nombre: $nombre) {\n    _id\n    documentos\n    email\n    fechaIngreso\n    nombre\n    numero\n    salarioFecha {\n      fecha\n      salario\n    }\n  }\n}\n": types.Buscar_PesonalDocument,
+    "\n  mutation Crear_Cliente($cliente: ClienteUserInput!) {\n    crear_Cliente(cliente: $cliente)\n  }\n": types.Crear_ClienteDocument,
+    "\n  query Cliente_ID($obtenerClienteIdId: String!) {\n    obtener_Cliente_ID(id: $obtenerClienteIdId) {\n      _id\n      contratos {\n        fechaFin\n        fechaInicio\n        numeroContrato\n      }\n      documentos\n      direccion\n      email\n      nombre\n      nombreCliente\n      numeroContacto\n      rubro\n      ruc\n    }\n  }\n": types.Cliente_IdDocument,
+    "\nquery Obtener_Usuarios_por_IDcliente($clienteId: String!) {\n  obtener_Usuarios_por_IDcliente(clienteId: $clienteId) {\n    _id\n    clienteAsociado\n    email\n    name\n    nivelUser\n    username\n  }\n}\n": types.Obtener_Usuarios_Por_IDclienteDocument,
+    "\n  query Buscar_Pesonal($nombre: String!) {\n    buscar_Pesonal(nombre: $nombre) {\n      _id\n      documentos\n      email\n      fechaIngreso\n      nombre\n      numero\n      salarioFecha {\n        fecha\n        salario\n      }\n    }\n  }\n": types.Buscar_PesonalDocument,
+    "\n  mutation Crear_Personal($input: PersonalUserInput!) {\n    crear_Personal(input: $input)\n  }\n": types.Crear_PersonalDocument,
+    "\n  query Obtener_Personal_Por_Id($obtenerPersonalPorIdId: String!) {\n    obtener_Personal_Por_Id(id: $obtenerPersonalPorIdId) {\n      _id\n      documentos\n      email\n      fechaIngreso\n      nombre\n      numero\n      salarioFecha {\n        fecha\n        salario\n      }\n    }\n  }\n": types.Obtener_Personal_Por_IdDocument,
     "\n  query Buscar_repuestos($producto: String!) {\n  buscar_repuestos(producto: $producto) {\n    cantidad\n    cantidadReserva\n    id\n    marca\n    precio\n    producto\n  }\n}\n": types.Buscar_RepuestosDocument,
+    "\n  mutation Crear_multiples_users($users: [CreateUserDto!]!) {\n    crear_multiples_users(users: $users)\n  }\n": types.Crear_Multiples_UsersDocument,
 };
 
 /**
@@ -40,15 +45,35 @@ export function gql(source: "\n  query Buscar_Clientes($nombreCliente: String!) 
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  mutation CreateUser($cliente: ClienteInput!) {\n    crear_Cliente(cliente: $cliente)\n  }\n"): (typeof documents)["\n  mutation CreateUser($cliente: ClienteInput!) {\n    crear_Cliente(cliente: $cliente)\n  }\n"];
+export function gql(source: "\n  mutation Crear_Cliente($cliente: ClienteUserInput!) {\n    crear_Cliente(cliente: $cliente)\n  }\n"): (typeof documents)["\n  mutation Crear_Cliente($cliente: ClienteUserInput!) {\n    crear_Cliente(cliente: $cliente)\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query Buscar_Pesonal($nombre: String!) {\n  buscar_Pesonal(nombre: $nombre) {\n    _id\n    documentos\n    email\n    fechaIngreso\n    nombre\n    numero\n    salarioFecha {\n      fecha\n      salario\n    }\n  }\n}\n"): (typeof documents)["\n  query Buscar_Pesonal($nombre: String!) {\n  buscar_Pesonal(nombre: $nombre) {\n    _id\n    documentos\n    email\n    fechaIngreso\n    nombre\n    numero\n    salarioFecha {\n      fecha\n      salario\n    }\n  }\n}\n"];
+export function gql(source: "\n  query Cliente_ID($obtenerClienteIdId: String!) {\n    obtener_Cliente_ID(id: $obtenerClienteIdId) {\n      _id\n      contratos {\n        fechaFin\n        fechaInicio\n        numeroContrato\n      }\n      documentos\n      direccion\n      email\n      nombre\n      nombreCliente\n      numeroContacto\n      rubro\n      ruc\n    }\n  }\n"): (typeof documents)["\n  query Cliente_ID($obtenerClienteIdId: String!) {\n    obtener_Cliente_ID(id: $obtenerClienteIdId) {\n      _id\n      contratos {\n        fechaFin\n        fechaInicio\n        numeroContrato\n      }\n      documentos\n      direccion\n      email\n      nombre\n      nombreCliente\n      numeroContacto\n      rubro\n      ruc\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\nquery Obtener_Usuarios_por_IDcliente($clienteId: String!) {\n  obtener_Usuarios_por_IDcliente(clienteId: $clienteId) {\n    _id\n    clienteAsociado\n    email\n    name\n    nivelUser\n    username\n  }\n}\n"): (typeof documents)["\nquery Obtener_Usuarios_por_IDcliente($clienteId: String!) {\n  obtener_Usuarios_por_IDcliente(clienteId: $clienteId) {\n    _id\n    clienteAsociado\n    email\n    name\n    nivelUser\n    username\n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query Buscar_Pesonal($nombre: String!) {\n    buscar_Pesonal(nombre: $nombre) {\n      _id\n      documentos\n      email\n      fechaIngreso\n      nombre\n      numero\n      salarioFecha {\n        fecha\n        salario\n      }\n    }\n  }\n"): (typeof documents)["\n  query Buscar_Pesonal($nombre: String!) {\n    buscar_Pesonal(nombre: $nombre) {\n      _id\n      documentos\n      email\n      fechaIngreso\n      nombre\n      numero\n      salarioFecha {\n        fecha\n        salario\n      }\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation Crear_Personal($input: PersonalUserInput!) {\n    crear_Personal(input: $input)\n  }\n"): (typeof documents)["\n  mutation Crear_Personal($input: PersonalUserInput!) {\n    crear_Personal(input: $input)\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query Obtener_Personal_Por_Id($obtenerPersonalPorIdId: String!) {\n    obtener_Personal_Por_Id(id: $obtenerPersonalPorIdId) {\n      _id\n      documentos\n      email\n      fechaIngreso\n      nombre\n      numero\n      salarioFecha {\n        fecha\n        salario\n      }\n    }\n  }\n"): (typeof documents)["\n  query Obtener_Personal_Por_Id($obtenerPersonalPorIdId: String!) {\n    obtener_Personal_Por_Id(id: $obtenerPersonalPorIdId) {\n      _id\n      documentos\n      email\n      fechaIngreso\n      nombre\n      numero\n      salarioFecha {\n        fecha\n        salario\n      }\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query Buscar_repuestos($producto: String!) {\n  buscar_repuestos(producto: $producto) {\n    cantidad\n    cantidadReserva\n    id\n    marca\n    precio\n    producto\n  }\n}\n"): (typeof documents)["\n  query Buscar_repuestos($producto: String!) {\n  buscar_repuestos(producto: $producto) {\n    cantidad\n    cantidadReserva\n    id\n    marca\n    precio\n    producto\n  }\n}\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation Crear_multiples_users($users: [CreateUserDto!]!) {\n    crear_multiples_users(users: $users)\n  }\n"): (typeof documents)["\n  mutation Crear_multiples_users($users: [CreateUserDto!]!) {\n    crear_multiples_users(users: $users)\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};

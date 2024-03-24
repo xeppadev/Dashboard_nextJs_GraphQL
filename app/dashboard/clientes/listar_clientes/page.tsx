@@ -1,4 +1,4 @@
-import DemoPage from "@/app/ui/dashboard/clientes/listar/table/table";
+import DemoPage from "@/app/ui/dashboard/clientes/listar/table";
 
 export default function ListarCli({
   searchParams,
