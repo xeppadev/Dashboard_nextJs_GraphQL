@@ -540,7 +540,7 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent className="w-full">
             <Image
-              src="http://es.contecon.mx/ima/mapa-ictsi.svg"
+              src="/mapa-ictsi.svg"
               alt="Picture of the author"
               width={700}
               height={900}
