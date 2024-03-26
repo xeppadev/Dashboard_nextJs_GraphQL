@@ -66,8 +66,7 @@ export const FormFieldate: React.FC<FieldValues> = ({
                   selected={field.value}
                   onSelect={(date) => {
                    if(date){
-                    date.setMinutes(date.getTimezoneOffset() - date.getMinutes() );
-                    const dateString = format(date, "yyyy-MM-dd'T'HH:mm:ss.SSS-05:00");
+                    const dateString = format(date, "yyyy-MM-dd'T'HH:mm:ss.SSS-05:00", { locale: es });
                     field.onChange(dateString);
                     }
                   }}

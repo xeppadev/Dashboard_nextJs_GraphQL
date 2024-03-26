@@ -21,7 +21,7 @@ export const REGISTRAR_PERSONAL = gql(/* GraphQL */ `
   mutation Crear_Personal($input: PersonalUserInput!) {
     crear_Personal(input: $input)
   }
-` );
+`);
 
 export const PERSONAL_ID = gql(/* GraphQL */ `
   query Obtener_Personal_Por_Id($obtenerPersonalPorIdId: String!) {
@@ -37,5 +37,19 @@ export const PERSONAL_ID = gql(/* GraphQL */ `
         salario
       }
     }
+  }
+`);
+
+export const ACTUALIZAR_PERSONAL = gql(/* GraphQL */`
+  mutation Actualizar_Info_Personal(
+    $actualizarInfoPersonalId: String!
+    $input: UpdatePersonalInput!
+    $salarioFecha: SalarioFechaInput
+  ) {
+    actualizar_Info_Personal(
+      id: $actualizarInfoPersonalId
+      input: $input
+      salarioFecha: $salarioFecha
+    )
   }
 `);

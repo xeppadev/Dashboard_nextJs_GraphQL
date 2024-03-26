@@ -97,10 +97,10 @@ export function processColumn(column: string) {
 }
 
 // Esta función toma un array de objetos salarioFecha y devuelve el salario más reciente
-export function SalarioMasReciente(salarioFecha: Maybe<Maybe<SalarioFechaDto>[]> | undefined): number | undefined {
+export function salarioMasReciente(salarioFecha: Maybe<Maybe<SalarioFechaDto>[]> | undefined)  {
   if (!salarioFecha || salarioFecha.length === 0) {
-    return 
-  }
+     return null;
+   }
 
   const salarioMasReciente = salarioFecha
     .slice()
@@ -108,5 +108,5 @@ export function SalarioMasReciente(salarioFecha: Maybe<Maybe<SalarioFechaDto>[]>
       (a, b) => new Date(b!.fecha).getTime() - new Date(a!.fecha).getTime()
     )[0];
 
-  return salarioMasReciente?.salario;
+  return salarioMasReciente
 }

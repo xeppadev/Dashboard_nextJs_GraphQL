@@ -76,7 +76,8 @@ export default function FormCliente() {
   ) => {
     // Crear un nuevo objeto FormData
     const formData = new FormData();
-
+    // Obtener el valor de file del formulario
+    const { file } = form.getValues();
     // Agregar los otros campos del formulario a formData
     formData.append("nombreCliente", data.nombreCliente);
     formData.append("ruc", data.ruc);
@@ -88,29 +89,18 @@ export default function FormCliente() {
     formData.append("items", JSON.stringify(data.items));
     formData.append("contratos", JSON.stringify(data.contratos));
     // Convertir data.file a un array y agregar cada archivo a formData
+    file.forEach((f, index) => {
+      formData.append("file", f.file);
+    });
 
-    // Llamar a la función registerCliente con formData
-    const result = await registerCliente(formData);
-    console.log(result);
     try {
       // Crear un nuevo objeto FormData para los archivos
-      const fileData = new FormData();
-
-      data.file.forEach((fileObject) => {
-        fileData.append("files", fileObject.file);
-      });
-       
-      // Intentar enviar los archivos a la API externa
-      await sentToExternalAPI(fileData, {
-        query1: "clientes",
-        query2: result,
-      });
-
+      await registerCliente(formData);
       // Mostrar un mensaje de éxito
       toast({
         title: "Registro Exitoso!",
         description: "El cliente ha sido registrado exitosamente.",
-        action: <ToastAction altText="Try again">Try again</ToastAction>
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
     } catch (error) {
       console.error("Error al enviar los archivos a la API externa:", error);

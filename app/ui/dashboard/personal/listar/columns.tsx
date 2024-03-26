@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { DataTableRowActions } from "../../clientes/listar/data-table-row-actions";
 import { DialogEdit } from "./accionedit";
 import { PersonalDto } from "@/src/generated/graphql";
-import { getInitials,SalarioMasReciente } from "@/app/lib/utils/utils";
+import { getInitials,salarioMasReciente } from "@/app/lib/utils/utils";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -94,10 +94,10 @@ export const columns: ColumnDef<Regist>[] = [
     },
     cell: ({ row }) => {
       const column = row.original;
-      const salario = SalarioMasReciente(column.salarioFecha);
+      const salario = salarioMasReciente(column.salarioFecha);
       return (
         <div className="flex max-w-fit items-center font-bold bg-freelance text-[#2970FF]  text-xs px-1.5 py-1 rounded-md">
-          S/. {salario}
+          S/.{salario?.salario}
           
         </div>
       );

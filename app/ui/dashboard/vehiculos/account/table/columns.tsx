@@ -45,7 +45,7 @@ export const columns: ColumnDef<Regist>[] = [
       return (
         <Link
           href={`/dashboard/clientes/cuentas/${column.id}`}
-          className="flex item-center min-w-[180px] "
+          className="flex item-center ml-3 min-w-[180px] "
         >
           <div className="flex space-x-4 justify-center  ">
             <Avatar className={`h-11 w-11 ${color}`}>

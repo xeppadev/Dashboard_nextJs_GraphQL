@@ -1,4 +1,4 @@
-import TabsDemo from "@/app/ui/dashboard/vehiculos/registrar/tabvehiculo";
+import VehiculoForm from "@/app/ui/dashboard/vehiculos/registrar/formvehiculo";
 
 
 export default function RegistrarVehicul() {
@@ -9,7 +9,7 @@ export default function RegistrarVehicul() {
         Registrar Vehiculo
       </h2>
       </div>
-        <TabsDemo />
+        <VehiculoForm />
       
     
   </div>

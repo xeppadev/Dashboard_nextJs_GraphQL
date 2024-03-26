@@ -39,19 +39,18 @@ export default function FormPersonal() {
       fechaIngreso: "",
       name: "",
       correo: "",
-      
-
     },
     resolver: zodResolver(formSchemaPersonal),
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof formSchemaPersonal>> = async (
+const onSubmit: SubmitHandler<z.infer<typeof formSchemaPersonal>> = async (
     data
   ) => {
     // Crear un nuevo objeto FormData
     const formData = new FormData();
-
+    // Obtener el valor de file del formulario
+    const { file } = form.getValues();
     // Agregar los otros campos del formulario a formData
     formData.append("name", data.name);
     formData.append("numero", data.numero);
@@ -65,25 +64,16 @@ export default function FormPersonal() {
     formData.append("clienteAsociado", data.clienteAsociado);
     formData.append("username", data.username);
     formData.append("password", data.password);
-
-   
-    const result = await registerPersonal(formData);
-    console.log(result);
-
+    
+    
+    // Agregar el archivo al objeto formData
+      file.forEach((f, index) => {
+      formData.append("file", f.file);
+    });
+      
     try {
+      await registerPersonal(formData);
       // Crear un nuevo objeto FormData
-      const fileData = new FormData();
-      console.log(data.file);
-
-      data.file.forEach((fileObject) => {
-        fileData.append("files", fileObject.file);
-      });
-
-      await sentToExternalAPI(fileData, {
-        query1: "personals",
-        query2: result,
-      });
-
       toast({
         title: "Operación exitosa",
         description: "El cliente ha sido registrado correctamente",
@@ -207,7 +197,7 @@ export default function FormPersonal() {
               label="Correo"
               placeholder="Ingrese un correo electronico"
             />
-             <FormFieldComponent
+            <FormFieldComponent
               control={form.control}
               name="password"
               label="Contraseña"

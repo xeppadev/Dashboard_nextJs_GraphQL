@@ -1,9 +1,10 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchemaClient } from "../../registrar/schema";
-import { useForm } from "react-hook-form";
+import { useForm , SubmitHandler} from "react-hook-form";
 import Link from "next/link";
 import * as z from "zod";
 import { ToastAction } from "@/components/ui/toast";
+import { actualizarCliente } from "@/lib/actions";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { FormFieldComponent } from "@/app/ui/components/formfieldcomponent";
@@ -14,15 +15,20 @@ const ClienteSchemaChange = formSchemaClient.omit({
   contratos: true,
   file: true,
   items: true,
-});
+}).extend({
+  _id: z.string(),
+  });
 
 type AccountFormValues = z.infer<typeof ClienteSchemaChange>;
 
 export function FormularioChange({ data }: { data: ClienteDto }) {
   const { toast } = useToast();
+
+ 
   const form = useForm<z.infer<typeof ClienteSchemaChange>>({
     resolver: zodResolver(ClienteSchemaChange),
     defaultValues: {
+      _id: data?._id || "",
       nombreCliente: data.nombreCliente || "",
       ruc: data.ruc,
       direccion: data.direccion,
@@ -33,17 +39,13 @@ export function FormularioChange({ data }: { data: ClienteDto }) {
     },
   });
 
-  //   function onSubmit(data: AccountFormValues) {
-  //     toast({
-  //       description: `usuario ${data.nombre} registrado con éxito`,
-  //       action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
-  //     });
-  //   }
+  
 
   return (
-    <Form {...form}>
-      <form className="space-y-4 m-2">
+    <Form {...form} >
+      <form className="space-y-4 m-2" action={actualizarCliente}>
         <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+        
           <FormFieldComponent
             control={form.control}
             name="nombreCliente"
@@ -85,6 +87,12 @@ export function FormularioChange({ data }: { data: ClienteDto }) {
             name="email"
             label="Correo del Contacto"
             placeholder="Ingrese un correo electronico"
+          />
+          <FormFieldComponent
+            control={form.control}
+            name="_id"
+            
+            type="hidden"
           />
         </div>
 

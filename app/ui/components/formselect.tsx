@@ -43,7 +43,7 @@ export const FormSelectComponent: React.FC<RadioGroupProps> = ({
     control={control}
     name={name}
     render={({ field }) => (
-      <FormItem className={`${className}`}>
+      <FormItem className={className}>
         {label && <FormLabel>{label}</FormLabel>}
         <Select onValueChange={field.onChange} defaultValue={field.value}>
           <FormControl>
@@ -51,9 +51,9 @@ export const FormSelectComponent: React.FC<RadioGroupProps> = ({
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
           </FormControl>
-          <SelectContent>
+          <SelectContent className={className}>
             {options.map((option) => (
-              <SelectItem key={option.value} value={option.value}>
+              <SelectItem key={option.value}  value={option.value}>
                  {option.label}
               </SelectItem>
             ))}

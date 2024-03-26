@@ -24,7 +24,7 @@ export const REGISTRAR_CLIENTE = gql(/* GraphQL */ `
   mutation Crear_Cliente($cliente: ClienteUserInput!) {
     crear_Cliente(cliente: $cliente)
   }
-` );
+`);
 
 export const CLIENTE_ID = gql(/* GraphQL */ `
   query Cliente_ID($obtenerClienteIdId: String!) {
@@ -48,14 +48,23 @@ export const CLIENTE_ID = gql(/* GraphQL */ `
 `);
 
 export const USUARIO_ID = gql(/* GraphQL */ `
-query Obtener_Usuarios_por_IDcliente($clienteId: String!) {
-  obtener_Usuarios_por_IDcliente(clienteId: $clienteId) {
-    _id
-    clienteAsociado
-    email
-    name
-    nivelUser
-    username
+  query Obtener_Usuarios_por_IDcliente($clienteId: String!) {
+    obtener_Usuarios_por_IDcliente(clienteId: $clienteId) {
+      _id
+      clienteAsociado
+      email
+      name
+      nivelUser
+      username
+    }
   }
-}
-` );
+`);
+
+export const ACTUALIZAR_CLIENTE = gql(/* GraphQL */ `
+  mutation Actualizar_Cliente(
+    $cliente: ClienteInput!
+    $actualizarClienteId: String!
+  ) {
+    actualizar_Cliente(cliente: $cliente, id: $actualizarClienteId)
+  }
+`);

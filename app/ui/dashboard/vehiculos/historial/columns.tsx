@@ -60,7 +60,7 @@ export const columns: ColumnDef<Regist>[] = [
       return (
         <Link
           href={`/dashboard/vehiculos/unidades/${column.id}`}
-          className="flex item-center min-w-[180px] "
+          className="flex item-center justify-center min-w-[180px] "
         >
           <div className=" space-x-4  inline-flex items-center ">
           <svg

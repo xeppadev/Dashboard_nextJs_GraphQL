@@ -2,14 +2,13 @@
 import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchemaClient } from "./data/schema";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { Container } from "@/components/ui/container";
 import { Textarea } from "@/components/ui/textarea";
 import Link from "next/link";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -32,57 +31,52 @@ import { useToast } from "@/components/ui/use-toast";
 import { FormFieldate } from "../../../components/formfielddate";
 import { FormFileComponent } from "../../../components/formfile";
 import { FormSelectComponent } from "@/app/ui/components/formselect";
-interface FieldConfig {
-  name: string;
-  label: string;
-  placeholder: string;
-  description?: string;
-  className?: string;
-  accion?: string;
-}
-interface AccountFormProps {
-  
-  buttonText?: string;
-}
 
 type AccountFormValues = z.infer<typeof formSchemaClient>;
 
-export function VehiculoForm({
-
-  buttonText,
-}: AccountFormProps) {
+export function VehiculoForm() {
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchemaClient>>({
     resolver: zodResolver(formSchemaClient),
     mode: "onChange",
   });
 
-  const onSubmit = (data: AccountFormValues) => {
-    console.log(data);
-    // const formData = new FormData();
-    // formData.append("type", data.type);
-    // formData.append("dob", data.dob.toString());
-    // formData.append("numerodocumento", data.numerodocumento);
-    // formData.append("minera", data.minera);
-    // formData.append("bio", data.bio);
-    // formData.append("file", selectedFile as Blob);
-    // formData.append("items", JSON.stringify(data.items));
-    // const res = await fetch("/api/form", {
-    //   method: "POST",
-    //   body: formData,
-    // });
+  const onSubmit: SubmitHandler<z.infer<typeof formSchemaClient>> = async (
+    values
+  ) => {
+    const formData = new FormData();
 
-    // if (res.ok) {
-    //   toast({
-    //     description: `usuario  registrado con éxito`,
-    //     action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
-    //   });
-    // }
+      formData.append("placa", values.placa);
+      formData.append("kmRegistroInicial", values.kmRegistroInicial)
+      formData.append("fechaSoat", values.fechaSoat)
+      formData.append("fechaRevision", values.fechaRevision)
+      formData.append("propietario", values.propietario)
+      formData.append("tipoContrato", values.tipoContrato)
+      formData.append("vigenciaContrato", values.vigenciaContrato)
+      formData.append("cliente", values.cliente)
+
+
+    try {
+      console.log(values);
+      toast({
+        title: "Operación exitosa",
+        description: "El cliente ha sido registrado correctamente",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+    } catch (error) {
+      console.error(error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+    }
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
+      <form className="space-y-10">
         <Card className=" grid grid-cols-5 gap-4 justify-between ">
           <CardHeader className="col-span-2 ">
             <CardTitle className="text-lg font-semibold">
@@ -96,52 +90,27 @@ export function VehiculoForm({
             <FormFieldComponent
               control={form.control}
               label="Placa del Vehiculo"
-              name="licensePlate"
+              name="placa"
               placeholder="Ingrese la placa del vehiculo"
             />
             <FormFieldComponent
               control={form.control}
               label="Kilometraje Actual"
-              name="mileage"
+              name="kmRegistroInicial"
               placeholder="Ingrese el kilometraje del vehiculo"
             />
 
-            <FormSelectComponent
-              control={form.control}
-              label="Soat Vigente"
-              placeholder="Seleccione una opcion"
-              name="yesNoSelect"
-              options={[
-                { value: "Sí", label: "Sí" },
-                { value: "No", label: "No" },
-              ]}
-              className="w-full"
-              className2="h-12"
-            />
             <FormFieldate
               control={form.control}
-              name="expirationDate"
+              name="fechaSoat"
               label="Fecha de Vencimiento"
               placeholder="fecha de vencimiento de Soat"
             />
-
-            <FormField
+            <FormFieldate
               control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Descripcion del estado de la Unidad</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Describe la informacion ."
-                      className="resize-none"
-                      {...field}
-                    />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
+              name="fechaRevision"
+              label="Fecha de Vencimiento"
+              placeholder="fecha de vencimiento de Soat"
             />
           </CardContent>
         </Card>
@@ -150,7 +119,7 @@ export function VehiculoForm({
           <CardHeader className="col-span-2 ">
             <CardTitle className="text-lg font-semibold">
               {" "}
-              Datos del Contrato con el dueño de la Unidad
+              Datos del Contrato
             </CardTitle>
             <CardDescription>Ingrese los datos del Contrato</CardDescription>
           </CardHeader>
@@ -159,69 +128,30 @@ export function VehiculoForm({
             <FormFieldComponent
               control={form.control}
               label="Propietario del Vehiculo"
-              name="personName"
+              name="propietario"
               placeholder="Ingrese el nombre del propietario"
             />
             <FormFieldate
               control={form.control}
-              name="startDate"
+              name="tipoContrato"
               label="Inicio de Contrato"
               placeholder="fecha de inicio de contrato"
             />
             <FormFieldate
               control={form.control}
-              name="endDate"
+              name="vigenciaContrato"
               label="Fin del Contrato"
               placeholder="fecha de fin de contrato"
             />
             <FormFieldComponent
               control={form.control}
-              name="pagoal"
+              name="cliente"
               label="Pago de Alquiler del Vehiculo"
               placeholder="Ingrese el costo de alquiler"
             />
-           
-           
           </CardContent>
         </Card>
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
-            <CardTitle className="text-lg font-semibold">
-              {" "}
-              Datos del Contrato con el Cliente 
-            </CardTitle>
-            <CardDescription>Ingrese los datos del Contrato</CardDescription>
-          </CardHeader>
 
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
-          <FormFieldComponent
-              control={form.control}
-              name="clientvehi"
-              label="Cliente del Vehiculo"
-              placeholder="ingrese un cliente"
-            />
-            <FormFieldate
-              control={form.control}
-              name="startDate"
-              label="Inicio de Contrato"
-              placeholder="fecha de inicio de contrato"
-            />
-            <FormFieldate
-              control={form.control}
-              name="endDate"
-              label="Fin del Contrato"
-              placeholder="fecha de fin de contrato"
-            />
-         
-             <FormFieldComponent
-              control={form.control}
-              name="pagocli"
-              label="Pago Alquiler del Cliente"
-              placeholder="ingrese el pago del cliente"
-            />
-          
-          </CardContent>
-        </Card>
         <Card className=" grid grid-cols-5 gap-4 justify-between ">
           <CardHeader className="col-span-2 ">
             <CardTitle className="text-lg font-semibold">
@@ -234,24 +164,22 @@ export function VehiculoForm({
           </CardHeader>
 
           <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
-            
             <div className="flex justify-between  w-[98%] space-x-4">
-            <CardTitle className="text-sm font-medium">
-              {" "}
-              Elementos Critico
-            </CardTitle>
-            <CardTitle className="text-sm font-medium">
-              {" "}
-              Estado Actual
-            </CardTitle>
+              <CardTitle className="text-sm font-medium">
+                {" "}
+                Elementos Critico
+              </CardTitle>
+              <CardTitle className="text-sm font-medium">
+                {" "}
+                Estado Actual
+              </CardTitle>
             </div>
             {[...Array(5)].map((_, index) => (
               <div key={index} className="inline-flex  w-full space-x-4">
-                <Container className="2xl:w-[88%] w-[85%] border-input ">
+                <Container className="2xl:w-[86%] w-[85%] border-input ">
                   <h4> Elemento {index + 1}</h4>
                 </Container>
 
-                
                 <FormSelectComponent
                   control={form.control}
                   placeholder=""
@@ -268,29 +196,11 @@ export function VehiculoForm({
                     { value: "9", label: "⭐ 9" },
                     { value: "10", label: "⭐ 10" },
                   ]}
-                  className="2xl:w-[12%] w-[15%]"
+                  className="2xl:w-[10%] w-[15%]"
                   className2="h-12"
                 />
               </div>
             ))}
-            
-          </CardContent>
-        </Card>
-
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
-            <CardTitle className="text-lg font-semibold">
-              Subida de Documentos
-            </CardTitle>
-            <CardDescription>Suba los documentos de la Unidad</CardDescription>
-          </CardHeader>
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
-            <FormFileComponent
-              control={form.control}
-              name="file"
-              label={"Subir archivo"}
-            />
-           
           </CardContent>
         </Card>
 
@@ -301,7 +211,7 @@ export function VehiculoForm({
             </Button>
           </Link>
           <Button type="submit" className="rounded-[10px]">
-            {buttonText}
+            Registrar
           </Button>
         </div>
       </form>

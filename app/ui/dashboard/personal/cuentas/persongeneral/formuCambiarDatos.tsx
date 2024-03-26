@@ -1,8 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formSchemaPersonal } from "../../registrar/schema";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 import * as z from "zod";
+import { format } from "date-fns";
 import { ToastAction } from "@/components/ui/toast";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
@@ -10,44 +11,74 @@ import { FormFieldComponent } from "@/app/ui/components/formfieldcomponent";
 import { FormFieldate } from "@/app/ui/components/formfielddate";
 import { useToast } from "@/components/ui/use-toast";
 import { PersonalDto } from "@/src/generated/graphql";
-import { SalarioMasReciente } from "@/app/lib/utils/utils";
-const ClienteSchemaChange = formSchemaPersonal.omit({
-  file: true,
-  name: true,
-  username: true,
-  correo: true,
-  password: true,
-  nivelUser: true,
-  clienteAsociado: true,
-});
+import { actualizarPersonal } from "@/lib/actions";
+import { salarioMasReciente } from "@/app/lib/utils/utils";
+const PeronalSchemaChange = formSchemaPersonal
+  .omit({
+    file: true,
+    name: true,
+    username: true,
+    correo: true,
+    password: true,
+    nivelUser: true,
+    clienteAsociado: true,
+  })
+  .extend({
+    id: z.string(),
+  });
 
-type AccountFormValues = z.infer<typeof ClienteSchemaChange>;
+type AccountFormValues = z.infer<typeof PeronalSchemaChange>;
 
 export function FormularioChange({ data }: { data: PersonalDto }) {
   const { toast } = useToast();
 
-  const salario = SalarioMasReciente(data.salarioFecha);
-  const form = useForm<z.infer<typeof ClienteSchemaChange>>({
-    resolver: zodResolver(ClienteSchemaChange),
+  const salario = salarioMasReciente(data.salarioFecha);
+  const form = useForm<z.infer<typeof PeronalSchemaChange>>({
+    resolver: zodResolver(PeronalSchemaChange),
     defaultValues: {
+      id: data._id || "",
       nombre: data.nombre,
       email: data.email || "",
-      fechaIngreso: data.fechaIngreso,
+      fechaIngreso: data.fechaIngreso || "a",
       numero: data.numero?.toString() || "",
-      salario: salario?.toString(),
+      salario: salario?.salario.toString() || "",
+      fecha: salario?.fecha || "",
     },
   });
 
-  //   function onSubmit(data: AccountFormValues) {
-  //     toast({
-  //       description: `usuario ${data.nombre} registrado con éxito`,
-  //       action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
-  //     });
-  //   }
 
+ const onSubmit: SubmitHandler<z.infer<typeof PeronalSchemaChange>>  = async (data) => {
+     // Crear un nuevo objeto FormData
+     const formData = new FormData();
+      // Obtener el valor de file del formulario
+      formData.append("id" , data.id);
+      formData.append("nombre", data.nombre);
+      formData.append("email", data.email);
+      formData.append("numero", data.numero);
+      formData.append("fechaIngreso", data.fechaIngreso);
+      formData.append("salario", data.salario);
+      formData.append("fecha", data.fecha);
+
+      try {
+        await actualizarPersonal(formData);
+        toast({
+          title: "Registro Exitoso!",
+          description: "El cliente ha sido registrado exitosamente.",
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        });
+      } catch (error) {
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem with your request.",
+          action: <ToastAction altText="Try again">Try again</ToastAction>,
+        });
+      }
+
+ }
   return (
     <Form {...form}>
-      <form className="space-y-4 m-2">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 m-2">
         <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
           <FormFieldComponent
             control={form.control}
@@ -91,6 +122,7 @@ export function FormularioChange({ data }: { data: PersonalDto }) {
             placeholder="Ingrese una Fecha"
             className="w-full mt-2.5"
           />
+          <FormFieldComponent control={form.control} name="id" type="hidden" />
         </div>
         <div className="flex justify-end space-x-4">
           <Link href="/dashboard/clientes/listar_clientes">
