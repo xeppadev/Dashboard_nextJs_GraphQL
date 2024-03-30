@@ -14,6 +14,7 @@ export default function ListarStock({
   };
 }) {
   const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
   return (
     <div className="flex flex-col items-stretch  2xl:mx-16 space-y-5  w-full sm:w-auto">
       <div className="flex justify-between items-center">
@@ -25,7 +26,7 @@ export default function ListarStock({
         </div>
         
       </div>
-      <TableStock query={query}  />
+      <TableStock query={query} currentPage={currentPage}  />
     </div>
   );
   }

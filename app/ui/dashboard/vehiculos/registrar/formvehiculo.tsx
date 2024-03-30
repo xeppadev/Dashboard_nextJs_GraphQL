@@ -1,21 +1,13 @@
 "use client";
 import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchemaClient } from "./data/schema";
+import { formSchemaRegist } from "./schema";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { Container } from "@/components/ui/container";
-import { Textarea } from "@/components/ui/textarea";
+import Rating from "@/app/ui/components/rating";
+import { registrarVehiculo } from "@/lib/actions";
 import Link from "next/link";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import * as z from "zod";
-import { FormItemsComponent } from "../../../components/formitems";
 import { ToastAction } from "@/components/ui/toast";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,39 +17,60 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import { FormFieldComponent } from "../../../components/formfieldcomponent";
 import { useToast } from "@/components/ui/use-toast";
 import { FormFieldate } from "../../../components/formfielddate";
-import { FormFileComponent } from "../../../components/formfile";
 import { FormSelectComponent } from "@/app/ui/components/formselect";
 
-type AccountFormValues = z.infer<typeof formSchemaClient>;
+const formSchemaVehicle = formSchemaRegist.omit({
+  estados: true,
+});
 
-export function VehiculoForm() {
+type dataProps = {
+  data: {
+    value: string | null | undefined;
+    label: string | null | undefined;
+  }[];
+};
+
+export function VehiculoForm({ data }: dataProps) {
   const { toast } = useToast();
-  const form = useForm<z.infer<typeof formSchemaClient>>({
-    resolver: zodResolver(formSchemaClient),
+
+  const form = useForm<z.infer<typeof formSchemaRegist>>({
+    resolver: zodResolver(formSchemaRegist),
     mode: "onChange",
+    defaultValues: {
+      placa: "",
+      kmRegistroInicial: "",
+      fechaSoat: "",
+      fechaRevision: "",
+      propietario: "",
+      tipoContrato: "",
+      vigenciaContrato: "",
+      cliente: "",
+      puntaje: "",
+      estados: [],
+    },
   });
 
-  const onSubmit: SubmitHandler<z.infer<typeof formSchemaClient>> = async (
+  const onSubmit: SubmitHandler<z.infer<typeof formSchemaVehicle>> = async (
     values
   ) => {
     const formData = new FormData();
 
-      formData.append("placa", values.placa);
-      formData.append("kmRegistroInicial", values.kmRegistroInicial)
-      formData.append("fechaSoat", values.fechaSoat)
-      formData.append("fechaRevision", values.fechaRevision)
-      formData.append("propietario", values.propietario)
-      formData.append("tipoContrato", values.tipoContrato)
-      formData.append("vigenciaContrato", values.vigenciaContrato)
-      formData.append("cliente", values.cliente)
-
+    formData.append("placa", values.placa);
+    formData.append("kmRegistroInicial", values.kmRegistroInicial);
+    formData.append("fechaSoat", values.fechaSoat);
+    formData.append("fechaRevision", values.fechaRevision);
+    formData.append("propietario", values.propietario);
+    formData.append("tipoContrato", values.tipoContrato);
+    formData.append("vigenciaContrato", values.vigenciaContrato);
+    formData.append("cliente", values.cliente);
+    formData.append("puntaje", values.puntaje);
+    console.log(values.puntaje);
 
     try {
-      console.log(values);
+      await registrarVehiculo(formData);
       toast({
         title: "Operación exitosa",
         description: "El cliente ha sido registrado correctamente",
@@ -76,7 +89,7 @@ export function VehiculoForm() {
 
   return (
     <Form {...form}>
-      <form className="space-y-10">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
         <Card className=" grid grid-cols-5 gap-4 justify-between ">
           <CardHeader className="col-span-2 ">
             <CardTitle className="text-lg font-semibold">
@@ -103,14 +116,14 @@ export function VehiculoForm() {
             <FormFieldate
               control={form.control}
               name="fechaSoat"
-              label="Fecha de Vencimiento"
+              label="vigencia de Soat"
               placeholder="fecha de vencimiento de Soat"
             />
             <FormFieldate
               control={form.control}
               name="fechaRevision"
-              label="Fecha de Vencimiento"
-              placeholder="fecha de vencimiento de Soat"
+              label="Fecha de Revision Tecnica"
+              placeholder="fecha de Revision Tecnica"
             />
           </CardContent>
         </Card>
@@ -131,23 +144,36 @@ export function VehiculoForm() {
               name="propietario"
               placeholder="Ingrese el nombre del propietario"
             />
-            <FormFieldate
+            <FormSelectComponent
               control={form.control}
+              label="Tipo de Contrato"
+              placeholder="Seleccione un tipo de contrato"
               name="tipoContrato"
-              label="Inicio de Contrato"
-              placeholder="fecha de inicio de contrato"
+              options={[
+                { value: "1", label: "Alquiler" },
+                { value: "2", label: "Venta" },
+                { value: "3", label: "Leasing" },
+              ]}
+              className="w-full"
+              className2="h-12"
+            />
+            <FormSelectComponent
+              control={form.control}
+              className="w-full"
+              className2="h-12"
+              name="cliente"
+              label="Cliente"
+              placeholder="Seleccione un cliente"
+              options={data.map(({ value, label }) => ({
+                value: value || "",
+                label: label || "",
+              }))}
             />
             <FormFieldate
               control={form.control}
               name="vigenciaContrato"
               label="Fin del Contrato"
               placeholder="fecha de fin de contrato"
-            />
-            <FormFieldComponent
-              control={form.control}
-              name="cliente"
-              label="Pago de Alquiler del Vehiculo"
-              placeholder="Ingrese el costo de alquiler"
             />
           </CardContent>
         </Card>
@@ -164,43 +190,24 @@ export function VehiculoForm() {
           </CardHeader>
 
           <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
-            <div className="flex justify-between  w-[98%] space-x-4">
-              <CardTitle className="text-sm font-medium">
-                {" "}
-                Elementos Critico
-              </CardTitle>
-              <CardTitle className="text-sm font-medium">
-                {" "}
-                Estado Actual
-              </CardTitle>
-            </div>
-            {[...Array(5)].map((_, index) => (
-              <div key={index} className="inline-flex  w-full space-x-4">
-                <Container className="2xl:w-[86%] w-[85%] border-input ">
-                  <h4> Elemento {index + 1}</h4>
-                </Container>
+            <Rating
+              className="2xl:w-[10%] w-[15%]"
+              className2="h-12"
+              placeholder=""
+              onValueChange={(value, index) => {
+                // Actualizar el valor del estado
+                const estados = [...form.getValues().estados];
+                estados[index] = parseInt(value);
+                // Establecer la copia del estado como el nuevo estado
+                form.setValue("estados", estados);
 
-                <FormSelectComponent
-                  control={form.control}
-                  placeholder=""
-                  name={`select${index + 1}`}
-                  options={[
-                    { value: "1", label: "⭐ 1" },
-                    { value: "2", label: "⭐ 2" },
-                    { value: "3", label: "⭐ 3" },
-                    { value: "4", label: "⭐ 4" },
-                    { value: "5", label: "⭐ 5" },
-                    { value: "6", label: "⭐ 6" },
-                    { value: "7", label: "⭐ 7" },
-                    { value: "8", label: "⭐ 8" },
-                    { value: "9", label: "⭐ 9" },
-                    { value: "10", label: "⭐ 10" },
-                  ]}
-                  className="2xl:w-[10%] w-[15%]"
-                  className2="h-12"
-                />
-              </div>
-            ))}
+                // Calcular el promedio de `estados` y actualizar el valor de `promedio`
+                const promedio =
+                  estados.reduce((acc, curr) => acc + curr, 0) / estados.length;
+                // Establecer el promedio en otro campo del estado
+                form.setValue("puntaje", promedio.toString());
+              }}
+            />
           </CardContent>
         </Card>
 

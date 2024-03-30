@@ -46,10 +46,10 @@ export const options: NextAuthOptions = {
           access_token: user.access_token, // Guarda el token de acceso directamente
         };
       }
-
+         
       return token;
     },
-
+    
     async session({ token, session }) {
       session.access_token = token.access_token; // Agrega el token de acceso a la sesión
 

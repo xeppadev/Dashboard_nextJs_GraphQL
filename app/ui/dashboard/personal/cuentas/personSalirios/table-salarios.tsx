@@ -11,11 +11,7 @@ export default function UserSalarios({ data }: { data: PersonalDto }) {
         <DataTable
           columns={columns}
           data={data.salarioFecha || []}
-          toolBarComponet2={false}
-          paginationComponet={false}
           showHeader={false}
-          paginationComponet2={true}
-          type={"table"}
         />
       </div>
     </div>

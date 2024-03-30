@@ -14,7 +14,7 @@ import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
 import MantenimienForm from "./formul-mantenimientos";
 import { Car, Plus } from "lucide-react";
-import CalendarComponent from "../clientes/cuentas/clientContratos/calendar";
+// import CalendarComponent from "../clientes/cuentas/clientContratos/calendar";
 import { ScrollProduct } from "./scroll-mantenimientos";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -30,10 +30,10 @@ export default function Facturas() {
           <CardTitle className="text-gray-500">Filtrar Producto</CardTitle>
           <Input placeholder="Buscar" className="w-full h-12" />
           <CardTitle className="text-gray-500">Fecha de Operacion</CardTitle>
-          <CalendarComponent
+          {/* <CalendarComponent
             classname={"w-full "}
             descripcion={"Ingresar una fecha"}
-          />
+          /> */}
           <CardTitle className="text-gray-500">Proveedor</CardTitle>
           <ScrollProduct />
         </CardContent>

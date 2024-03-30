@@ -3,8 +3,10 @@ import { formSchemaClient } from "@/app/ui/dashboard/clientes/registrar/schema";
 import { formSchemaPersonal } from "@/app/ui/dashboard/personal/registrar/schema";
 import { registrarClienteModel } from "@/src/models/registrarClienteModel";
 import { registrarPersonalModel } from "@/src/models/regjstroPersonalModel";
-import { actualizarClienteModel } from "@/src/models/actualizarCliente";
-import { actualizarPersonalModel } from "@/src/models/actualizarPersonal";
+import { actualizarClienteModel } from "@/src/models/actualizarClienteModel";
+import { formSchemaRegist } from "@/app/ui/dashboard/vehiculos/registrar/schema";
+import { actualizarPersonalModel } from "@/src/models/actualizarPersonalModel";
+import { registrarVehiculoModel } from "@/src/models/registrarVehiculoModel";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
@@ -148,35 +150,30 @@ export async function actualizarPersonal(formData: FormData) {
   redirect("/dashboard/personal/listar_personal");
 }
 
-// export async function registrarVehiculo (formData: FormData) {
-//   const dataRegister = VehiculoSchema.parse({
-//     placa: formData.get("placa"),
-//     marca: formData.get("marca"),
-//     modelo: formData.get("modelo"),
-//     anio: formData.get("anio"),
-//     color: formData.get("color"),
-//     capacidad: formData.get("capacidad"),
-//     tipo: formData.get("tipo"),
-//     cliente: formData.get("cliente"),
-//     conductor: formData.get("conductor"),
-//     rating: formData.get("rating"),
-//     file: formData.get("file"),
-//   });
-//   const file = formData.getAll("file") as File[];
+const VehiculoSchema = formSchemaRegist.omit({
+  estados: true,
+});
 
-//   const result1 = await registrarVehiculoModel(dataRegister);
-//   const fileData = new FormData();
-//   file.forEach((f, index) => {
-//     fileData.append("files", f);
-//   });
+export async function registrarVehiculo (formData: FormData) {
+  const dataRegister = VehiculoSchema.parse({
+    placa: formData.get("placa"),
+    kmRegistroInicial: formData.get("kmRegistroInicial"),
+    fechaSoat: formData.get("fechaSoat"),
+    fechaRevision: formData.get("fechaRevision"),
+    propietario: formData.get("propietario"),
+    tipoContrato: formData.get("tipoContrato"),
+    vigenciaContrato: formData.get("vigenciaContrato"),
+    cliente: formData.get("cliente"),
+    puntaje: formData.get("puntaje"),
+    
+  });
 
-//   const dataFromMutation = result1?.crear_Vehiculo;
+  console.log(dataRegister);
+  await registrarVehiculoModel(dataRegister);
 
-//   await sentToExternalAPI(fileData, {
-//     query1: "vehiculos",
-//     query2: dataFromMutation,
-//   });
 
-//   revalidatePath("/dashboard/vehiculos/listar_vehiculos");
-//   redirect("/dashboard/vehiculos/listar_vehiculos");
-// }
+
+
+  revalidatePath("/dashboard/vehiculos/listar_vehiculos");
+  redirect("/dashboard/vehiculos/listar_vehiculos");
+}

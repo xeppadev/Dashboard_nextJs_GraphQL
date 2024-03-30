@@ -1,18 +1,20 @@
 import { gql } from "../generated";
-
-export const BUSCAR_PERSONAL = gql(/* GraphQL */ `
-  query Buscar_Pesonal($nombre: String!) {
-    buscar_Pesonal(nombre: $nombre) {
-      _id
-      documentos
-      email
-      fechaIngreso
-      nombre
-      numero
-      salarioFecha {
-        fecha
-        salario
+export const BUSCAR_PERSONAL_SEARCH = gql(/* GraphQL */ `
+  query Buscar_Pesonal_Search($nombre: String!, $page: Int) {
+    buscar_Pesonal(nombre: $nombre, page: $page) {
+      personal {
+        _id
+        documentos
+        email
+        fechaIngreso
+        nombre
+        numero
+        salarioFecha {
+          fecha
+          salario
+        }
       }
+      totalPages
     }
   }
 `);
@@ -40,7 +42,7 @@ export const PERSONAL_ID = gql(/* GraphQL */ `
   }
 `);
 
-export const ACTUALIZAR_PERSONAL = gql(/* GraphQL */`
+export const ACTUALIZAR_PERSONAL = gql(/* GraphQL */ `
   mutation Actualizar_Info_Personal(
     $actualizarInfoPersonalId: String!
     $input: UpdatePersonalInput!

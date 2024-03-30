@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchemaClient } from "../registrar/data/schema";
+import { formSchemaRegist} from "../registrar/schema";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { ToastAction } from "@/components/ui/toast";
@@ -34,11 +34,10 @@ interface AccountFormProps {
   space?: string;
 }
 
-type AccountFormValues = z.infer<typeof formSchemaClient>;
+type AccountFormValues = z.infer<typeof formSchemaRegist>;
 
 const defaultValues: Partial<AccountFormValues> = {
-  licensePlate: "",
-  description: "",
+  
 };
 
 // interface AccountFormProps {
@@ -52,21 +51,21 @@ export function CarForm({
   space,
 }: AccountFormProps) {
   const { toast } = useToast();
-  const form = useForm<z.infer<typeof formSchemaClient>>({
-    resolver: zodResolver(formSchemaClient),
+  const form = useForm<z.infer<typeof formSchemaRegist>>({
+    resolver: zodResolver(formSchemaRegist),
     defaultValues,
   });
 
-  function onSubmit(data: AccountFormValues) {
-    toast({
-      description: `usuario ${data.licensePlate} registrado con éxito`,
-      action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
-    });
-  }
+  // function onSubmit(data: AccountFormValues) {
+  //   toast({
+  //     description: `usuario ${data.licensePlate} registrado con éxito`,
+  //     action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
+  //   });
+  // }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2 mx-2">
+      <form  className="space-y-2 mx-2">
         <div className="grid grid-cols-1 gap-y-2 gap-x-8 xl:grid-cols-2">
           {fields.map((field, index) => (
             <div key={index}>
@@ -94,7 +93,7 @@ export function CarForm({
             </div>
           ))}
         </div>
-        {textarea && (
+        {/* {textarea && (
           <FormField
             control={form.control}
             name="description"
@@ -115,7 +114,7 @@ export function CarForm({
               </FormItem>
             )}
           />
-        )}
+        )} */}
         <div className={`flex justify-end space-x-4 ${space}`}>
           <Button className="rounded-[10px]" variant={"ghost"}>
             Cancel

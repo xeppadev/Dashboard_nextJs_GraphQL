@@ -1,6 +1,6 @@
 import { CodegenConfig } from "@graphql-codegen/cli";
 
-const uri =process.env.NEXT_PUBLIC_GRAPHQL_URL;
+
 
 const config: CodegenConfig = {
   schema: "https://espejo.workflowdt.cloud/graphql",

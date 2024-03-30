@@ -1,4 +1,6 @@
 import { getClient } from "@/lib/client";
+import { getServerSession } from "next-auth";
+import { options } from "@/app/options";
 import { REGISTRAR_PERSONAL } from "../repositories/personalRepo";
 import { formSchemaPersonal } from "@/app/ui/dashboard/personal/registrar/schema";
 import * as z from "zod";
@@ -8,9 +10,15 @@ type Datavalues = z.infer<typeof PersonalSchema>;
 
 export async function registrarPersonalModel(dataPersonal: Datavalues) {
   const client = getClient();
+  const session = await getServerSession(options);
 
   const { data } = await client.mutate({
     mutation: REGISTRAR_PERSONAL,
+    context: {
+      headers: {
+        Authorization: `Bearer ${session?.access_token}`,
+      },
+    },
     variables: {
       input: {
         personal: {

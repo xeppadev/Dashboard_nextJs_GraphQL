@@ -13,7 +13,6 @@ export default function UserDocument({ data }: { data: ClienteDto }) {
         <DataTable
           columns={columns}
           data={data.contratos || []}
-          toolBarComponet2={false}
           paginationComponet={false}
           showHeader={false}
           paginationComponet2={true}

@@ -1,4 +1,4 @@
-import DemoPage from "@/app/ui/dashboard/clientes/listar/table";
+import TablaClientes from "@/app/ui/dashboard/clientes/listar/table";
 
 export default function ListarCli({
   searchParams,
@@ -9,6 +9,7 @@ export default function ListarCli({
   };
 }) {
   const query = searchParams?.query || "";
+  const currentPage = Number(searchParams?.page) || 1;
 
   return (
     <div className="flex flex-col   2xl:mx-16 space-y-5  w-full sm:w-auto">
@@ -17,7 +18,7 @@ export default function ListarCli({
           <h2 className="text-3xl font-bold">Clientes</h2>
         </div>
       </div>
-      <DemoPage query={query} />
+      <TablaClientes query={query} currentPage={currentPage} />
     </div>
   );
 }

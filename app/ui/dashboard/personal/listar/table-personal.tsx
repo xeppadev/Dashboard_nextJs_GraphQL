@@ -1,10 +1,11 @@
 import { columns } from "./columns";
 import { DataTable } from "../../../components/data-table";
-import { buscarPersonalModel } from "@/src/models/buscarPersonal";
+import { buscarPersonalModel } from "@/src/models/buscarPersonalModel";
 import { DataTableToolbar } from "@/app/ui/components/data-table-toolbar";
+import Pagination from "@/app/ui/components/pagination";
 
-export default async function TablePerson({ query }: { query: string }) {
-  const { data: dataPersonal, loading } = await buscarPersonalModel(query);
+export default async function TablePerson({ query , currentPage }: { query: string; currentPage: number}) {
+  const { data: dataPersonal, loading } = await buscarPersonalModel(query , currentPage);
 
   if (loading) {
     return <div>Loading...</div>;
@@ -17,15 +18,8 @@ export default async function TablePerson({ query }: { query: string }) {
         url={"/personal/registrar_personal"}
         buttonName={"Registrar Personal"}
       />
-      <DataTable
-        showHeader={true}
-        columns={columns}
-        data={dataPersonal}
-        paginationComponet={true}
-        toolBarComponet2={false}
-        paginationComponet2={false}
-        type={"list"}
-      />
+      <DataTable showHeader={true} columns={columns} data={dataPersonal.personal} />
+      <Pagination totalPages={dataPersonal.totalPages} />
     </>
   );
 }

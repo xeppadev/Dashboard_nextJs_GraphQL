@@ -2,9 +2,10 @@ import { columns } from "./columns";
 import { DataTable } from "../../../components/data-table";
 import { DataTableToolbar } from "@/app/ui/components/data-table-toolbar";
 import { buscarRepuestoModel } from "@/src/models/buscarRepuestoModel";
+import Pagination from "@/app/ui/components/pagination";
 
-export default async function TableStock({ query }: { query: string }) {
-  const { data: dataRepuestos, loading } = await buscarRepuestoModel(query);
+export default async function TableStock({ query, currentPage  }: { query: string; currentPage : number}) {
+  const { data: dataRepuestos, loading } = await buscarRepuestoModel(query , currentPage);
 
   return (
     <>
@@ -13,15 +14,8 @@ export default async function TableStock({ query }: { query: string }) {
         url={"/stock/registrar_stock"}
         buttonName={"Registrar Repuesto"}
       />
-      <DataTable
-        showHeader={true}
-        columns={columns}
-        data={dataRepuestos}
-        paginationComponet={true}
-        toolBarComponet2={false}
-        paginationComponet2={false}
-        type={"list"}
-      />
+      <DataTable showHeader={true} columns={columns} data={dataRepuestos.repuestos} />
+      <Pagination totalPages={dataRepuestos.totalPages} />
     </>
   );
 }

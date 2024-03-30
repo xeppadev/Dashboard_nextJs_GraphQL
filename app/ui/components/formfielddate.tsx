@@ -45,7 +45,7 @@ export const FormFieldate: React.FC<FieldValues> = ({
                     size={size}
                     variant={"outline"}
                     className={cn(
-                      "w-full p-3 text-left font-normal justify-between dark:text-nav_item",
+                      "w-full p-3 text-left font-normal justify-between dark:text-nav_item rounded-[10px]",
 
                       !field.value && "text-muted-foreground "
                     )}

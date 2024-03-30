@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import Search from "../../components/search";
 import Image from "next/image";
 import { Overview } from "./chart/chartcomponent";
 import { LineChart } from "./chart/linecomponent";
@@ -11,73 +10,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import type { SVGProps } from "react";
 import { CustomCard } from "./chart/card/customcard";
-
-function IonFilter(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
-      viewBox="0 0 512 512"
-      {...props}
-    >
-      <path
-        fill="currentColor"
-        d="M472 168H40a24 24 0 0 1 0-48h432a24 24 0 0 1 0 48m-80 112H120a24 24 0 0 1 0-48h272a24 24 0 0 1 0 48m-96 112h-80a24 24 0 0 1 0-48h80a24 24 0 0 1 0 48"
-      ></path>
-    </svg>
-  );
-}
-
-function EpArrowDownBold(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
-      viewBox="0 0 1024 1024"
-      {...props}
-    >
-      <path
-        fill="currentColor"
-        d="M104.704 338.752a64 64 0 0 1 90.496 0l316.8 316.8l316.8-316.8a64 64 0 0 1 90.496 90.496L557.248 791.296a64 64 0 0 1-90.496 0L104.704 429.248a64 64 0 0 1 0-90.496"
-      ></path>
-    </svg>
-  );
-}
-
-function MaterialSymbolsStoreRounded(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="1em"
-      height="1em"
-      viewBox="0 0 24 24"
-      {...props}
-    >
-      <path
-        fill="currentColor"
-        d="M5 4h14q.425 0 .713.288T20 5q0 .425-.288.713T19 6H5q-.425 0-.712-.288T4 5q0-.425.288-.712T5 4m0 16q-.425 0-.712-.288T4 19v-5h-.175q-.475 0-.775-.363t-.2-.837l1-5q.075-.35.35-.575T4.825 7h14.35q.35 0 .625.225t.35.575l1 5q.1.475-.2.837t-.775.363H20v5q0 .425-.288.713T19 20q-.425 0-.712-.288T18 19v-5h-4v5q0 .425-.288.713T13 20zm1-2h6v-4H6z"
-      ></path>
-    </svg>
-  );
-}
+import { DatePickerComponent } from "../../components/dataComponent";
+import { MaterialSymbolsStoreRounded } from "@/app/lib/icons";
 
 export default function Stadistic() {
   return (
     <section>
-      <div className=" flex justify-between w-full">
-        <Input className="w-1/5  h-11" placeholder="Buscar" />
-        <div>
-          <Button className=" space-x-2 h-10" variant="ghost">
-            <IonFilter /> <span>Filters</span>
-          </Button>
-          <Button className=" space-x-2 h-10" variant="ghost">
-            <span>Ordenar por:</span> <EpArrowDownBold />
-          </Button>
-        </div>
+      <div className="flex flex-col items-center space-x-2  lg:flex-row lg:space-x-3 lg:items-start lg:w-full space-y-3 lg:space-y-0">
+        <Search placeholder="Buscar Vehiculo" width="w-[35%]" />
+        <DatePickerComponent label="Fecha" paramName="fecha" />
       </div>
       <div className="grid grid-cols-3 gap-6 mb-7 mt-6">
         <div className="  col-span-1  ">
@@ -428,7 +370,7 @@ export default function Stadistic() {
       </div>
 
       <div className="grid grid-cols-3 gap-6 mb-7">
-      <div className="col-span-2 ">
+        <div className="col-span-2 ">
           <Card>
             <CardHeader>
               <CardTitle className="font-medium">
@@ -441,7 +383,6 @@ export default function Stadistic() {
                 className="w-full h-[330px] "
                 data={[
                   {
-                    
                     id: "Recorrido Actual",
                     data: [
                       { x: "Jan", y: 300 },
@@ -455,42 +396,32 @@ export default function Stadistic() {
                       { x: "Sep", y: 723 },
                       { x: "Oct", y: 567 },
                       { x: "Nov", y: 611 },
-                      { x: "Dec", y: 765 }, 
-
+                      { x: "Dec", y: 765 },
                     ],
                   },
-                 
                 ]}
               />
               <div className="text-center">
                 <p className="text-3xl font-semibold">645.25 Km</p>
-                <p className="text-sm text-gray-500">
-                  Recorrido Actual 
-                </p>
+                <p className="text-sm text-gray-500">Recorrido Actual</p>
               </div>
               <div className="flex flex-col space-y-2 mt-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                   
-
                     <p>Fecha Registro</p>
                   </div>
                   <p>04 Mayo de 2023</p>
                 </div>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    
-
                     <p>Kilometro Inicial</p>
                   </div>
                   <p>116Km</p>
                 </div>
               </div>
-
             </CardContent>
           </Card>
         </div>
-       
 
         <div className="col-span-1">
           <Card>
@@ -536,7 +467,7 @@ export default function Stadistic() {
         </div>
       </div>
       <div className="grid grid-cols-2 gap-6">
-      <div className="col-span-2">
+        <div className="col-span-2">
           <Card>
             <CardHeader>
               <CardTitle className="font-medium">

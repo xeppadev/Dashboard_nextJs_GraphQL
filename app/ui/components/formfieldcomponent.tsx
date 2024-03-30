@@ -31,7 +31,7 @@ export const FormFieldComponent: React.FC<FieldValues> = ({
         <FormItem className={className}>
           <FormLabel >{label}</FormLabel>
           <FormControl className={className2}>
-            <Input placeholder={placeholder} {...field} type={type} className="w-full h-12" />
+            <Input placeholder={placeholder} {...field} type={type} className="w-full h-12 rounded-[10px]" />
           </FormControl>
           <FormDescription>{description}</FormDescription>
           <FormMessage />

@@ -70,17 +70,7 @@ export const data = [
      
   
     },
-    {
-      id: "7ghjty562l",
-      unidades: "AEH-742",
-      cliente : "Minera Barrick Peru SAC",
-      inicio: "2021-11-15T14:35:28.185+00:00",
-      termino: "2023-11-20T21:19:12.997+00:00",
-      cambios: "2",
-      costo : "S/ 1211.60",
-      mantenimiento: "correctivo",
-      
-    },
+    
   
     
   ];

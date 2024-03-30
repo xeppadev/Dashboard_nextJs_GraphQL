@@ -13,15 +13,7 @@ export default async function TableProveedor() {
 
   return (
     <div className="   ">
-      <DataTable
-        showHeader={true}
-        columns={columns}
-        data={data}
-        paginationComponet={true}
-        toolBarComponet2={false}
-        paginationComponet2={false}
-        type={"list"}
-      />
+      <DataTable showHeader={true} columns={columns} data={data} />
     </div>
   );
 }

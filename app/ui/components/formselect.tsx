@@ -22,12 +22,13 @@ interface Option {
 
 interface RadioGroupProps {
   options: Option[];
-  control: any;
+  control?: any;
   name: string;
   className?: string;
   className2?: string;
   placeholder?: string;
   label?: string;
+  onValueChange?: (value: string) => void;
 }
 
 export const FormSelectComponent: React.FC<RadioGroupProps> = ({
@@ -35,9 +36,10 @@ export const FormSelectComponent: React.FC<RadioGroupProps> = ({
   name,
   options,
   className = "w-1/4 mt-2",
-  className2 = "h-10",
+  className2 = "h-10 ",
   label,
   placeholder,
+  onValueChange,
 }) => (
   <FormField
     control={control}
@@ -45,13 +47,13 @@ export const FormSelectComponent: React.FC<RadioGroupProps> = ({
     render={({ field }) => (
       <FormItem className={className}>
         {label && <FormLabel>{label}</FormLabel>}
-        <Select onValueChange={field.onChange} defaultValue={field.value}>
+        <Select onValueChange={onValueChange? onValueChange : field.onChange} defaultValue={field.value}>
           <FormControl>
-            <SelectTrigger className={`${className2}`}>
-              <SelectValue placeholder={placeholder} />
+            <SelectTrigger className={className2}>
+              <SelectValue placeholder={placeholder}  />
             </SelectTrigger>
           </FormControl>
-          <SelectContent className={className}>
+          <SelectContent >
             {options.map((option) => (
               <SelectItem key={option.value}  value={option.value}>
                  {option.label}

@@ -20,31 +20,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { DataTableToolbar2 } from "../dashboard/vehiculos/historial/data-table-toolbar";
 
 import { DataTablePagination } from "../dashboard/clientes/listar/data-table-pagination";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  
-  paginationComponet: boolean;
   showHeader: boolean;
-  paginationComponet2: boolean;
-  toolBarComponet2: boolean;
-  type: string;
-  
 }
 
 export function DataTable<TData, TValue>({
-
-  paginationComponet,
-  paginationComponet2,
-  toolBarComponet2,
   showHeader,
   columns,
   data,
-  type,
-  
 }: DataTableProps<TData, TValue>) {
   // const [sorting, setSorting] = React.useState<SortingState>([]);
   // const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -65,9 +52,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      {toolBarComponet2 && <DataTableToolbar2 table={table} />}
-    
-      <div className=" rounded-[12px]  bg-background shadow-custom dark:bg-card  dark:shadow-none ">
+      <div className=" rounded-[14px]  bg-background shadow-custom dark:bg-card  dark:shadow-none ">
         <Table>
           {showHeader && (
             <TableHeader className="bg-[#F8F9FA] dark:bg-[#1c2536]   text-[#637381] h-[60px]">
@@ -89,35 +74,36 @@ export function DataTable<TData, TValue>({
               ))}
             </TableHeader>
           )}
-         <TableBody>
-          {table.getRowModel().rows?.length ? (
-            table.getRowModel().rows.map((row) => (
-              <TableRow
-                key={row.id}
-                data-state={row.getIsSelected() && "selected"}
-              >
-                {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} className="h-[78px]">
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </TableCell>
-                ))}
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && "selected"}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id} className="h-[78px]">
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  No results.
+                </TableCell>
               </TableRow>
-            ))
-          ) : (
-            <TableRow>
-              <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results.
-              </TableCell>
-            </TableRow>
-          )}
-        </TableBody>
+            )}
+          </TableBody>
         </Table>
-
-        {paginationComponet && (
-          <DataTablePagination table={table} type={type} />
-        )}
       </div>
-      {paginationComponet2 && <DataTablePagination table={table} type={type} />}
     </>
   );
 }

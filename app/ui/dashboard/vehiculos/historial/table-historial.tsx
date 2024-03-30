@@ -1,30 +1,42 @@
-import { Regist, columns } from "./columns";
+import { columns } from "./columns";
 import { DataTable } from "../../../components/data-table";
 import BarraOptions from "./barraoptions";
-import { data } from "./data/datosfetch";
+import { DataTableToolbar } from "./data-table-toolbar";
+import Pagination from "@/app/ui/components/pagination";
+import { buscarMantenimientosModel } from "@/src/models/historialMantenimientos";
+import { Suspense } from "react";
+import SandboxMantenimiento from "@/app/lib/utils/skeletons/skeletonMantenimiento";
 
-async function getData(): Promise<Regist[]> {
-  // Fetch data from your API here.
-  return data;
-}
-
-export default async function DemoPage() {
-  const data = await getData();
-
+export default async function TableHistorial({
+  query,
+  date1,
+  date2,
+  currentPage,
+}: {
+  query?: string 
+  date1?: Date | null;
+  date2?: Date | null;
+  currentPage?: number;
+}) {
+  const { data: dataHistorial } = await buscarMantenimientosModel(
+    date1 || null,
+    date2 || null,
+    query || "",
+    currentPage || 1
+  );
   return (
-    <div className=" flex flex-col space-y-6  ">
-      <BarraOptions />
+    <div className=" flex flex-col space-y-6">
+      <Suspense fallback={<SandboxMantenimiento />} key={query || "" + currentPage}>
+        <BarraOptions query={query} currentPage={currentPage} />
+      </Suspense>
+
+      <DataTableToolbar />
       <DataTable
         showHeader={true}
         columns={columns}
-        data={data}
-      
-        toolBarComponet2={true}
-        paginationComponet={true}
-        paginationComponet2={false}
-    
-        type={"list"}
+        data={dataHistorial.mantenimientos}
       />
+      <Pagination totalPages={dataHistorial.totalPages} />
     </div>
   );
 }

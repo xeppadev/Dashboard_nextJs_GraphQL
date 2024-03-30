@@ -8,12 +8,12 @@ import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DataTableRowActions } from "../../clientes/listar/data-table-row-actions";
 import { DialogEdit } from "./accionesedit";
-import { RepuestoType } from "@/src/generated/graphql";
+import { RepuestoSearchType} from "@/src/generated/graphql";
 import { StockStatus, getInitials } from "@/app/lib/utils/utils";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Regist = RepuestoType;
+export type Regist = RepuestoSearchType;
 
 export const columns: ColumnDef<Regist>[] = [
   {
@@ -53,7 +53,7 @@ export const columns: ColumnDef<Regist>[] = [
       }
       return (
         <Link
-          href={`/dashboard/clientes/cuentas/${column.id}`}
+          href={`/dashboard/clientes/cuentas/${column._id}`}
           className="flex item-center min-w-[180px] "
         >
           <div className="flex space-x-4 justify-center  ">
@@ -67,7 +67,7 @@ export const columns: ColumnDef<Regist>[] = [
             </Avatar>
             <div className="flex-col flex justify-center ">
               <span className="font-medium ">{row.getValue("producto")}</span>
-              <span className=" font-medium text-[#6c737f]"> {column.id}</span>
+              <span className=" font-medium text-[#6c737f]"> {column._id}</span>
             </div>
           </div>
         </Link>
