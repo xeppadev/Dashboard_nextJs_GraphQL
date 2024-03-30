@@ -11,11 +11,7 @@ export default function UserDocumentos({ data }: { data: ClienteDto }) {
         <DataTable
           columns={columns}
           data={data.documentos || []}
-          
-          paginationComponet={false}
           showHeader={false}
-          paginationComponet2={true}
-          type={"table"}
         />
       </div>
     </div>
