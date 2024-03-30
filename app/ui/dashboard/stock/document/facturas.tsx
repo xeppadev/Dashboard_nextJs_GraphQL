@@ -13,7 +13,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Input } from "@/components/ui/input";
-import CalendarComponent from "../../clientes/cuentas/clientContratos/calendar";
+// import CalendarComponent from "../../clientes/cuentas/clientContratos/calendar";
 import { ScrollAreaDemo } from "./scrollproveedor";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export default function Facturas() {
@@ -26,15 +26,15 @@ export default function Facturas() {
         <CardContent className="space-y-5">
           <Input placeholder="Buscar" className="w-full h-12" />
           <CardTitle className="text-gray-500">Fecha Registro</CardTitle>
-          <CalendarComponent 
+          {/* <CalendarComponent 
           classname={"w-full"}
           descripcion={"Fecha Inicio"}
-          />
+          /> */}
           <CardTitle className="text-gray-500">Fecha Vencimiento</CardTitle>
-          <CalendarComponent 
+          {/* <CalendarComponent 
           classname={"w-full"}
           descripcion={"Fecha Final"}
-          />
+          /> */}
           <CardTitle className="text-gray-500">Proveedor</CardTitle>
           <ScrollAreaDemo />
         </CardContent>
@@ -105,19 +105,8 @@ export default function Facturas() {
             </div>
           </Card>
         </div>
-        
-        <DataTable
-          columns={columns}
-          data={data}
-          toolBarComponet2={false}
-         
-          paginationComponet={false}
-          showHeader={false}
-          paginationComponet2={true}
-          type="table"
-         
-        />
-        
+
+        <DataTable columns={columns} data={data} showHeader={false} />
       </div>
     </div>
   );
