@@ -33,6 +33,7 @@ const documents = {
     "\n  mutation Crear_multiples_users($users: [CreateUserDto!]!) {\n    crear_multiples_users(users: $users)\n  }\n": types.Crear_Multiples_UsersDocument,
     "\n  mutation Crear_auto($createCarInput: CreateCarDto!) {\n    crear_auto(createCarInput: $createCarInput)\n  }\n": types.Crear_AutoDocument,
     "\n  query obtenerPlacas {\n    obtener_info_placas {\n      placa\n    }\n  }\n": types.ObtenerPlacasDocument,
+    "\n  query Buscar_info_placas_tabla($plate: String!, $page: Int) {\n    buscar_info_placas_tabla(plate: $plate, page: $page) {\n      cars {\n        _id\n        cliente\n        fechaSoat\n        placa\n        propietario\n        tipoContrato\n      }\n      totalPages\n    }\n  }\n": types.Buscar_Info_Placas_TablaDocument,
 };
 
 /**
@@ -129,6 +130,10 @@ export function gql(source: "\n  mutation Crear_auto($createCarInput: CreateCarD
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  query obtenerPlacas {\n    obtener_info_placas {\n      placa\n    }\n  }\n"): (typeof documents)["\n  query obtenerPlacas {\n    obtener_info_placas {\n      placa\n    }\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  query Buscar_info_placas_tabla($plate: String!, $page: Int) {\n    buscar_info_placas_tabla(plate: $plate, page: $page) {\n      cars {\n        _id\n        cliente\n        fechaSoat\n        placa\n        propietario\n        tipoContrato\n      }\n      totalPages\n    }\n  }\n"): (typeof documents)["\n  query Buscar_info_placas_tabla($plate: String!, $page: Int) {\n    buscar_info_placas_tabla(plate: $plate, page: $page) {\n      cars {\n        _id\n        cliente\n        fechaSoat\n        placa\n        propietario\n        tipoContrato\n      }\n      totalPages\n    }\n  }\n"];
 
 export function gql(source: string) {
   return (documents as any)[source] ?? {};
