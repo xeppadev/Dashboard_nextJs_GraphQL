@@ -1,8 +1,8 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { Backend_URL } from "@/lib/contants";
 
 
-const apiURL = process.env.NEXT_API_URL;
 export const options: NextAuthOptions = {
     providers: [
     CredentialsProvider({
@@ -18,7 +18,7 @@ export const options: NextAuthOptions = {
       async authorize(credentials, req) {
         if (!credentials?.username || !credentials?.password) return null;
         const { username, password } = credentials;
-        const res = await fetch(apiURL + "/auth/login", {
+        const res = await fetch(Backend_URL + "/auth/login", {
           method: "POST",
           body: JSON.stringify({
             username,
