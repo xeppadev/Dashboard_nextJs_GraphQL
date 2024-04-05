@@ -2,7 +2,7 @@ import { getClient } from "@/lib/client";
 import { BUSCAR_REPUESTOS_SEARCH } from "../repositories/repuestosRepo";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/options";
-export async function buscarRepuestoModel(producto: string , page: number) {
+export async function buscarRepuestoModel(producto: string , page?: number) {
   const client = getClient();
   const session = await getServerSession(options);
 

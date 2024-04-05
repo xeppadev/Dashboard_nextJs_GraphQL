@@ -16,6 +16,8 @@ type MyResponsiveLineProps = {
 import { ResponsiveLine } from "@nivo/line";
 
 export function LineChart({ className , data ,...props }: MyResponsiveLineProps) {
+ 
+  const textColor = "#6B7280"
   return (
     <div {...props} className={className}>
       <ResponsiveLine
@@ -39,13 +41,24 @@ export function LineChart({ className , data ,...props }: MyResponsiveLineProps)
         axisLeft={{
           tickSize: 0,
           tickValues: 5,
-          tickPadding: 16,
+          tickPadding: 4,
         }}
-        colors={["#2563EB", "#F69009"]}
+        colors={["#F69009", "#2563EB"]}
         pointSize={6}
         useMesh={true}
         gridYValues={6}
         theme={{
+          axis: {
+            ticks: {
+              text: {
+                
+                fontSize: "13px",
+                fill: textColor,
+                fontWeight: 500,
+                
+              },
+            },
+          },
           tooltip: {
             chip: {
               borderRadius: "9999px",
@@ -58,7 +71,9 @@ export function LineChart({ className , data ,...props }: MyResponsiveLineProps)
           },
           grid: {
             line: {
-              stroke: "#f3f4f6",
+              stroke: "#6B7280",
+              strokeWidth: 0.2,
+              width: 0.1,
             },
           },
         }}
@@ -123,13 +138,14 @@ export function LineChart({ className , data ,...props }: MyResponsiveLineProps)
                   }}
                 >
                   <span className={`text-[1px] mr-1 p-1 rounded-full bg-[${point.serieColor}]`}></span>
-                  {point.serieId}: <strong className="ml-1">{point.data.yFormatted}</strong>
+                  {point.serieId}: <strong className="ml-1">{`${point.data.yFormatted} Mm`}</strong>
                 </div>
               ))}
             </div>
           );
         }}
         enableGridX={false}
+       
         role="application"
       />
     </div>

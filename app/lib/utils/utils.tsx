@@ -1,12 +1,12 @@
 import { differenceInDays, parseISO } from "date-fns";
 import { ContratoDto } from "@/src/generated/graphql";
 import { SalarioFechaDto } from "@/src/generated/graphql";
+import { es } from "date-fns/locale";
+import { format, parse } from "date-fns";
 export type Maybe<T> = T | null;
 type StatusComponentProps = {
   contratos?: Maybe<Array<Maybe<ContratoDto>>>;
 };
-
-
 
 export const StatusComponent: React.FC<StatusComponentProps> = ({
   contratos,
@@ -88,8 +88,7 @@ export function getInitials(name: string): string {
 }
 
 export function processColumn(column: string) {
-  const fileName =
-  column.replace(/[\\/]/g, "/").split("/").pop() || "";
+  const fileName = column.replace(/[\\/]/g, "/").split("/").pop() || "";
 
   const fileType = fileName.split(".").pop() || "";
 
@@ -97,10 +96,12 @@ export function processColumn(column: string) {
 }
 
 // Esta función toma un array de objetos salarioFecha y devuelve el salario más reciente
-export function salarioMasReciente(salarioFecha: Maybe<Maybe<SalarioFechaDto>[]> | undefined)  {
+export function salarioMasReciente(
+  salarioFecha: Maybe<Maybe<SalarioFechaDto>[]> | undefined
+) {
   if (!salarioFecha || salarioFecha.length === 0) {
-     return null;
-   }
+    return null;
+  }
 
   const salarioMasReciente = salarioFecha
     .slice()
@@ -108,10 +109,8 @@ export function salarioMasReciente(salarioFecha: Maybe<Maybe<SalarioFechaDto>[]>
       (a, b) => new Date(b!.fecha).getTime() - new Date(a!.fecha).getTime()
     )[0];
 
-  return salarioMasReciente
+  return salarioMasReciente;
 }
-
-
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the total number of pages is 7 or less,
@@ -123,13 +122,13 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   // If the current page is among the first 3 pages,
   // show the first 3, an ellipsis, and the last 2 pages.
   if (currentPage <= 3) {
-    return [1, 2, 3, '...', totalPages - 1, totalPages];
+    return [1, 2, 3, "...", totalPages - 1, totalPages];
   }
 
   // If the current page is among the last 3 pages,
   // show the first 2, an ellipsis, and the last 3 pages.
   if (currentPage >= totalPages - 2) {
-    return [1, 2, '...', totalPages - 2, totalPages - 1, totalPages];
+    return [1, 2, "...", totalPages - 2, totalPages - 1, totalPages];
   }
 
   // If the current page is somewhere in the middle,
@@ -137,11 +136,24 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   // another ellipsis, and the last page.
   return [
     1,
-    '...',
+    "...",
     currentPage - 1,
     currentPage,
     currentPage + 1,
-    '...',
+    "...",
     totalPages,
   ];
 };
+
+export function convertMonth(monthYear: string) {
+  // Parse the month and year from the string
+  const [month, year] = monthYear.split("/").map(Number);
+
+  // Create a new Date object with the parsed month and year
+  const date = new Date(year, month - 1);
+
+  // Format the date to get the month name
+  const monthName = format(date, "MMMM" , { locale: es }).toUpperCase();
+
+  return monthName;
+}

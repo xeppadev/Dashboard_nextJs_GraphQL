@@ -1,8 +1,7 @@
-'use client';
-import { ResponsiveBar } from "@nivo/bar"
+"use client";
+import { ResponsiveBar } from "@nivo/bar";
 
-
-type DataItem = {
+export type DataItem = {
   name: string;
   [key: string]: number | string;
 };
@@ -10,27 +9,34 @@ type DataItem = {
 type MyResponsiveLineProps = {
   data: DataItem[];
   className?: string;
-  groupMode?:  "stacked" | "grouped";
+  groupMode?: "stacked" | "grouped";
   borderRadius?: number;
   layout?: "horizontal" | "vertical";
   tickPadding?: number;
   padding?: number;
   enableLabel?: boolean;
-  
 };
 
-export function Overview({   enableLabel,padding = 0.4,tickPadding = 0 , layout,borderRadius,groupMode,data , className, ...props }: MyResponsiveLineProps) {
-  const keys = Object.keys(data[0]).filter((key) => key !== "name")
+export function Overview({
+  enableLabel,
+  padding = 0.4,
+  tickPadding = 0,
+  layout,
+  borderRadius,
+  groupMode,
+  data,
+  className,
+  ...props
+}: MyResponsiveLineProps) {
+  const keys =
+    data && data[0] ? Object.keys(data[0]).filter((key) => key !== "name") : [];
   return (
     <div {...props} className={className}>
       <ResponsiveBar
         data={data}
         keys={keys}
-
-       
         indexBy="name"
-        margin={{ top: 20, right: 0, bottom: 50, left: 20 }}
-        
+        margin={{ top: 20, right: 10, bottom: 55, left: 40 }}
         padding={padding}
         groupMode={groupMode}
         borderRadius={borderRadius}
@@ -45,9 +51,17 @@ export function Overview({   enableLabel,padding = 0.4,tickPadding = 0 , layout,
           tickValues: 4,
           tickPadding: tickPadding,
         }}
-        
         gridYValues={4}
         theme={{
+          axis: {
+            ticks: {
+              text: {
+                fontSize: "13px",
+                fill: "#6B7280",
+                fontWeight: 500,
+              },
+            },
+          },
           tooltip: {
             chip: {
               borderRadius: "9999px",
@@ -60,43 +74,42 @@ export function Overview({   enableLabel,padding = 0.4,tickPadding = 0 , layout,
           },
           grid: {
             line: {
-              stroke: "#f3f4f6",
+              stroke: "#6B7280",
+              strokeWidth: 0.2,
+              width: 0.1,
             },
           },
         }}
-           
         legends={[
           {
-              dataFrom: 'keys',
-              anchor: 'bottom',
-              direction: 'row',
-              justify: false,
-              translateX: 30,
-              translateY: 35,
-              itemsSpacing: 0,
-              itemWidth: 100,
-              symbolShape: 'circle',
-              itemHeight:10,
-              itemDirection: 'left-to-right',
-              itemOpacity: 0.85,
-              symbolSize: 14,
-              effects: [
-                  {
-                      on: 'hover',
-                      style: {
-                          itemOpacity: 1
-                      }
-                  }
-              ]
-          }
-      ]}
-        
+            dataFrom: "keys",
+            anchor: "bottom",
+            direction: "row",
+            justify: false,
+            translateX: 30,
+            translateY: 50,
+            itemWidth: 100,
+            symbolShape: "circle",
+            itemHeight: 10,
+            itemDirection: "left-to-right",
+            itemOpacity: 0.85,
+            symbolSize: 14,
+            effects: [
+              {
+                on: "hover",
+                style: {
+                  itemOpacity: 1,
+                },
+              },
+            ],
+          },
+        ]}
         tooltipLabel={({ id }) => `${id}`}
         enableLabel={enableLabel}
-        
         role="application"
         ariaLabel="A bar chart showing data"
+        labelTextColor={{ from: "theme", theme: "background" }}
       />
     </div>
-  )
+  );
 }

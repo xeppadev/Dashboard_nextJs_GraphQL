@@ -4,7 +4,7 @@ import { buscarClientesModel } from "@/src/models/buscarClienteModel";
 import { DataTableToolbar } from "../../../components/data-table-toolbar";
 import Pagination from "@/app/ui/components/pagination";
 
-export default async function TablaClientes({
+export default async function TablaVehiculos({
   query,
   currentPage,
 }: {
@@ -16,9 +16,9 @@ export default async function TablaClientes({
   return (
     <>
       <DataTableToolbar
-        placeholder="Buscar Cliente"
-        url={"/clientes/registrar_clientes"}
-        buttonName="Registrar Cliente"
+        placeholder="Buscar vehiculos..."
+        url={"/vehiculos/registrar_vehiculos"}
+        buttonName="Registrar Vehiculo"
       />
       <DataTable
         showHeader={true}

@@ -20,7 +20,7 @@ import { FormFieldComponent } from "../../../components/formfieldcomponent";
 import { FormFieldate } from "../../../components/formfielddate";
 import { FormFileComponent } from "../../../components/formfile";
 import { registerPersonal } from "@/lib/actions";
-import { sentToExternalAPI } from "@/lib/actions";
+
 
 export default function FormPersonal() {
   const { toast } = useToast();

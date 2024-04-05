@@ -1,4 +1,4 @@
-import TabsDemo from "@/app/ui/dashboard/proveedores/registrar/tabproveedores";
+import FormProveedor from "@/app/ui/dashboard/proveedores/registrar/formproveedores";
 
 
 export default function RegistrarProve() {
@@ -9,7 +9,7 @@ export default function RegistrarProve() {
         Registrar Proveedor
       </h2>
       </div>
-        <TabsDemo />
+        <FormProveedor />
       
     
   </div>

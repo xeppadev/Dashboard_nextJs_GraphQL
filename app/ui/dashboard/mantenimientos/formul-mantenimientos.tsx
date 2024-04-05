@@ -29,24 +29,18 @@ import {
 
 import { FormFieldComponent } from "../../components/formfieldcomponent";
 import { useToast } from "@/components/ui/use-toast";
-import { FormFieldate } from "../../components/formfielddate";
+
 import { FormFileComponent } from "../../components/formfile";
 import { FormSelectComponent } from "@/app/ui/components/formselect";
-interface FieldConfig {
-  name: string;
-  label: string;
-  placeholder: string;
-  description?: string;
-  className?: string;
-  accion?: string;
-}
-interface AccountFormProps {
-  buttonText?: string;
-}
+import { RepuestoSearchType } from "@/src/generated/graphql";
+
+type FormularioProps = {
+  data: RepuestoSearchType[];
+};
 
 type AccountFormValues = z.infer<typeof formSchemaClient>;
 
-function MantenimienForm({ buttonText }: AccountFormProps) {
+function MantenimienForm({ data }: FormularioProps) {
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchemaClient>>({
     resolver: zodResolver(formSchemaClient),
@@ -55,7 +49,6 @@ function MantenimienForm({ buttonText }: AccountFormProps) {
 
   const onSubmit = (data: AccountFormValues) => {
     console.log(data);
-   
   };
 
   return (
@@ -64,7 +57,7 @@ function MantenimienForm({ buttonText }: AccountFormProps) {
         <Card className=" py-4 h-full ">
           <CardContent className="flex flex-col  px-2 mx-4 space-y-1">
             <CardTitle className="text-lg font-semibold mr-auto">
-               Detalles del Mantenimiento
+              Detalles del Mantenimiento
             </CardTitle>
 
             <div className=" p-0 space-x-3 flex-row flex w-full  ">
@@ -86,7 +79,7 @@ function MantenimienForm({ buttonText }: AccountFormProps) {
                 className="w-1/4"
                 className2="h-10"
               />
-              
+
               <FormSelectComponent
                 placeholder="Soat Vigente"
                 control={form.control}
@@ -94,7 +87,6 @@ function MantenimienForm({ buttonText }: AccountFormProps) {
                 options={[
                   { value: "si", label: "Sí" },
                   { value: "no", label: "No" },
-                  
                 ]}
               />
               <FormSelectComponent
@@ -102,39 +94,46 @@ function MantenimienForm({ buttonText }: AccountFormProps) {
                 control={form.control}
                 name="maintenanceType"
                 options={[
-                  { value: "mantenimiento preventivo", label:"Mantenimiento Preventivo" },
-                  { value: "mantenimiento predictivo", label: "Mantenimiento Predictivo" },
-                  { value: "mantenimiento correctivo", label: "Mantenimiento Correctivo" },
-                  
+                  {
+                    value: "mantenimiento preventivo",
+                    label: "Mantenimiento Preventivo",
+                  },
+                  {
+                    value: "mantenimiento predictivo",
+                    label: "Mantenimiento Predictivo",
+                  },
+                  {
+                    value: "mantenimiento correctivo",
+                    label: "Mantenimiento Correctivo",
+                  },
                 ]}
               />
             </div>
             <div className="space-y-2">
               <CardTitle className="text-lg font-semibold">
-                Diagnostico del Vehiculo 
+                Diagnostico del Vehiculo
               </CardTitle>
               <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                 
-                  <FormControl>
-                    <Textarea
-                      placeholder="Describe la informacion ."
-                      className="resize-none"
-                      {...field}
-                    />
-                  </FormControl>
+                control={form.control}
+                name="description"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Textarea
+                        placeholder="Describe la informacion ."
+                        className="resize-none"
+                        {...field}
+                      />
+                    </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
             <div>
-              <CardTitle className="text-lg font-semibold">
-                 Documentos del Mantenimiento
+              <CardTitle className="text-lg font-semibold my-2">
+                Documentos del Mantenimiento
               </CardTitle>
               <FormFileComponent
                 control={form.control}
@@ -142,7 +141,6 @@ function MantenimienForm({ buttonText }: AccountFormProps) {
                 label={""}
               />
             </div>
-          
           </CardContent>
         </Card>
 
@@ -153,7 +151,7 @@ function MantenimienForm({ buttonText }: AccountFormProps) {
             </Button>
           </Link>
           <Button type="submit" className="rounded-[10px]">
-            {buttonText}
+            Registrar
           </Button>
         </div>
       </form>

@@ -5,7 +5,7 @@ import { buscarRepuestoModel } from "@/src/models/buscarRepuestoModel";
 import Pagination from "@/app/ui/components/pagination";
 
 export default async function TableStock({ query, currentPage  }: { query: string; currentPage : number}) {
-  const { data: dataRepuestos, loading } = await buscarRepuestoModel(query , currentPage);
+  const { data: dataRepuestos } = await buscarRepuestoModel(query , currentPage);
 
   return (
     <>

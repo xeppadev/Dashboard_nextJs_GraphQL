@@ -7,6 +7,8 @@ import { actualizarClienteModel } from "@/src/models/actualizarClienteModel";
 import { formSchemaRegist } from "@/app/ui/dashboard/vehiculos/registrar/schema";
 import { actualizarPersonalModel } from "@/src/models/actualizarPersonalModel";
 import { registrarVehiculoModel } from "@/src/models/registrarVehiculoModel";
+import { registrarProveedoresModel } from "@/src/models/registrarProveedores";
+import { formSchemaProveedor } from "@/app/ui/dashboard/proveedores/registrar/schema";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
@@ -144,7 +146,7 @@ export async function actualizarPersonal(formData: FormData) {
   const dataRegister = PeronalSchemaChange.parse(
     Object.fromEntries(formData.entries())
   );
-  console.log(dataRegister);
+ 
   await actualizarPersonalModel(dataRegister);
   revalidatePath("/dashboard/personal/listar_personal");
   redirect("/dashboard/personal/listar_personal");
@@ -154,7 +156,7 @@ const VehiculoSchema = formSchemaRegist.omit({
   estados: true,
 });
 
-export async function registrarVehiculo (formData: FormData) {
+export async function registrarVehiculo(formData: FormData) {
   const dataRegister = VehiculoSchema.parse({
     placa: formData.get("placa"),
     kmRegistroInicial: formData.get("kmRegistroInicial"),
@@ -165,15 +167,27 @@ export async function registrarVehiculo (formData: FormData) {
     vigenciaContrato: formData.get("vigenciaContrato"),
     cliente: formData.get("cliente"),
     puntaje: formData.get("puntaje"),
-    
   });
 
-  console.log(dataRegister);
-  await registrarVehiculoModel(dataRegister);
-
-
-
+   await registrarVehiculoModel(dataRegister);
 
   revalidatePath("/dashboard/vehiculos/listar_vehiculos");
   redirect("/dashboard/vehiculos/listar_vehiculos");
+}
+
+export async function registrarProveedores(formData: FormData) {
+  const dataRegister = formSchemaProveedor.parse({
+    nombre: formData.get("nombre"),
+    email: formData.get("email"),
+    numeroContacto: formData.get("numeroContacto"),
+    nombreContacto: formData.get("nombreContacto"),
+    rubro: formData.get("rubro"),
+    ruc: formData.get("ruc"),
+    direccion: formData.get("direccion"),
+  });
+
+  await registrarProveedoresModel(dataRegister);
+
+  revalidatePath("/dashboard/proveedores/listar_proveedores");
+  redirect("/dashboard/proveedores/listar_proveedores");
 }
