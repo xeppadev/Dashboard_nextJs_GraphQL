@@ -1,4 +1,4 @@
-import TablaVehiculos from "@/app/ui/dashboard/clientes/listar/table";
+// import TablaVehiculos from "@/app/ui/dashboard/clientes/listar/table";
 
 export default function Page({
   searchParams,
