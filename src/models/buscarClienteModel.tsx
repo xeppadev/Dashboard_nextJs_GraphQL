@@ -1,27 +1,16 @@
 import { getClient } from "@/lib/client";
 import { BUSCAR_CLIENTES_SEARCH } from "../repositories/clientesRepo";
-import { getServerSession } from "next-auth";
-import { options } from "@/app/options";
 
-export async function buscarClientesModel(nombreCliente: string , page: number) {
+export async function buscarClientesModel(nombreCliente: string, page: number) {
   const client = getClient();
-  const session = await getServerSession(options);
 
-  const { data, loading  } = await client.query({
-    query:BUSCAR_CLIENTES_SEARCH,
-    context: {
-      headers: {
-        Authorization: `Bearer ${session?.access_token}`,
-      },
-    },
+  const { data, loading } = await client.query({
+    query: BUSCAR_CLIENTES_SEARCH,
     variables: {
       nombreCliente,
       page,
     },
-
-   
   });
-  
- 
-  return { data: data.buscar_Clientes, loading}
+
+  return { data: data.buscar_Clientes, loading };
 }
