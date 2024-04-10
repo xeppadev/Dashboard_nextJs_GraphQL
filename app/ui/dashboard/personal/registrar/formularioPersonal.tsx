@@ -113,19 +113,19 @@ const onSubmit: SubmitHandler<z.infer<typeof formSchemaPersonal>> = async (
               control={form.control}
               name="email"
               label="Correo del Personal"
-              placeholder="Ingrese un numero de RUC"
+              placeholder="Ingrese un email"
             />
             <FormFieldComponent
               control={form.control}
               name="numero"
               label="Numero de Personal"
-              placeholder="Ingrese una direccion"
+              placeholder="Ingrese un numero de telefono"
             />
             <FormFieldate
               control={form.control}
               name="fechaIngreso"
               label="Fecha de Ingreso"
-              placeholder="Fecha una fecha"
+              placeholder="Ingrese una fecha de Ingreso"
             />
           </CardContent>
         </Card>
@@ -150,7 +150,7 @@ const onSubmit: SubmitHandler<z.infer<typeof formSchemaPersonal>> = async (
               control={form.control}
               name="salario"
               label="Ingrese el Salario actual (S/.)"
-              placeholder="Ingrese un correo electronico"
+              placeholder="Ingrese un salario"
             />
           </CardContent>
         </Card>
@@ -182,14 +182,14 @@ const onSubmit: SubmitHandler<z.infer<typeof formSchemaPersonal>> = async (
               control={form.control}
               name="name"
               label="Nombre de Personal"
-              placeholder="Ingrese el nombre de Contacto"
+              placeholder="Ingrese un nombre"
             />
 
             <FormFieldComponent
               control={form.control}
               name="username"
               label="Nombre de Usuario"
-              placeholder="Ingrese un Numero "
+              placeholder="Ingrese un nombre de usuario"
             />
             <FormFieldComponent
               control={form.control}

@@ -27,6 +27,7 @@ const apiURL = process.env.NEXT_API_URL;
 
 export async function sentToExternalAPI(formData: FormData, queries: queries) {
   const session = await getServerSession(options);
+  console.log(session);
   const url = new URL(`${apiURL}/documentos/upload`);
   url.searchParams.append("query1", queries.query1);
   if (queries.query2) {
@@ -199,7 +200,6 @@ export async function registrarProveedores(formData: FormData) {
 const MantenimientoSchema = formSchemaMantenimiento
   .omit({
     file: true,
-
   })
   .extend({
     repuestos: z.array(
@@ -228,7 +228,7 @@ export async function registrarMantenimiento(formData: FormData) {
     diagnostico: formData.get("diagnostico"),
   });
   const file = formData.getAll("file") as File[];
-  
+
   // const result = await registrarMantenimientoModel(dataRegister);
   const fileData = new FormData();
   file.forEach((f, index) => {
@@ -245,7 +245,6 @@ export async function registrarMantenimiento(formData: FormData) {
   // revalidatePath("/dashboard/mantenimientos/listar_mantenimientos");
   // redirect("/dashboard/mantenimientos/listar_mantenimientos");
 }
-
 
 export async function registrarRepuestos(formData: FormData) {
   const dataRegister = formSchemaStockSend.parse({
