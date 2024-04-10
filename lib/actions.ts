@@ -27,7 +27,6 @@ const apiURL = process.env.NEXT_API_URL;
 
 export async function sentToExternalAPI(formData: FormData, queries: queries) {
   const session = await getServerSession(options);
-  console.log(session);
   const url = new URL(`${apiURL}/documentos/upload`);
   url.searchParams.append("query1", queries.query1);
   if (queries.query2) {
@@ -37,10 +36,19 @@ export async function sentToExternalAPI(formData: FormData, queries: queries) {
     method: "POST",
     body: formData,
     headers: {
+      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${session?.access_token}`,
     },
   });
 }
+
+
+
+
+
+
+
+
 
 const ClienteSchema = formSchemaClient.omit({
   file: true,

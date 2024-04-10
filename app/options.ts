@@ -1,7 +1,7 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { Backend_URL } from "@/lib/contants";
-
+// import { Backend_URL } from "@/lib/contants";
+const  Backend_URL = process.env.NEXT_API_URL;
 
 export const options: NextAuthOptions = {
     providers: [
