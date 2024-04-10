@@ -1,7 +1,6 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import Link from "next/link";
 import { format, parseISO } from "date-fns";
 import { DialogEdit } from "../clientcuentas/editarusers";
 import { DataTableRowActions } from "../../listar/data-table-row-actions";

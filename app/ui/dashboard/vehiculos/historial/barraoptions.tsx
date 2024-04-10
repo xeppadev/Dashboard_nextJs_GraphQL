@@ -11,9 +11,7 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardHeader,
   CardTitle,
-  CardFooter,
 } from "@/components/ui/card";
 import { format } from "date-fns";
 import { historialMantenimientosModel } from "@/src/models/historialMantenimientos";
@@ -85,7 +83,9 @@ export default async function BarraOptions({
           <CardTitle className="text-sm 2xl:text-[1rem] ">
             Kilometraje Actual
           </CardTitle>
-          <CardDescription>{`${data?.kmActual} km` || "sin datos"}</CardDescription>
+          <CardDescription>
+            {`${data?.kmActual} km` || "sin datos"}
+          </CardDescription>
         </CardContent>
       </div>
       <div className="flex items-center justify-center 2xl:space-x-3 min-w-[150px]  space-x-1 w-full  border-l border-dashed">
@@ -95,7 +95,9 @@ export default async function BarraOptions({
             Operatividad
           </CardTitle>
           <CardDescription>
-            {data?.operatividad ? `${Math.round(data?.operatividad * 100)} %` : "sin datos"}
+            {data?.operatividad
+              ? `${Math.round(data?.operatividad * 100)} %`
+              : "sin datos"}
           </CardDescription>
         </CardContent>
       </div>

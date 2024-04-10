@@ -1,8 +1,6 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import Link from "next/link";
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
@@ -54,11 +52,8 @@ export const columns: ColumnDef<Regist>[] = [
           : names[0].charAt(0);
 
       return (
-        <Link
-          href={`/dashboard/clientes/cuentas/${column._id}`}
-          className="flex item-center min-w-[180px] "
-        >
-          <div className="flex space-x-4 justify-center  ">
+       
+          <div className="flex space-x-4  item-center ">
             <Avatar className={`h-11 w-11 bg-primary`}>
               <AvatarImage src="" alt="@shadcn" />
               <AvatarFallback
@@ -75,7 +70,7 @@ export const columns: ColumnDef<Regist>[] = [
               </span>
             </div>
           </div>
-        </Link>
+        
       );
     },
   },

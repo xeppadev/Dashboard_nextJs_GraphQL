@@ -1,6 +1,6 @@
 import { getClient } from "@/lib/client";
 import { BUSCAR_CLIENTES_SEARCH } from "../repositories/clientesRepo";
-import { Session } from "next-auth";
+
 
 export async function buscarClientesModel(nombreCliente: string, page: number, token:string | undefined) {
   const client = getClient();

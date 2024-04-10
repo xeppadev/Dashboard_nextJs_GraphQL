@@ -1,14 +1,13 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { DataTableRowActions } from "../../clientes/listar/data-table-row-actions";
 import { DialogEdit } from "./accionesedit";
-import { RepuestoSearchType} from "@/src/generated/graphql";
+import { RepuestoSearchType } from "@/src/generated/graphql";
 import { StockStatus, getInitials } from "@/app/lib/utils/utils";
 
 // This type is used to define the shape of our data.
@@ -49,28 +48,23 @@ export const columns: ColumnDef<Regist>[] = [
       const column = row.original;
       let initial = "";
       if (column?.producto) {
-       initial = getInitials(column.producto);
+        initial = getInitials(column.producto);
       }
       return (
-        <Link
-          href={`/dashboard/clientes/cuentas/${column._id}`}
-          className="flex item-center min-w-[180px] "
-        >
-          <div className="flex space-x-4 justify-center  ">
-            <Avatar className={`h-11 w-11 bg-primary`}>
-              <AvatarImage src="" alt="@shadcn" />
-              <AvatarFallback
-                className={`text-base font-medium text-white bg-primary`}
-              >
-                {initial}
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex-col flex justify-center ">
-              <span className="font-medium ">{row.getValue("producto")}</span>
-              <span className=" font-medium text-[#6c737f]"> {column._id}</span>
-            </div>
+        <div className="flex space-x-4 min-w-[180px] items-center">
+          <Avatar className={`h-11 w-11 bg-primary`}>
+            <AvatarImage src="" alt="@shadcn" />
+            <AvatarFallback
+              className={`text-base font-medium text-white bg-primary`}
+            >
+              {initial}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-col flex justify-center ">
+            <span className="font-medium ">{row.getValue("producto")}</span>
+            <span className=" font-medium text-[#6c737f]"> {column._id}</span>
           </div>
-        </Link>
+        </div>
       );
     },
   },
@@ -107,7 +101,6 @@ export const columns: ColumnDef<Regist>[] = [
       );
     },
   },
- 
 
   {
     accessorKey: "cantidadReserva",

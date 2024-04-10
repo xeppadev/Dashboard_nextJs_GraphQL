@@ -12,7 +12,7 @@ export default async function ListarCli({
   const query = searchParams?.query || "";
   const currentPage = Number(searchParams?.page) || 1;
   const session = await getServerSession(options)
-  console.log(session)
+
   const token = session?.access_token;
   return (
     <div className="flex flex-col   2xl:mx-16 space-y-5  w-full sm:w-auto">

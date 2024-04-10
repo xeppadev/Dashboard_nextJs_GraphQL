@@ -51,7 +51,7 @@ export const MyResponsiveTimeRange = ({
         margin={{ top: 40, right: 0, bottom: 0, left: 0 }}
         weekdayLegendOffset={65}
         tooltip={(data) =>
-          `${data.day}: ${data.value}`
+          format(new Date(data.day), "dd/MM/yyyy") + " - " + data.value
         }
         theme={{
           text: {

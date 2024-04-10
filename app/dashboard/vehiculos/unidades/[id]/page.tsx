@@ -12,7 +12,6 @@ const Page = ({ params }: { params?: { id?: string } }) => {
       <div className="flex   items-center justify-between lg:container">
         <div className="space-x-4 flex flex-row items-center">
         <h2 className="  text-3xl  font-bold ">Unidad Vehicular</h2>
-        <Badge className="text-xs  rounded-xl dark:text-foreground mt-1"> placa: AEH-742</Badge>
         </div>
         <div className="flex items-center ml-4">
           <Link href={`/dashboard/clientes/registrar_clientes`}>

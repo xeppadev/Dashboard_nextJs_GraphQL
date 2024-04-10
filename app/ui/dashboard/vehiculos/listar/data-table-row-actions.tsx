@@ -2,16 +2,14 @@
 
 import { DotsVerticalIcon } from "@radix-ui/react-icons"
 import { Row } from "@tanstack/react-table"
-
 import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-   DropdownMenuShortcut,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from  "@/components/ui/dropdown-menu"
-
+} from "@/components/ui/dropdown-menu"
 
 
 interface DataTableRowActionsProps<TData> {
@@ -36,10 +34,10 @@ export function DataTableRowActions<TData>({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" >
         <DropdownMenuItem>Edit</DropdownMenuItem>
-        
+
         <DropdownMenuItem>
           Delete
-        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

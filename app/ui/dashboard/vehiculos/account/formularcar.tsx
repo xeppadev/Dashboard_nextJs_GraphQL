@@ -1,130 +1,82 @@
+ "use client"
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchemaRegist} from "../registrar/schema";
+import { formSchemaRegist } from "../registrar/schema";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { ToastAction } from "@/components/ui/toast";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
+import { FormFieldComponent } from "@/app/ui/components/formfieldcomponent";
+import { CarInfo } from "@/src/generated/graphql";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
+import { ultimaRevision } from "@/app/lib/utils/utils";
 
-import { FormFieldComponent } from "../../../components/formfieldcomponent";
-import { useToast } from "@/components/ui/use-toast";
-import { FormFieldate } from "../../../components/formfielddate";
+const ClienteSchemaChange = formSchemaRegist.omit({
+  tipoContrato: true,
+  estados: true,
+  puntaje: true,
+});
 
-interface FieldConfig {
-  name: string;
-  label: string;
-  placeholder: string;
-  description?: string;
-  className?: string;
-  accion?: string;
-}
-interface AccountFormProps {
-  fields: FieldConfig[];
-  buttonText?: string;
-  textarea?: boolean;
-  space?: string;
-}
 
-type AccountFormValues = z.infer<typeof formSchemaRegist>;
 
-const defaultValues: Partial<AccountFormValues> = {
-  
-};
-
-// interface AccountFormProps {
-//   setValue: (value: string) => void;
-// }
-
-export function CarForm({
-  fields,
-  buttonText,
-  textarea,
-  space,
-}: AccountFormProps) {
-  const { toast } = useToast();
-  const form = useForm<z.infer<typeof formSchemaRegist>>({
-    resolver: zodResolver(formSchemaRegist),
-    defaultValues,
+export function FormularioChange({ data }: { data: CarInfo }) {
+  const revision = ultimaRevision(data.Mantenimientos);
+  const form = useForm<z.infer<typeof ClienteSchemaChange>>({
+    resolver: zodResolver(ClienteSchemaChange),
+    defaultValues: {
+      placa: data.placa,
+      kmRegistroInicial: data.kmActual?.toString() + " km" || "",
+      fechaSoat: format(new Date(data.fechaSoat), "PPP", { locale: es }) || "",
+      fechaRevision: revision?.fecha ?
+        format(new Date(revision?.fecha), "PPP", { locale: es })  : "sin fecha",
+      propietario: data.propietario,
+      vigenciaContrato:
+        format(new Date(data.vigenciaContrato), "PPP", { locale: es }) || "",
+      cliente: data.cliente,
+    },
   });
-
-  // function onSubmit(data: AccountFormValues) {
-  //   toast({
-  //     description: `usuario ${data.licensePlate} registrado con éxito`,
-  //     action: <ToastAction altText="Goto schedule to undo">Undo</ToastAction>,
-  //   });
-  // }
 
   return (
     <Form {...form}>
-      <form  className="space-y-2 mx-2">
-        <div className="grid grid-cols-1 gap-y-2 gap-x-8 xl:grid-cols-2">
-          {fields.map((field, index) => (
-            <div key={index}>
-              {!["expirationDate", "startDate", "endDate"].includes(
-                field.name
-              ) ? (
-                <FormFieldComponent
-                  control={form.control}
-                  name={field.name}
-                  label={field.label}
-                  placeholder={field.placeholder}
-                  description={field.description}
-                  className={field.className}
-                />
-              ) : (
-                <FormFieldate
-                  control={form.control}
-                  name={field.name}
-                  label={field.label}
-                  placeholder={field.placeholder}
-                  description={field.description}
-                  className={field.className}
-                />
-              )}
-            </div>
-          ))}
-        </div>
-        {/* {textarea && (
-          <FormField
+      <form className="space-y-4 m-2">
+        <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
+          <FormFieldComponent
             control={form.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  Descripcion del estado actualizado de la Unidad
-                </FormLabel>
-                <FormControl>
-                  <Textarea
-                    placeholder="Describe la informacion ."
-                    className="resize-none"
-                    {...field}
-                  />
-                </FormControl>
-
-                <FormMessage />
-              </FormItem>
-            )}
+            name="placa"
+            label="Placa del Vehiculo"
           />
-        )} */}
-        <div className={`flex justify-end space-x-4 ${space}`}>
-          <Button className="rounded-[10px]" variant={"ghost"}>
-            Cancel
-          </Button>
-          <Button type="submit" className="rounded-[10px]">
-            {buttonText}
-          </Button>
+          <FormFieldComponent
+            control={form.control}
+            name="kmRegistroInicial"
+            label="Kilometraje actual"
+          />
+          <FormFieldComponent
+            control={form.control}
+            name="fechaSoat"
+            label="Vencimiento del Soat"
+          />
+          <FormFieldComponent
+            control={form.control}
+            name="fechaRevision"
+            label="Ultima Revision"
+          />
+          <FormFieldComponent
+            control={form.control}
+            name="propietario"
+            label="Nombre de Propietario"
+          />
+          <FormFieldComponent
+            control={form.control}
+            name="vigenciaContrato"
+            label="Vigencia del Contrato"
+          />
+          <FormFieldComponent
+            control={form.control}
+            name="cliente"
+            label="Nombre del Cliente"
+          />
+          <FormFieldComponent control={form.control} name="_id" type="hidden" />
         </div>
       </form>
     </Form>
   );
 }
-export default CarForm;

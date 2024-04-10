@@ -3,9 +3,9 @@ import { DataTable } from "../../../components/data-table";
 import { buscarClientesModel } from "@/src/models/buscarClienteModel";
 import { DataTableToolbar } from "../../../components/data-table-toolbar";
 import Pagination from "@/app/ui/components/pagination";
-import { Session } from "next-auth";
 
-export default async function TablaVehiculos({
+
+export default async function TablaClientes({
   query,
   currentPage,
   token,

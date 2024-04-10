@@ -1,3 +1,4 @@
+import { km } from "date-fns/locale";
 import * as z from "zod";
 
 const MAX_FILE_SIZE = 500000;
@@ -8,33 +9,39 @@ const ACCEPTED_IMAGE_TYPES = [
   "image/webp",
 ];
 
-export const formSchemaClient = z.object({
-  licensePlate: z.string().min(1,{ message: "La placa del vehículo es inválida." }),
+export const formSchemaMantenimiento = z.object({
+  tipo: z.string().min(1, { message: "El tipo de mantenimiento es inválido." }),
+
+  placa: z.string().min(1, { message: "La placa es inválida." }),
+  kmMedido: z.string().min(1, { message: "El kilometraje es inválido." }),
   
-  maintenanceType: z.enum(["mantenimiento preventivo", "mantenimiento predictivo", "mantenimiento correctivo"], {
-    required_error: "Debes seleccionar un tipo de mantenimiento.",
-  }),
-  
-  mileage: z.number().min(1, { message: "El kilometraje es inválido." }),
-  
-  yesNoSelect: z.enum(["si", "no"], {
-    required_error: "Debes seleccionar sí o no.",
-  }),
-  
-  description: z
+  fecha: z.string().min(1, { message: "La fecha es inválida." }),
+  fechaSoat: z.string().min(1, { message: "La fecha es inválida." }), 
+  Cliente: z.string().min(1, { message: "El cliente es inválido." }),
+  kmPrevio: z.string().min(1, { message: "El kilometraje es inválido." }),
+
+  tecnico: z.string().min(1, { message: "El técnico es inválido." }),
+
+  diagnostico: z
     .string()
     .min(1, { message: "La descripción es inválida." })
     .max(500, { message: "La descripción es demasiado larga." }),
-  
+
   file: z
-    .any()
-    .refine((files) => files?.length == 1, "Se requiere una imagen.")
-    .refine(
-      (files) => files?.[0]?.size <= MAX_FILE_SIZE,
-      `El tamaño máximo del archivo es 5MB.`
+    .array(
+      z.object({
+        file: z
+          .any()
+          .refine((file) => file != null, "Image is required.")
+          .refine(
+            (file) => file?.size <= MAX_FILE_SIZE,
+            `Max file size is 5MB.`
+          )
+          .refine(
+            (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+            ".jpg, .jpeg, .png and .webp files are accepted."
+          ),
+      })
     )
-    .refine(
-      (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
-      "Se aceptan archivos .jpg, .jpeg, .png y .webp."
-    ),
+    .min(1, { message: "Debe subir al menos un archivo." }),
 });

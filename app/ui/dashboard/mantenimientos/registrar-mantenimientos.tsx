@@ -20,17 +20,31 @@ import { InfoMantenimiento } from "./infoMantenimiento";
 import Search from "../../components/search";
 import { DatePickerDemo } from "../../components/calendarComponent";
 import { RepuestoSearchType } from "@/src/generated/graphql";
+
 export default function Mantenimientos({
   data,
+  placas,
+  obtenerInfo,
 }: {
-  data: { repuestos: RepuestoSearchType[] };
+  data: {
+    repuestos: RepuestoSearchType[];
+  };
+  placas: { value: string; label: string }[];
+  obtenerInfo: {
+    _id?: string | null | undefined;
+    fechaSoat?: any;
+    kmActual?: number | null | undefined;
+    cliente?: string | null | undefined;
+  };
 }) {
   const [selectedProducts, setSelectedProducts] = React.useState<
     RepuestoSearchType[]
   >([]);
-  const [finalProducts, setFinalProducts] = React.useState<RepuestoSearchType[]>([]);
+  const [finalProducts, setFinalProducts] = React.useState<
+    RepuestoSearchType[]
+  >([]);
   const [inputValue, setInputValue] = React.useState(0);
-   
+
   const handleSelectProduct = (product: RepuestoSearchType) => {
     setSelectedProducts((prevProducts) => {
       const productIndex = prevProducts.findIndex((p) => p._id === product._id);
@@ -45,13 +59,18 @@ export default function Mantenimientos({
   };
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(Number(event.target.value));
-    setSelectedProducts(prevProducts => prevProducts.map(product => ({ ...product, cantidad: Number(event.target.value) })));
+    setSelectedProducts((prevProducts) =>
+      prevProducts.map((product) => ({
+        ...product,
+        cantidad: Number(event.target.value),
+      }))
+    );
   };
   const handleButtonClick = () => {
     setFinalProducts((prevProducts) => [...prevProducts, ...selectedProducts]);
     setInputValue(0);
   };
- 
+
   return (
     <div className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-4 ">
       <Card className="flex flex-col 2xl:sticky top-32 left-0  justify-between bg-background h-full  w-full xl:w-1/4 ">
@@ -84,7 +103,10 @@ export default function Mantenimientos({
               />
             </Container>
 
-            <Button className="pr-3  pl-1 py-5 text-sm font-semibold rounded-xl dark:text-foreground" onClick={handleButtonClick}>
+            <Button
+              className="pr-3  pl-1 py-5 text-sm font-semibold rounded-xl dark:text-foreground"
+              onClick={handleButtonClick}
+            >
               <Plus className="ml-1  rounded-lg" />
               Agregar
             </Button>
@@ -93,12 +115,19 @@ export default function Mantenimientos({
       </Card>
 
       <div className=" px-1 flex-col flex  w-full  2xl:w-3/4  space-y-2 ">
-        <OptionsTab />
-        <InfoMantenimiento data={finalProducts} setFinalProducts={setFinalProducts}  />
-       
+        {/* <OptionsTab /> */}
+        <InfoMantenimiento
+          data={finalProducts}
+          setFinalProducts={setFinalProducts}
+        />
+
         <div className="space-y-3 pt-3">
           <h3 className="text-xl font-bold">Informacion Adicional</h3>
-          <MantenimienForm  data={finalProducts} />
+          <MantenimienForm
+            repuestos={finalProducts}
+            placas={placas}
+            obtenerInfo={obtenerInfo}
+          />
         </div>
       </div>
     </div>

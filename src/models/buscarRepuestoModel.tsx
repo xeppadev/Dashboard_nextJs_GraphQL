@@ -18,5 +18,5 @@ export async function buscarRepuestoModel(producto: string , page?: number) {
       page
     },
   });
-  return { data: data.buscar_repuestos, loading };
+  return { data: data.buscar_repuestos, loading, dataRepuestos:data.buscar_repuestos.repuestos };
 }

@@ -9,6 +9,10 @@ import { actualizarPersonalModel } from "@/src/models/actualizarPersonalModel";
 import { registrarVehiculoModel } from "@/src/models/registrarVehiculoModel";
 import { registrarProveedoresModel } from "@/src/models/registrarProveedores";
 import { formSchemaProveedor } from "@/app/ui/dashboard/proveedores/registrar/schema";
+import { formSchemaMantenimiento } from "@/app/ui/dashboard/mantenimientos/data/schema";
+import { registrarMantenimientoModel } from "@/src/models/registrarMantenimientoModel";
+import { registrarRepuestosModel } from "@/src/models/registrarRepuestosModel";
+import { formSchemaStockSend } from "@/app/ui/dashboard/stock/registrar/schema";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getServerSession } from "next-auth";
@@ -146,7 +150,7 @@ export async function actualizarPersonal(formData: FormData) {
   const dataRegister = PeronalSchemaChange.parse(
     Object.fromEntries(formData.entries())
   );
- 
+
   await actualizarPersonalModel(dataRegister);
   revalidatePath("/dashboard/personal/listar_personal");
   redirect("/dashboard/personal/listar_personal");
@@ -169,7 +173,7 @@ export async function registrarVehiculo(formData: FormData) {
     puntaje: formData.get("puntaje"),
   });
 
-   await registrarVehiculoModel(dataRegister);
+  await registrarVehiculoModel(dataRegister);
 
   revalidatePath("/dashboard/vehiculos/listar_vehiculos");
   redirect("/dashboard/vehiculos/listar_vehiculos");
@@ -190,4 +194,67 @@ export async function registrarProveedores(formData: FormData) {
 
   revalidatePath("/dashboard/proveedores/listar_proveedores");
   redirect("/dashboard/proveedores/listar_proveedores");
+}
+
+const MantenimientoSchema = formSchemaMantenimiento
+  .omit({
+    file: true,
+
+  })
+  .extend({
+    repuestos: z.array(
+      z.object({
+        producto: z.string(),
+        cantidad: z.number(),
+        precio: z.any(),
+        marca: z.any(),
+      })
+    ),
+    fechaSoat: z.string().min(1, { message: "La fecha es inválida." }),
+    kmPrevio: z.string().min(1, { message: "El kilometraje es inválido." }),
+  });
+
+export async function registrarMantenimiento(formData: FormData) {
+  const dataRegister = MantenimientoSchema.parse({
+    tipo: formData.get("tipo"),
+    placa: formData.get("placa"),
+    kmMedido: formData.get("kmMedido"),
+    fechaSoat: formData.get("fechaSoat"),
+    fecha: formData.get("fecha"),
+    repuestos: JSON.parse(formData.get("repuestos") as string),
+    Cliente: formData.get("Cliente"),
+    kmPrevio: formData.get("kmPrevio"),
+    tecnico: formData.get("tecnico"),
+    diagnostico: formData.get("diagnostico"),
+  });
+  const file = formData.getAll("file") as File[];
+  
+  // const result = await registrarMantenimientoModel(dataRegister);
+  const fileData = new FormData();
+  file.forEach((f, index) => {
+    fileData.append("files", f);
+  });
+
+  // const dataFromMutation = result?.regisrar_mantenimiento_no_programado;
+
+  // await sentToExternalAPI(fileData, {
+  //   query1: "mantenimientos",
+  //   query2: dataFromMutation,
+  // });
+
+  // revalidatePath("/dashboard/mantenimientos/listar_mantenimientos");
+  // redirect("/dashboard/mantenimientos/listar_mantenimientos");
+}
+
+
+export async function registrarRepuestos(formData: FormData) {
+  const dataRegister = formSchemaStockSend.parse({
+    oldStock: JSON.parse(formData.get("oldStock") as string),
+    newStock: JSON.parse(formData.get("newStock") as string),
+  });
+
+  await registrarRepuestosModel(dataRegister);
+
+  revalidatePath("/dashboard/stock/listar_stock");
+  redirect("/dashboard/stock/listar_stock");
 }

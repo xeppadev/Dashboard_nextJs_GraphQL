@@ -1,4 +1,4 @@
-// import TablaVehiculos from "@/app/ui/dashboard/clientes/listar/table";
+import TablaVehiculos from "@/app/ui/dashboard/vehiculos/listar/table";
 
 export default function Page({
   searchParams,
@@ -14,7 +14,7 @@ export default function Page({
           <h2 className="text-3xl font-bold">Vehiculos</h2>
         </div>
       </div>
-      {/* <TablaVehiculos query={searchParams?.query || ""} currentPage={1} /> */}
+      <TablaVehiculos query={searchParams?.query || ""} currentPage={1} />
     </div>
   );
 }

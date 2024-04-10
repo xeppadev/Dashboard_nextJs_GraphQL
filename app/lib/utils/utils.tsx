@@ -1,6 +1,7 @@
 import { differenceInDays, parseISO } from "date-fns";
 import { ContratoDto } from "@/src/generated/graphql";
 import { SalarioFechaDto } from "@/src/generated/graphql";
+import { MantenimientoInfo } from "@/src/generated/graphql";
 import { es } from "date-fns/locale";
 import { format, parse } from "date-fns";
 export type Maybe<T> = T | null;
@@ -97,7 +98,7 @@ export function processColumn(column: string) {
 
 // Esta función toma un array de objetos salarioFecha y devuelve el salario más reciente
 export function salarioMasReciente(
-  salarioFecha: Maybe<Maybe<SalarioFechaDto>[]> | undefined
+  salarioFecha: Maybe<Maybe<SalarioFechaDto>[]> | undefined 
 ) {
   if (!salarioFecha || salarioFecha.length === 0) {
     return null;
@@ -110,6 +111,22 @@ export function salarioMasReciente(
     )[0];
 
   return salarioMasReciente;
+}
+
+export function ultimaRevision(
+  revision:  MantenimientoInfo[] | null | undefined
+) {
+  if (!revision || revision.length === 0) {
+    return null;
+  }
+
+  const ultimaRevision = revision
+    .slice()
+    .sort(
+      (a, b) => new Date(b!.fecha).getTime() - new Date(a!.fecha).getTime()
+    )[0];
+
+  return ultimaRevision
 }
 
 export const generatePagination = (currentPage: number, totalPages: number) => {

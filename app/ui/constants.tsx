@@ -99,7 +99,7 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   {
     postitle: "Mantenimiento",
     title: "Mantenimiento",
-    path: "/dashboard/mantenimiento",
+    path: "/dashboard/registrar-mantenimiento",
     icon: <MingcuteToolFill className="w-[23px] h-[23px]" />,
   },
   {

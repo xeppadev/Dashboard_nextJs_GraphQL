@@ -45,37 +45,38 @@ export function FormularioChange({ data }: { data: PersonalDto }) {
       fecha: salario?.fecha || "",
     },
   });
+  
 
+  const onSubmit: SubmitHandler<z.infer<typeof PeronalSchemaChange>> = async (
+    data
+  ) => {
+    // Crear un nuevo objeto FormData
+    const formData = new FormData();
+    // Obtener el valor de file del formulario
+    formData.append("id", data.id);
+    formData.append("nombre", data.nombre);
+    formData.append("email", data.email);
+    formData.append("numero", data.numero);
+    formData.append("fechaIngreso", data.fechaIngreso);
+    formData.append("salario", data.salario);
+    formData.append("fecha", data.fecha);
 
- const onSubmit: SubmitHandler<z.infer<typeof PeronalSchemaChange>>  = async (data) => {
-     // Crear un nuevo objeto FormData
-     const formData = new FormData();
-      // Obtener el valor de file del formulario
-      formData.append("id" , data.id);
-      formData.append("nombre", data.nombre);
-      formData.append("email", data.email);
-      formData.append("numero", data.numero);
-      formData.append("fechaIngreso", data.fechaIngreso);
-      formData.append("salario", data.salario);
-      formData.append("fecha", data.fecha);
-
-      try {
-        await actualizarPersonal(formData);
-        toast({
-          title: "Registro Exitoso!",
-          description: "El cliente ha sido registrado exitosamente.",
-          action: <ToastAction altText="Try again">Try again</ToastAction>,
-        });
-      } catch (error) {
-        toast({
-          variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description: "There was a problem with your request.",
-          action: <ToastAction altText="Try again">Try again</ToastAction>,
-        });
-      }
-
- }
+    try {
+      await actualizarPersonal(formData);
+      toast({
+        title: "Registro Exitoso!",
+        description: "El cliente ha sido registrado exitosamente.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+    }
+  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 m-2">

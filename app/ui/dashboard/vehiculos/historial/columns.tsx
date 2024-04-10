@@ -1,5 +1,4 @@
 "use client";
-import { states } from "./data/data";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
@@ -48,7 +47,7 @@ export const columns: ColumnDef<Regist>[] = [
 
       return (
         <Link
-          href={`/dashboard/vehiculos/unidades/${column._id}`}
+          href={`/dashboard/vehiculos/unidades/${column.placa}`}
           className="flex item-center  min-w-[180px] "
         >
           <div className=" space-x-4  inline-flex items-center ">

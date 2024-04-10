@@ -16,7 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { PersonalDto } from "@/src/generated/graphql";
 export default function Main({ data }: { data: PersonalDto }) {
   return (
-    <div className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-5 ">
+    <div className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-5 pb-6 px-3 pt-2">
       <Card className="flex flex-col justify-between bg-background  lg:w-[75%]    xl:w-1/4">
         <CardHeader className=" m-2 pr-3 pt-3  ">
           <h3 className="ml-auto  text-green-500 bg-active-green font-semibold text-sm  px-1.5 py-1 max-w-fit rounded-md">

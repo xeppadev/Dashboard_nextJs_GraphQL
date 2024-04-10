@@ -52,7 +52,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <div className=" rounded-[14px]  bg-background shadow-custom dark:bg-card  dark:shadow-none ">
+      <div className=" rounded-[14px]  bg-background shadow-custom  dark:bg-card   dark:shadow-none ">
         <Table>
           {showHeader && (
             <TableHeader className="bg-[#F8F9FA] dark:bg-[#1c2536]   text-[#637381] h-[60px]">

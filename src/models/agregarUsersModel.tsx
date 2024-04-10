@@ -5,7 +5,17 @@ import * as z from "zod";
 import { getServerSession } from "next-auth";
 import { options } from "@/app/options";
 
-const ClienteSchema2 = formSchemaClient.omit({ nombreCliente: true,  ruc: true , direccion: true, email: true, numeroContacto: true, rubro: true, contratos: true, file: true, nombre:true});
+const ClienteSchema2 = formSchemaClient.omit({
+  nombreCliente: true,
+  ruc: true,
+  direccion: true,
+  email: true,
+  numeroContacto: true,
+  rubro: true,
+  contratos: true,
+  file: true,
+  nombre: true,
+});
 type Datavalues = z.infer<typeof ClienteSchema2>;
 
 export async function agregarUsersModel(dataUser: Datavalues) {

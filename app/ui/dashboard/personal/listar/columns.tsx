@@ -10,6 +10,7 @@ import { DataTableRowActions } from "../../clientes/listar/data-table-row-action
 import { DialogEdit } from "./accionedit";
 import { PersonalDto } from "@/src/generated/graphql";
 import { getInitials,salarioMasReciente } from "@/app/lib/utils/utils";
+import { es } from "date-fns/locale";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -118,7 +119,7 @@ export const columns: ColumnDef<Regist>[] = [
       return (
         <div className="font-normal max-w-fit   text-center  justify-center flex flex-col">
           <span className="text-sm">
-            {format(parseISO(row.getValue("fechaIngreso")), "dd MMM yyyy")}
+            {format(parseISO(row.getValue("fechaIngreso")), "dd MMM yyyy" , {locale:es})}
           </span>
           {/* <span className="text-xs text-[#637381]">
           {format(parseISO(row.getValue("vencimiento")), "h:mm a")}

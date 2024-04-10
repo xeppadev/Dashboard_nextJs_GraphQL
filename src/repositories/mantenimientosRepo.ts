@@ -22,7 +22,6 @@ export const BUSCAR_MANTENIMIENTOS_SEARCH = gql(/* GraphQL */ `
         placa
         repuestoUsados
         tipo
-
       }
       totalPages
     }
@@ -39,6 +38,47 @@ export const HISTORIAL_MANTENIMIENTOS = gql(/* GraphQL */ `
       placa
       ultimaRevision
       vigenciaContrato
+    }
+  }
+`);
+
+export const MANTENIMIENTO_NO_PROGRAMADO = gql(/* GraphQL */ `
+  mutation Regisrar_mantenimiento_no_programado(
+    $updateOneMantenimientoInput: UpdateOneMantenimientoDto!
+  ) {
+    regisrar_mantenimiento_no_programado(
+      updateOneMantenimientoInput: $updateOneMantenimientoInput
+    )
+  }
+`);
+
+export const MANTEN_INFO_ID = gql(/* GraphQL */ `
+  query Mantenimiento_Info_por_ID($mantenimientoInfoPorIdId: String!) {
+    Mantenimiento_Info_por_ID(id: $mantenimientoInfoPorIdId) {
+      anotaciones
+      cambiosSolicitados
+      cliente
+      diagnostico
+      diagnosticoFinal
+      documentos
+      estado
+      fechaFin
+      fecha
+      fechaInicio
+      fechaSoat
+      kmMedido
+      kmPrevio
+      placa
+      repuestos {
+        cantidad
+        cantidadReserva
+        id
+        marca
+        precio
+        producto
+      }
+      tecnico
+      tipo
     }
   }
 `);

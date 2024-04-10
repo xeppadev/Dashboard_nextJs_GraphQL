@@ -81,7 +81,7 @@ const onSubmit: SubmitHandler<z.infer<typeof formSchemaPersonal>> = async (
       });
     } catch (error) {
       console.error("Error al enviar los archivos a la API externa:", error);
-      toast({
+      toast({ 
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request.",

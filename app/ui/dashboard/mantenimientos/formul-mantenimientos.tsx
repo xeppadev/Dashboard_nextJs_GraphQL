@@ -1,55 +1,108 @@
 "use client";
 import * as React from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { formSchemaClient } from "./data/schema";
-import { useForm } from "react-hook-form";
-import { Container } from "@/components/ui/container";
-import { Textarea } from "@/components/ui/textarea";
+import { formSchemaMantenimiento } from "./data/schema";
+import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
-import {
-  Form,
-  FormControl,
-  FormDescription,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form";
+import { Form } from "@/components/ui/form";
 import * as z from "zod";
-import { FormItemsComponent } from "../../components/formitems";
-import { ToastAction } from "@/components/ui/toast";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-
+import { Card, CardContent, CardTitle } from "@/components/ui/card";
+import { FormTextComponent } from "../../components/formText";
 import { FormFieldComponent } from "../../components/formfieldcomponent";
+import { registrarMantenimiento } from "@/lib/actions";
 import { useToast } from "@/components/ui/use-toast";
-import { placasUnidadesModel } from "@/src/models/placasunidadesModel";
 import { FormFileComponent } from "../../components/formfile";
 import { FormSelectComponent } from "@/app/ui/components/formselect";
 import { RepuestoSearchType } from "@/src/generated/graphql";
-
+import ComponentOptions from "../../components/optionsearch";
+import { format } from "date-fns";
+import { es } from "date-fns/locale";
+import { ToastAction } from "@/components/ui/toast";
 type FormularioProps = {
-  data: RepuestoSearchType[];
+  repuestos: RepuestoSearchType[];
+  placas: { value: string; label: string }[];
+  obtenerInfo: {
+    _id?: string | null | undefined;
+    fechaSoat?: any;
+    kmActual?: number | null | undefined;
+    cliente?: string | null | undefined;
+  };
 };
 
-type AccountFormValues = z.infer<typeof formSchemaClient>;
+type AccountFormValues = z.infer<typeof formSchemaMantenimiento>;
 
-function MantenimienForm({ data }: FormularioProps) {
-  
+function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
   const { toast } = useToast();
-  const form = useForm<z.infer<typeof formSchemaClient>>({
-    resolver: zodResolver(formSchemaClient),
+  const form = useForm<z.infer<typeof formSchemaMantenimiento>>({
+    resolver: zodResolver(formSchemaMantenimiento),
     mode: "onChange",
+    defaultValues: {
+      diagnostico: "",
+      tipo: "",
+      kmMedido: "",
+      kmPrevio: "",
+      fechaSoat: "",
+      Cliente: "",
+      tecnico: "1242",
+      file: [],
+      placa: "",
+      fecha: new Date().toISOString(),
+    },
   });
 
-  const onSubmit = (data: AccountFormValues) => {
-    console.log(data);
+  React.useEffect(() => {
+    if (obtenerInfo.fechaSoat) {
+      form.setValue(
+        "fechaSoat",
+        format(new Date(obtenerInfo.fechaSoat), "PPP", {
+          locale: es,
+        })
+      );
+    }
+
+    if (obtenerInfo.kmActual) {
+      form.setValue("kmPrevio", `${obtenerInfo.kmActual.toString()} km`);
+    }
+  }, [obtenerInfo, form]);
+
+  const onSubmit: SubmitHandler<
+    z.infer<typeof formSchemaMantenimiento>
+  > = async (data) => {
+    const formData = new FormData();
+    const { file } = form.getValues();
+    formData.append("placa", data.placa);
+    formData.append("fechaSoat", obtenerInfo.fechaSoat);
+    formData.append("kmPrevio", obtenerInfo.kmActual?.toString() || "");
+    formData.append("kmMedido", data.kmMedido);
+    formData.append("repuestos", JSON.stringify(repuestos));
+    formData.append("Cliente", obtenerInfo.cliente?.toString() || "");
+    formData.append("tecnico", data.tecnico);
+    formData.append("diagnostico", data.diagnostico);
+    formData.append("tipo", data.tipo);
+    formData.append("fecha", data.fecha);
+
+    // Agregar el archivo al objeto formData
+    file.forEach((f, index) => {
+      formData.append("file", f.file);
+    });
+
+    try {
+      await registrarMantenimiento(formData);
+      toast({
+        title: "Operación exitosa",
+        description: "El cliente ha sido registrado correctamente",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
+      });
+    } catch (error) {
+      console.error("Error al enviar los archivos a la API externa:", error);
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "There was a problem with your request.",
+        action: <ToastAction altText="Try again"> Try again</ToastAction>,
+      });
+    }
   };
 
   return (
@@ -62,46 +115,44 @@ function MantenimienForm({ data }: FormularioProps) {
             </CardTitle>
 
             <div className=" p-0 space-x-3 flex-row flex w-full  ">
-              <FormSelectComponent
+              <ComponentOptions
+                paramName="placa"
                 placeholder="Placa de vehículo"
-                control={form.control}
-                name="licensePlate"
-                options={[
-                  { value: "FPG-636", label: "FPG-636" },
-                  { value: "FIR-612", label: "FIR-612" },
-                  { value: "AGD-112", label: "AGD-112" },
-                  { value: "F5R-712", label: "F5R-712" },
-                ]}
+                options={placas}
+                className="w-1/4"
+                className2="w-full h-12 mt-2"
+                onValueChange={(value) => {
+                  form.setValue("placa", value);
+                }}
               />
               <FormFieldComponent
                 control={form.control}
-                name="mileage"
-                placeholder="kilometraje actual"
+                name="fechaSoat"
+                placeholder="Fecha de Soat"
                 className="w-1/4"
-                className2="h-10"
               />
 
-              <FormSelectComponent
-                placeholder="Soat Vigente"
+              <FormFieldComponent
                 control={form.control}
-                name="yesNoSelect"
-                options={[
-                  { value: "si", label: "Sí" },
-                  { value: "no", label: "No" },
-                ]}
+                name="kmPrevio"
+                placeholder="kilometraje Previo"
+                className="w-1/4"
+              />
+              <FormFieldComponent
+                control={form.control}
+                name="kmMedido"
+                placeholder="kilometraje Medido"
+                className="w-1/4"
               />
               <FormSelectComponent
-                placeholder="Tipo Mantenimiento"
+                placeholder="Tipo de Mantenimiento"
                 control={form.control}
-                name="maintenanceType"
+                name="tipo"
+                className2="h-12"
                 options={[
                   {
                     value: "mantenimiento preventivo",
                     label: "Mantenimiento Preventivo",
-                  },
-                  {
-                    value: "mantenimiento predictivo",
-                    label: "Mantenimiento Predictivo",
                   },
                   {
                     value: "mantenimiento correctivo",
@@ -114,33 +165,17 @@ function MantenimienForm({ data }: FormularioProps) {
               <CardTitle className="text-lg font-semibold">
                 Diagnostico del Vehiculo
               </CardTitle>
-              <FormField
+              <FormTextComponent
                 control={form.control}
-                name="description"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Textarea
-                        placeholder="Describe la informacion ."
-                        className="resize-none"
-                        {...field}
-                      />
-                    </FormControl>
-
-                    <FormMessage />
-                  </FormItem>
-                )}
+                name="diagnostico"
+                placeholder={"Describe la informacion"}
               />
             </div>
             <div>
               <CardTitle className="text-lg font-semibold my-2">
                 Documentos del Mantenimiento
               </CardTitle>
-              <FormFileComponent
-                control={form.control}
-                name="file"
-                label={""}
-              />
+              <FormFileComponent control={form.control} name="file" />
             </div>
           </CardContent>
         </Card>

@@ -1,4 +1,3 @@
-
 import Stadistic from "@/app/ui/dashboard/estadisticas/stadisticas";
 export default function Estadisticas() {
   return (

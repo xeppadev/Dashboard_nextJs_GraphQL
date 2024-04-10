@@ -28,3 +28,36 @@ export const OBTENER_INFO_PLACAS = gql(/* GraphQL */ `
     }
   }
 `);
+
+export const INFO_SOME_PLACA = gql(/* GraphQL */ `
+  query Obtener_info_for_placa($placa: String!) {
+    obtener_info_for_placa(placa: $placa) {
+      _id
+      fechaSoat
+      kmActual
+      cliente
+    }
+  }
+`);
+
+
+export const ADMIN_HISTORY_CARS = gql(/* GraphQL */ `
+  query adminHistoryCars($placa: String!) {
+    admin_history_cars(placa: $placa) {
+      Mantenimientos {
+        fecha
+        id
+        repuestosUsados
+        tipo
+      }
+      Puntaje
+      cliente
+      fechaSoat
+      id
+      kmActual
+      placa
+      propietario
+      vigenciaContrato
+    }
+  }
+`);

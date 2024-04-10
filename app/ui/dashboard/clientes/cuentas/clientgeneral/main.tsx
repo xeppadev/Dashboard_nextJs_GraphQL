@@ -16,11 +16,11 @@ import { Badge } from "@/components/ui/badge";
 import { ClienteDto } from "@/src/generated/graphql";
 export default function Main({ data }: { data: ClienteDto }) {
   return (
-    <div className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-5 ">
+    <div className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-5 pb-6 pt-2 px-3">
       <Card className="flex flex-col justify-between bg-background  lg:w-[75%]    xl:w-1/4">
         <CardHeader className=" m-2 pr-3 pt-3  ">
           <h3 className="ml-auto  text-green-500 bg-active-green font-semibold text-sm  px-1.5 py-1 max-w-fit rounded-md">
-            Activo
+           {data.rubro}
           </h3>
         </CardHeader>
         <CardContent className="flex flex-col items-center space-y-4 pt-5 flex-grow">
@@ -40,15 +40,7 @@ export default function Main({ data }: { data: ClienteDto }) {
         </CardContent>
 
         <CardFooter className="flex flex-col justify-center space-y-10 ">
-          <div className="flex flex-row space-x-1 border rounded-xl p-3 items-center ">
-            <div className="space-y-1">
-              <CardTitle className="text-sm ">Desactivar</CardTitle>
-              <CardDescription className="text-sm">
-                Inabilita la cuenta de este cliente
-              </CardDescription>
-            </div>
-            <Switch id="airplane-mode" />
-          </div>
+          
           <AlertDialogDemo buttonText="Eliminar Cuenta" />
         </CardFooter>
       </Card>
