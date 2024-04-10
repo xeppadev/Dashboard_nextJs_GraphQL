@@ -33,23 +33,19 @@ export async function sentToExternalAPI(formData: FormData, queries: queries) {
   if (queries.query2) {
     url.searchParams.append("query2", queries.query2);
   }
-  await fetch(url.toString(), {
-    method: "POST",
-    body: formData,
-    headers: {
-      "Content-Type": "multipart/form-data",
-      Authorization: `Bearer ${session?.access_token}`,
-    },
-  });
+  try {
+    await fetch(url.toString(), {
+      method: "POST",
+      body: formData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${session?.access_token}`,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
 }
-
-
-
-
-
-
-
-
 
 const ClienteSchema = formSchemaClient.omit({
   file: true,
