@@ -1,24 +1,23 @@
 "use client";
-
 import { ColumnDef } from "@tanstack/react-table";
-import { DialogEdit } from "../dashboard/clientes/cuentas/clientcuentas/editarusers";
-import { DataTableRowActions } from "../dashboard/clientes/listar/data-table-row-actions";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Maybe } from "graphql/jsutils/Maybe";
 import { processColumn } from "@/app/lib/utils/utils";
-import { SolarTrashBinTrashBoldDuotone, SolarFileDownloadBoldDuotone} from "@/app/lib/icons";
+import DownloadFile from "./downloadComponent";
+
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 type StringOutput = Maybe<string>;
+
+// Funcion DownloadFile que se encarga de descargar un archivo
 
 export const columns: ColumnDef<StringOutput>[] = [
   {
     header: "Nombre",
     id: "nombre",
-    cell: ({ row}) => {
+    cell: ({ row }) => {
       const column = row.original;
       const { fileName } = processColumn(column || "");
-   
 
       return (
         <div className="flex space-x-4 ml-4   items-center  min-w-[180px] ">
@@ -42,7 +41,7 @@ export const columns: ColumnDef<StringOutput>[] = [
   {
     id: "tipo",
     header: "Tipo de Archivo",
-    cell: ({ row  }) => {
+    cell: ({ row }) => {
       const column = row.original;
       const { fileType } = processColumn(column || "");
       return (
@@ -58,12 +57,9 @@ export const columns: ColumnDef<StringOutput>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
-      return (
-        <div className="flex float-right justify-center mr-2  items-center  max-w-[70px] ">
-          <SolarFileDownloadBoldDuotone className="h-7 w-7 text-[#2970FF]" />
-          <SolarTrashBinTrashBoldDuotone className="h-7 w-7 ml-1.5  text-[#f44336]" />
-        </div>
-      );
+      const column = row.original;
+      const { fileName } = processColumn(column || "");
+      return <DownloadFile file={column || ""} fileName={fileName || ""} />;
     },
   },
 ];

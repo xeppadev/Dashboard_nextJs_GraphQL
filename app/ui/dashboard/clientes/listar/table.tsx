@@ -21,9 +21,9 @@ export default async function TablaClientes({
   return (
     <>
       <DataTableToolbar
-        placeholder="Buscar vehiculos..."
-        url={"/vehiculos/registrar_vehiculos"}
-        buttonName="Registrar Vehiculo"
+        placeholder="Buscar Clientes..."
+        url={"/clientes/registrar_clientes"}
+        buttonName="Registrar Cliente"
       />
       <DataTable
         showHeader={true}

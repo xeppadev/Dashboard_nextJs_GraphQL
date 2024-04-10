@@ -19,6 +19,7 @@ import { getServerSession } from "next-auth";
 import { options } from "@/app/options";
 import * as z from "zod";
 import { Backend_URL } from "./contants";
+import{ sentToExternalAPI } from "./upload";
 
 type queries = {
   query1: string;
@@ -26,26 +27,26 @@ type queries = {
 };
 // const apiURL = process.env.NEXT_API_URL;
 
-export async function sentToExternalAPI(formData: FormData, queries: queries) {
-  const session = await getServerSession(options);
-  const url = new URL(`${Backend_URL}/documentos/upload`);
-  url.searchParams.append("query1", queries.query1);
-  if (queries.query2) {
-    url.searchParams.append("query2", queries.query2);
-  }
-  try {
-    await fetch(url.toString(), {
-      method: "POST",
-      body: formData,
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${session?.access_token}`,
-      },
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
+// export async function sentToExternalAPI(formData: FormData, queries: queries) {
+//   const session = await getServerSession(options);
+//   const url = new URL(`${Backend_URL}/documentos/upload`);
+//   url.searchParams.append("query1", queries.query1);
+//   if (queries.query2) {
+//     url.searchParams.append("query2", queries.query2);
+//   }
+//   try {
+//     const res = await fetch(url.toString(), {
+//       method: "POST",
+//       body: formData,
+//       headers: {
+//         Authorization: `Bearer ${session?.access_token}`,
+//       },
+//     });
+//     console.log(res);
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
 const ClienteSchema = formSchemaClient.omit({
   file: true,
@@ -74,14 +75,15 @@ export async function registerCliente(formData: FormData) {
     fileData.append("files", f);
   });
   const dataFromMutation = result2?.crear_Cliente;
+  console.log(fileData);
 
   await sentToExternalAPI(fileData, {
     query1: "clientes",
     query2: dataFromMutation,
   });
 
-  revalidatePath("/dashboard/clientes/listar_clientes");
-  redirect("/dashboard/clientes/listar_clientes");
+  // revalidatePath("/dashboard/clientes/listar_clientes");
+  // redirect("/dashboard/clientes/listar_clientes");
 }
 
 const ClienteSchemaChange = formSchemaClient
