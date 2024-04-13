@@ -20,6 +20,8 @@ interface FormFieldComponentProps {
   className2?: string;
   className?: string;
   type?: string;
+ 
+
 }
 
 export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
@@ -27,6 +29,7 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
   control,
   name,
   label,
+  
   placeholder,
   description,
   className2,
@@ -46,6 +49,7 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
             type={type}
             className="w-full h-12 rounded-[10px]"
             value={value ? value : field.value}
+            
           />
         </FormControl>
         <FormDescription>{description}</FormDescription>

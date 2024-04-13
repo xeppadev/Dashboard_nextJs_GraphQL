@@ -58,8 +58,8 @@ export const columns: ColumnDef<StringOutput>[] = [
     id: "actions",
     cell: ({ row }) => {
       const column = row.original;
-      const { fileName } = processColumn(column || "");
-      return <DownloadFile file={column || ""} fileName={fileName || ""} />;
+      const { fileName, fileUrl} = processColumn(column || "");
+      return <DownloadFile file={fileUrl} fileName={fileName} />;
     },
   },
 ];

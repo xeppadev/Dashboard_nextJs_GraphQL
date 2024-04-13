@@ -26,6 +26,7 @@ export async function registrarPersonalModel(dataPersonal: Datavalues) {
           email: dataPersonal.email,
           numero: parseFloat(dataPersonal.numero),
           fechaIngreso: dataPersonal.fechaIngreso,
+          username: dataPersonal.username,
           salarioFecha: [
             {
               fecha: dataPersonal.fecha,

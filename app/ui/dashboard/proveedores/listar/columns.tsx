@@ -5,10 +5,9 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DataTableRowActions } from "../../clientes/listar/data-table-row-actions";
-import { DialogEdit } from "./accionedit";
+import { borrarProveedorModel } from "@/src/models/borrarProveedorModel";
 import { ProveedorDto } from "@/src/generated/graphql";
-
+import { AlertDialogDemo } from "@/app/ui/components/dialogdelete";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Regist = ProveedorDto;
@@ -52,25 +51,20 @@ export const columns: ColumnDef<Regist>[] = [
           : names[0].charAt(0);
 
       return (
-       
-          <div className="flex space-x-4  item-center ">
-            <Avatar className={`h-11 w-11 bg-primary`}>
-              <AvatarImage src="" alt="@shadcn" />
-              <AvatarFallback
-                className={`text-base font-medium text-white bg-primary`}
-              >
-                {initial}
-              </AvatarFallback>
-            </Avatar>
-            <div className="flex-col flex justify-center ">
-              <span className="font-medium ">{row.getValue("nombre")}</span>
-              <span className="font-normal text-[#6c737f]">
-                {" "}
-                {column.rubro}
-              </span>
-            </div>
+        <div className="flex space-x-4  item-center ">
+          <Avatar className={`h-11 w-11 bg-primary`}>
+            <AvatarImage src="" alt="@shadcn" />
+            <AvatarFallback
+              className={`text-base font-medium text-white bg-primary`}
+            >
+              {initial}
+            </AvatarFallback>
+          </Avatar>
+          <div className="flex-col flex justify-center ">
+            <span className="font-medium ">{row.getValue("nombre")}</span>
+            <span className="font-normal text-[#6c737f]"> {column.rubro}</span>
           </div>
-        
+        </div>
       );
     },
   },
@@ -117,9 +111,16 @@ export const columns: ColumnDef<Regist>[] = [
     cell: ({ row }) => {
       const payment = row.original;
       return (
-        <div className="flex float-right  items-center mt-1 max-w-[50px] ">
-          <DialogEdit />
-          <DataTableRowActions row={row} />
+        <div className="flex float-right  items-center mt-1 mr-3 max-w-[50px] ">
+          <AlertDialogDemo
+            handleDelete={async () => {
+              try {
+                await borrarProveedorModel(payment._id || "");
+              } catch (error) {
+                console.log(error);
+              }
+            }}
+          />
         </div>
       );
     },

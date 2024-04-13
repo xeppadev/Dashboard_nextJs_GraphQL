@@ -28,8 +28,8 @@ const formSchemaVehicle = formSchemaRegist.omit({
 
 type dataProps = {
   data: {
-    value: string | null | undefined;
-    label: string | null | undefined;
+    value: string 
+    label: string 
   }[];
 };
 
@@ -164,10 +164,7 @@ export function VehiculoForm({ data }: dataProps) {
               name="cliente"
               label="Cliente"
               placeholder="Seleccione un cliente"
-              options={data.map(({ value, label }) => ({
-                value: value || "",
-                label: label || "",
-              }))}
+              options={data}
             />
             <FormFieldate
               control={form.control}

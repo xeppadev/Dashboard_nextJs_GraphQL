@@ -53,9 +53,9 @@ export const FormSelectComponent: React.FC<RadioGroupProps> = ({
               <SelectValue placeholder={placeholder}  />
             </SelectTrigger>
           </FormControl>
-          <SelectContent >
+          <SelectContent className="rounded-lg">
             {options.map((option) => (
-              <SelectItem key={option.value}  value={option.value}>
+              <SelectItem key={option.value}  value={option.value}  >
                  {option.label}
               </SelectItem>
             ))}

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-import { AlertDialogDemo } from "../../clientes/cuentas/clientgeneral/dialogdelete";
+import { AlertDialogDemo } from "../../../components/dialogdelete";
 import { CarInfo } from "@/src/generated/graphql";
 import { PhStarFill } from "@/app/lib/icons";
 
@@ -57,7 +57,7 @@ export default function CardVehiculo({ data }: { data: CarInfo }) {
             </div>
           </div>
         </div> */}
-        <AlertDialogDemo buttonText="Eliminar Vehiculo" />
+        {/* <AlertDialogDemo buttonText="Eliminar Vehiculo" /> */}
       </CardFooter>
     </Card>
   );

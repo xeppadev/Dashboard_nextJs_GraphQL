@@ -24,3 +24,15 @@ export const MUTATION_PROVEEDORES = gql(/* GraphQL */ `
     crear_Proveedor(input: $input)
   }
 `);
+
+export const OBTENER_PROVEEDOR = gql(/* GraphQL */ `
+  query QueryProveedores {
+    obtener_nombres_proveedor
+  }
+`);
+
+export const BORRAR_PROVEEDOR = gql(/* GraphQL */ `
+  mutation Borrar_Proveedor($borrarProveedorId: String!) {
+    borrar_Proveedor(id: $borrarProveedorId)
+  }
+`);

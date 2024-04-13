@@ -5,10 +5,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DataTableRowActions } from "../../clientes/listar/data-table-row-actions";
-import { DialogEdit } from "./accionesedit";
+import { AlertDialogDemo } from "@/app/ui/components/dialogdelete";
 import { RepuestoSearchType } from "@/src/generated/graphql";
 import { StockStatus, getInitials } from "@/app/lib/utils/utils";
+import { borrarRepuestoModel } from "@/src/models/borrarRepuestoModel";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -118,9 +118,16 @@ export const columns: ColumnDef<Regist>[] = [
 
     cell: ({ row }) => {
       return (
-        <div className="flex float-right  items-center mt-1 max-w-[50px] ">
-          <DialogEdit />
-          <DataTableRowActions row={row} />
+        <div className="flex float-right  items-center mt-1 max-w-[50px] mr-3">
+          <AlertDialogDemo
+            handleDelete={async () => {
+              try {
+                await borrarRepuestoModel(row.original._id || "");
+              } catch (error) {
+                console.log(error);
+              }
+            }}
+          />
         </div>
       );
     },

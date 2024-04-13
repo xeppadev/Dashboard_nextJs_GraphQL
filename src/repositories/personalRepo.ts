@@ -38,6 +38,7 @@ export const PERSONAL_ID = gql(/* GraphQL */ `
         fecha
         salario
       }
+      username
     }
   }
 `);
@@ -53,5 +54,11 @@ export const ACTUALIZAR_PERSONAL = gql(/* GraphQL */ `
       input: $input
       salarioFecha: $salarioFecha
     )
+  }
+`);
+
+export const BORRAR_PERSONAL = gql(/* GraphQL */ `
+  mutation Borrar_Personal($borrarPersonalId: String!) {
+    borrar_Personal(id: $borrarPersonalId)
   }
 `);

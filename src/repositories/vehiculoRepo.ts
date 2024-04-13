@@ -40,7 +40,6 @@ export const INFO_SOME_PLACA = gql(/* GraphQL */ `
   }
 `);
 
-
 export const ADMIN_HISTORY_CARS = gql(/* GraphQL */ `
   query adminHistoryCars($placa: String!) {
     admin_history_cars(placa: $placa) {
@@ -58,6 +57,20 @@ export const ADMIN_HISTORY_CARS = gql(/* GraphQL */ `
       placa
       propietario
       vigenciaContrato
+    }
+  }
+`);
+
+export const BUSCAR_PLACAS_AUTOS = gql(/* GraphQL */ `
+  query Query($placa: String!) {
+    buscar_placas_autos(placa: $placa)
+  }
+`);
+
+export const OBTENER_PROPIETARIOS = gql(/* GraphQL */ `
+  query Obtener_Propietarios {
+    obtener_info_placas {
+      propietario
     }
   }
 `);

@@ -18,7 +18,7 @@ export default async function TablePerson({ query , currentPage }: { query: stri
         url={"/personal/registrar_personal"}
         buttonName={"Registrar Personal"}
       />
-      <DataTable showHeader={true} columns={columns} data={dataPersonal.personal} />
+      <DataTable showHeader={true} columns={columns} data={dataPersonal.personal } />
       <Pagination totalPages={dataPersonal.totalPages} />
     </>
   );

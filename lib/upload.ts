@@ -20,13 +20,13 @@ export async function sentToExternalAPI(formData: FormData, queries: queries) {
       method: "POST",
       body: formData,
       headers: {
-          Authorization: `Bearer ${session?.access_token}`,
+        Authorization: `Bearer ${session?.access_token}`,
       },
     });
 
     console.log("Enviado a la API externa");
-    console.log(response);
   } catch (error) {
     console.log(error);
   }
 }
+

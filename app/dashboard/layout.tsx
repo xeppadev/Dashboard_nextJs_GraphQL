@@ -8,11 +8,7 @@ export default async function Layout({
   children: React.ReactNode;
 }) {
 
-  const {data} = await notificationsqueyModel(
-    (datos) => {
-      return {datos};
-    }
-  );
+  const {data} = await notificationsqueyModel();
   return (
     <div className="flex  min-h-dvh flex-col 2xl:flex-row ">
       <div className="flex-none md:w-60 2xl:w-[270px]">

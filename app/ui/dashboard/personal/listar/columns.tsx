@@ -14,9 +14,9 @@ import { es } from "date-fns/locale";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Regist = PersonalDto;
+export type Regist = PersonalDto 
 
-export const columns: ColumnDef<Regist>[] = [
+export const columns: ColumnDef<Regist>[]    = [
   {
     id: "select",
     header: ({ table }) => (

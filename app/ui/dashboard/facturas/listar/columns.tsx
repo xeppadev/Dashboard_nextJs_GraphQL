@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DialogEdit } from "./dialog-edit";
+import { ViewDownload } from "./dialog-edit";
 import { DataTableRowActions } from "./data-table-row-actions";
 import { Checkbox } from "@/components/ui/checkbox";
 import { format, parseISO } from "date-fns";
@@ -75,7 +75,9 @@ export const columns: ColumnDef<Regist>[] = [
     cell: ({ row }) => {
       const column = row.original;
       return (
-        <div className=" flex items-center ">{column?.involucrado || "sin datos"}</div>
+        <div className=" flex items-center ">
+          {column?.involucrado || "sin datos"}
+        </div>
       );
     },
   },
@@ -137,9 +139,10 @@ export const columns: ColumnDef<Regist>[] = [
     id: "actions",
 
     cell: ({ row }) => {
+      const column = row.original;
       return (
         <div className="flex float-right  items-center mt-1 max-w-[50px] ">
-          <DialogEdit />
+          <ViewDownload datos={column.documentos} />
           <DataTableRowActions row={row} />
         </div>
       );

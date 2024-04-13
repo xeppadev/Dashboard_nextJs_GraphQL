@@ -49,7 +49,7 @@ export default function Modal({ datos }: ModalProps) {
           defaultValue="user"
           className="w-full  my-5 overflow-y-auto h-full "
         >
-          <TabsList className="inline-flex lg:space-x-5 space-x-2 pt-3 px-5 border-y w-full sticky top-0   dark:bg-background">
+          <TabsList className="inline-flex lg:space-x-5 space-x-2 pt-3 px-5 border-y w-full sticky top-0 bg-white  dark:bg-background">
             <TabsTrigger className="space-x-[5px]" value="add">
               {" "}
               <span>Todos</span>

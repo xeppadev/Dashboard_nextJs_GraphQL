@@ -48,5 +48,5 @@ export const formSchemaPersonal = z.object({
     .min(8, { message: "La contraseña invalida." })
     .max(50, { message: "La contraseña es demasiado larga." }),
   nivelUser: z.string().min(1, { message: "Invalido." }),
-  clienteAsociado: z.string().min(1, { message: "Invalido." }),
+  
 });

@@ -16,11 +16,11 @@ import { useToast } from "@/components/ui/use-toast";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { formSchemaPersonal } from "./schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FormSelectComponent } from "@/app/ui/components/formselect";
 import { FormFieldComponent } from "../../../components/formfieldcomponent";
 import { FormFieldate } from "../../../components/formfielddate";
 import { FormFileComponent } from "../../../components/formfile";
 import { registerPersonal } from "@/lib/actions";
-
 
 export default function FormPersonal() {
   const { toast } = useToast();
@@ -31,7 +31,6 @@ export default function FormPersonal() {
       file: [],
       username: "",
       password: "",
-      clienteAsociado: "",
       nivelUser: "",
       fecha: "",
       numero: "",
@@ -44,7 +43,7 @@ export default function FormPersonal() {
     mode: "onChange",
   });
 
-const onSubmit: SubmitHandler<z.infer<typeof formSchemaPersonal>> = async (
+  const onSubmit: SubmitHandler<z.infer<typeof formSchemaPersonal>> = async (
     data
   ) => {
     // Crear un nuevo objeto FormData
@@ -61,16 +60,14 @@ const onSubmit: SubmitHandler<z.infer<typeof formSchemaPersonal>> = async (
     formData.append("nombre", data.nombre);
     formData.append("correo", data.correo);
     formData.append("nivelUser", data.nivelUser);
-    formData.append("clienteAsociado", data.clienteAsociado);
     formData.append("username", data.username);
     formData.append("password", data.password);
-    
-    
+
     // Agregar el archivo al objeto formData
-      file.forEach((f, index) => {
+    file.forEach((f, index) => {
       formData.append("file", f.file);
     });
-      
+
     try {
       await registerPersonal(formData);
       // Crear un nuevo objeto FormData
@@ -81,7 +78,7 @@ const onSubmit: SubmitHandler<z.infer<typeof formSchemaPersonal>> = async (
       });
     } catch (error) {
       console.error("Error al enviar los archivos a la API externa:", error);
-      toast({ 
+      toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
         description: "There was a problem with your request.",
@@ -204,17 +201,14 @@ const onSubmit: SubmitHandler<z.infer<typeof formSchemaPersonal>> = async (
               placeholder="Ingrese una contraseña"
               type="password"
             />
-            <FormFieldComponent
+            <FormSelectComponent
               control={form.control}
               name="nivelUser"
+              placeholder="Seleccione un nivel de usuario"
               label="Nivel de Usuario"
-              placeholder="Ingrese un correo electronico"
-            />
-            <FormFieldComponent
-              control={form.control}
-              name="clienteAsociado"
-              label="Cliente Asociado"
-              placeholder="Ingrese el nombre del Cliente"
+              options={[{ value: "tecnico", label: "Tecnico" }]}
+              className="w-full"
+              className2="h-12"
             />
           </CardContent>
         </Card>

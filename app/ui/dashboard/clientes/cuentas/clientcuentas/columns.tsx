@@ -1,15 +1,15 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import Link from "next/link";
-import { format, parseISO } from "date-fns";
+
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DialogEdit } from "./editarusers";
 import { UserOutput } from "@/src/generated/graphql";
+import { AlertDialogDemo } from "@/app/ui/components/dialogdelete";
+import { eliminarUserModel } from "@/src/models/eliminarUserModel";
+import { useRouter } from 'next/navigation'
 
-import { DataTableRowActions } from "../../listar/data-table-row-actions";
-import { User } from "next-auth";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -94,9 +94,20 @@ export const columns: ColumnDef<Regist>[] = [
       const payment = row.original;
 
       return (
-        <div className="flex float-right  items-center mt-1  ">
+        <div className="flex float-right space-x-2  items-center mt-1  ">
           <DialogEdit />
-          <DataTableRowActions row={row} />
+          <AlertDialogDemo handleDelete={
+            async () => {
+              try {
+              await eliminarUserModel(payment._id);
+              } catch (error) {
+                console.log(error);
+            }
+            
+          }
+        
+           
+          }  />
         </div>
       );
     },

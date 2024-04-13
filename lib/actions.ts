@@ -15,38 +15,15 @@ import { registrarRepuestosModel } from "@/src/models/registrarRepuestosModel";
 import { formSchemaStockSend } from "@/app/ui/dashboard/stock/registrar/schema";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { getServerSession } from "next-auth";
-import { options } from "@/app/options";
 import * as z from "zod";
-import { Backend_URL } from "./contants";
-import{ sentToExternalAPI } from "./upload";
-
-type queries = {
-  query1: string;
-  query2: string | undefined;
-};
-// const apiURL = process.env.NEXT_API_URL;
-
-// export async function sentToExternalAPI(formData: FormData, queries: queries) {
-//   const session = await getServerSession(options);
-//   const url = new URL(`${Backend_URL}/documentos/upload`);
-//   url.searchParams.append("query1", queries.query1);
-//   if (queries.query2) {
-//     url.searchParams.append("query2", queries.query2);
-//   }
-//   try {
-//     const res = await fetch(url.toString(), {
-//       method: "POST",
-//       body: formData,
-//       headers: {
-//         Authorization: `Bearer ${session?.access_token}`,
-//       },
-//     });
-//     console.log(res);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+import { sentToExternalAPI } from "./upload";
+import { actualizarUserModel } from "@/src/models/actualizarUserModel";
+import { registrarFacturaModel } from "@/src/models/registrarFacturasModel";
+import { formSchemaFacturadatos } from "@/app/ui/dashboard/facturas/registrar/schema";
+import { agregarContratoModel } from "@/src/models/agregarContratoModel";
+import { formSchemaContratos } from "@/app/ui/dashboard/clientes/cuentas/changeCuenta/schema";
+import { agregarUsuarioModel } from "@/src/models/agregarUsuarioModel";
+import { formSchemaUsuarios } from "@/app/ui/dashboard/clientes/cuentas/changeCuenta/schema";
 
 const ClienteSchema = formSchemaClient.omit({
   file: true,
@@ -75,15 +52,14 @@ export async function registerCliente(formData: FormData) {
     fileData.append("files", f);
   });
   const dataFromMutation = result2?.crear_Cliente;
-  console.log(fileData);
 
   await sentToExternalAPI(fileData, {
     query1: "clientes",
     query2: dataFromMutation,
   });
 
-  // revalidatePath("/dashboard/clientes/listar_clientes");
-  // redirect("/dashboard/clientes/listar_clientes");
+  revalidatePath("/dashboard/clientes/listar_clientes");
+  redirect("/dashboard/clientes/listar_clientes");
 }
 
 const ClienteSchemaChange = formSchemaClient
@@ -263,4 +239,89 @@ export async function registrarRepuestos(formData: FormData) {
 
   revalidatePath("/dashboard/stock/listar_stock");
   redirect("/dashboard/stock/listar_stock");
+}
+
+const PeronalSchemaUpdate = formSchemaPersonal
+  .omit({
+    nombre: true,
+    file: true,
+    email: true,
+    numero: true,
+    fecha: true,
+    salario: true,
+    fechaIngreso: true,
+    nivelUser: true,
+    username: true,
+  })
+  .extend({
+    oldusername: z.string(),
+  });
+
+export async function actualizarUser(formData: FormData) {
+  const dataRegister = PeronalSchemaUpdate.parse(
+    Object.fromEntries(formData.entries())
+  );
+
+  await actualizarUserModel(dataRegister);
+  revalidatePath("/dashboard/personal/listar_personal");
+  redirect("/dashboard/personal/listar_personal");
+}
+
+export async function registrarFactura(formData: FormData) {
+  const dataRegister = formSchemaFacturadatos.parse({
+    tipoFactura: formData.get("tipoFactura"),
+    involucrado: formData.get("involucrado"),
+    fecha: formData.get("fecha"),
+    montoParcial: formData.get("montoParcial"),
+    igv: formData.get("igv"),
+    numeroFactura: formData.get("numeroFactura"),
+    detraccion: formData.get("detraccion"),
+  });
+
+  const file = formData.getAll("file") as File[];
+  const result2 = await registrarFacturaModel(dataRegister);
+  const fileData = new FormData();
+  file.forEach((f, index) => {
+    fileData.append("files", f);
+  });
+
+  const dataFromMutation = result2?.crear_factura;
+  await sentToExternalAPI(fileData, {
+    query1: "facturas",
+    query2: dataFromMutation,
+  });
+
+  revalidatePath("/dashboard/facturacion/listar_facturas");
+  redirect("/dashboard/facturacion/listar_facturas");
+}
+
+
+
+
+export async function agregarContrato(formData: FormData) {
+  const dataRegister = formSchemaContratos.parse({
+    numeroContrato: formData.get("numeroContrato"),
+    fechaInicio: formData.get("fechaInicio"),
+    fechaFin: formData.get("fechaFin"),
+    agregarContratoId: formData.get("agregarContratoId"),
+  });
+
+  await agregarContratoModel(dataRegister);
+  revalidatePath("/dashboard/clientes/cuentas/[id]", "page");
+  redirect(`/dashboard/clientes/cuentas/${dataRegister.agregarContratoId}`);
+}
+
+
+export async function agregarUsuario(formData: FormData) {
+  const dataRegister = formSchemaUsuarios.parse({
+    idCliente: formData.get("idCliente"),
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+    username: formData.get("username"),
+  });
+
+  await agregarUsuarioModel(dataRegister);
+  revalidatePath("/dashboard/clientes/cuentas/[id]", "page");
+  redirect(`/dashboard/clientes/cuentas/${dataRegister.idCliente}`);
 }

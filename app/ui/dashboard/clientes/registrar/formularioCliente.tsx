@@ -14,13 +14,15 @@ import { SolarTrashBinTrashBold, IcRoundAdd } from "@/app/lib/icons";
 import { ToastAction } from "@/components/ui/toast";
 import { useToast } from "@/components/ui/use-toast";
 import { useForm, SubmitHandler, useFieldArray } from "react-hook-form";
-import { formSchemaClient } from "./schema";
+import { formSchemaClient, formSchemaClientdatos } from "./schema";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormFieldComponent } from "../../../components/formfieldcomponent";
 import { FormFieldate } from "../../../components/formfielddate";
 import { FormFileComponent } from "../../../components/formfile";
-import { registerCliente } from "@/lib/actions";
+import { FormSelectComponent } from "@/app/ui/components/formselect";
 
+import { registerCliente } from "@/lib/actions";
 
 export default function FormCliente() {
   const { toast } = useToast();
@@ -53,7 +55,7 @@ export default function FormCliente() {
         },
       ],
     },
-    resolver: zodResolver(formSchemaClient),
+    resolver: zodResolver(formSchemaClientdatos),
     mode: "onChange",
   });
 
@@ -78,6 +80,7 @@ export default function FormCliente() {
     const formData = new FormData();
     // Obtener el valor de file del formulario
     const { file } = form.getValues();
+
     // Agregar los otros campos del formulario a formData
     formData.append("nombreCliente", data.nombreCliente);
     formData.append("ruc", data.ruc);
@@ -86,7 +89,14 @@ export default function FormCliente() {
     formData.append("nombre", data.nombre);
     formData.append("numeroContacto", data.numeroContacto);
     formData.append("email", data.email);
-    formData.append("items", JSON.stringify(data.items));
+
+    // Agregar el valor de nombreCliente a clienteAsociado para cada elemento en items
+    const itemsWithClienteAsociado = data?.items?.map((item) => ({
+      ...item,
+      clienteAsociado: data.nombreCliente,
+    }));
+    formData.append("items", JSON.stringify(itemsWithClienteAsociado));
+
     formData.append("contratos", JSON.stringify(data.contratos));
     // Convertir data.file a un array y agregar cada archivo a formData
     file.forEach((f, index) => {
@@ -298,17 +308,14 @@ export default function FormCliente() {
                   type="password"
                 />
 
-                <FormFieldComponent
-                  control={form.control}
-                  name={`items.${index}.clienteAsociado`}
-                  label={`Cliente Asociado ${index + 1}`}
-                  placeholder="Ingrese un cliente asociado"
-                />
-                <FormFieldComponent
+                <FormSelectComponent
                   control={form.control}
                   name={`items.${index}.nivelUser`}
                   label={`Nivel de Usuario ${index + 1}`}
-                  placeholder="Ingrese un nivel de usuario"
+                  placeholder="Seleccione un nivel de usuario"
+                  options={[{ value: "cliente", label: "Cliente" }]}
+                  className="w-full"
+                  className2="h-12"
                 />
 
                 <div className="col-start-4 flex  justify-end ">

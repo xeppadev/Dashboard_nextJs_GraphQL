@@ -4,7 +4,7 @@ import { Backend_URL } from "@/lib/contants";
 
 
 export const options: NextAuthOptions = {
-    providers: [
+  providers: [
     CredentialsProvider({
       name: "Credentials",
       credentials: {
@@ -15,7 +15,7 @@ export const options: NextAuthOptions = {
         },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         if (!credentials?.username || !credentials?.password) return null;
         const { username, password } = credentials;
         const res = await fetch(Backend_URL + "/auth/login", {
@@ -39,19 +39,24 @@ export const options: NextAuthOptions = {
       },
     }),
   ],
-
+  pages: {
+    signIn: "/login",
+  },
+  session: {
+    strategy: "jwt",
+  },
   callbacks: {
-    async jwt({ token, user  }) {
+    async jwt({ token, user }) {
       if (user) {
         return {
           ...token,
           access_token: user.access_token, // Guarda el token de acceso directamente
         };
       }
-         
+
       return token;
     },
-    
+
     async session({ token, session }) {
       session.access_token = token.access_token; // Agrega el token de acceso a la sesión
 

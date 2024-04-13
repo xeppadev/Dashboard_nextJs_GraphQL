@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { FormFieldComponent } from "@/app/ui/components/formfieldcomponent";
 import { useToast } from "@/components/ui/use-toast";
-import { ClienteDto } from "@/src/generated/graphql";
+import { Cliente2Dto } from "@/src/generated/graphql";
 
 const ClienteSchemaChange = formSchemaClient.omit({
   contratos: true,
@@ -21,7 +21,7 @@ const ClienteSchemaChange = formSchemaClient.omit({
 
 type AccountFormValues = z.infer<typeof ClienteSchemaChange>;
 
-export function FormularioChange({ data }: { data: ClienteDto }) {
+export function FormularioChange({ data }: { data: Cliente2Dto }) {
   const { toast } = useToast();
 
  

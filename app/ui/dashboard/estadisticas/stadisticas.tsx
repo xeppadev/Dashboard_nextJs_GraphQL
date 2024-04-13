@@ -1,4 +1,4 @@
-import Search from "../../components/search";
+
 import { KilometrajeUnidad } from "./estadisticomponent/kilometrajaUnidad";
 import { GastosGenerales } from "./estadisticomponent/gastosGenerales";
 import { CostosMantenimientos } from "./estadisticomponent/costosMantenimientos";
@@ -9,19 +9,32 @@ import { DatePickerComponent } from "../../components/dataComponent";
 import { PuntuacionUnidad } from "./estadisticomponent/puntuaciaonUnidad";
 import { estadisticasModel } from "@/src/models/estadisticasModel";
 import { Monitoreo } from "./estadisticomponent/monitoreo";
+import SearchBar from "../../components/buscadorDesplegable";
+import { buscarPlacasModel } from "@/src/models/buscarplacasModel";
 
-export default async function Stadistic() {
-  const fecha = new Date().toISOString();
+export default async function Stadistic({
+  query,
+  fecha,
+}: {
+  query: string;
+  fecha: Date | null;
+}) {
+  
+ 
 
   const { data, datosResponsiveBar, datosKilometraje, operatividad } =
-    await estadisticasModel("", fecha);
+    await estadisticasModel(query, fecha?.toISOString() || "");
+
+  const { data: dataplacas } = await buscarPlacasModel(query || "");
+
   return (
     <section>
-      <div className="flex flex-col items-center space-x-2  lg:flex-row lg:space-x-3 lg:items-start lg:w-full space-y-3 lg:space-y-0">
-        <Search placeholder="Buscar Vehiculo" width="w-[35%]" />
+      <div className="flex flex-col items-center space-x-2 justify-between  lg:flex-row lg:space-x-3 lg:items-start lg:w-full space-y-3 lg:space-y-0">
+        <SearchBar placeholder="Buscar Vehiculo" data={dataplacas} />
+        {/* <Search placeholder="Buscar Vehiculo" width="w-[35%]" /> */}
         <DatePickerComponent label="Fecha" paramName="fecha" />
       </div>
-      <div className="grid lg:grid-cols-6 grid-cols-1 gap-7 my-6">
+      <div className="grid lg:grid-cols-6 grid-cols-1 gap-7 mt-10">
         <div className="lg:col-span-2 col-span-1 ">
           <PuntuacionUnidad data={data} />
         </div>

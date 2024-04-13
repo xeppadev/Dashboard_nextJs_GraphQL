@@ -1,9 +1,6 @@
 import React from "react";
 import TabsMantenimiento from "@/app/ui/dashboard/vehiculos/mantenimiento/tabMantenimiento";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { SolarPenBold } from "@/app/lib/icons";
+
 
 const Page = ({ params }: { params?: { id?: string } }) => {
   const id = params?.id;

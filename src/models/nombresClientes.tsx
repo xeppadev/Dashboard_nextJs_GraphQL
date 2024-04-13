@@ -15,8 +15,8 @@ export async function nombresClientesModel() {
     },
   });
   const nombresClientes = data.obtener_Todos_Clientes.map((cliente) => ({
-    value: cliente.nombreCliente,
-    label: cliente.nombreCliente,
+    value: cliente.nombreCliente || "",
+    label: cliente.nombreCliente || "",
   }));
 
   return { nombresClientes, loading };

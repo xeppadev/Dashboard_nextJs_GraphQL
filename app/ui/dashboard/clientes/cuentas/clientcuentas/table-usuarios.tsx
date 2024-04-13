@@ -2,14 +2,14 @@ import React from "react";
 import { DataTable } from "../../../../components/data-table";
 import { columns } from "./columns";
 import { UserOutput } from "@/src/generated/graphql";
-import { ClienteDto } from "@/src/generated/graphql";
+import { Cliente2Dto } from "@/src/generated/graphql";
 
 export default function UserUsuarios({
   data,
   cliente,
 }: {
   data: UserOutput[];
-  cliente: ClienteDto;
+  cliente: Cliente2Dto;
 }) {
   return (
     <div className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-4 pb-6">

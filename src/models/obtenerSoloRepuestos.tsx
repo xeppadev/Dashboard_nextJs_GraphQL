@@ -6,7 +6,7 @@ import { options } from "@/app/options";
 export async function obtenerSoloRepuestos() {
   const client = getClient();
   const session = await getServerSession(options);
-
+   
   const { data, loading } = await client.query({
     query: OBTENER_SOLO_REPUESTOS,
     context: {

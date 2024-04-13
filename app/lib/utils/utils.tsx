@@ -1,4 +1,5 @@
 import { differenceInDays, parseISO } from "date-fns";
+import { Contrato2Dto } from "@/src/generated/graphql";
 import { ContratoDto } from "@/src/generated/graphql";
 import { SalarioFechaDto } from "@/src/generated/graphql";
 import { MantenimientoInfo } from "@/src/generated/graphql";
@@ -6,7 +7,7 @@ import { es } from "date-fns/locale";
 import { format, parse } from "date-fns";
 export type Maybe<T> = T | null;
 type StatusComponentProps = {
-  contratos?: Maybe<Array<Maybe<ContratoDto>>>;
+  contratos?: Maybe<Array<Maybe<Contrato2Dto>>> |  Maybe<Array<Maybe<ContratoDto>>>
 };
 
 export const StatusComponent: React.FC<StatusComponentProps> = ({
@@ -90,10 +91,13 @@ export function getInitials(name: string): string {
 
 export function processColumn(column: string) {
   const fileName = column.replace(/[\\/]/g, "/").split("/").pop() || "";
-
+  const fileUrl = column.replace(/[\\/]/g, "/").replace(/ /g, "%20");
+  const segments = column.split("/");
+  const id = segments[2];
+  const tipo = segments[1];
   const fileType = fileName.split(".").pop() || "";
 
-  return { fileName, fileType };
+  return { fileName, fileType ,fileUrl, id, tipo}; 
 }
 
 // Esta función toma un array de objetos salarioFecha y devuelve el salario más reciente

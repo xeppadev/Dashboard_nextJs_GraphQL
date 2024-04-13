@@ -6,7 +6,8 @@ import {
 } from "@/components/ui/tabinline";
 import Main from "./persongeneral/main";
 import UserSalarios from "./personSalirios/table-salarios";
-// import UserDocument from "./clientContratos/table-document";
+import { FormularioChange } from "./personcuentas/formUsuarios";
+import { obtenerusersxusernameModel } from "@/src/models/obtenerusersxusernameModel";
 import UserDocumentos from "./personDocs/table-docs";
 import {
   FaSolidUserCog,
@@ -18,7 +19,7 @@ import { datosPersonalIdModel } from "@/src/models/datosPersonalIdModel";
 
 export default async function TabsAccount({ user }: { user?: string }) {
   const { data: datosPersonal } = await datosPersonalIdModel(user || "");
-
+   const { users: datoCuenta } = await obtenerusersxusernameModel(datosPersonal.username || "");
   return (
     <div className="lg:container mx-auto my-8">
       <Tabs defaultValue="user" className="w-full space-y-8">
@@ -40,7 +41,6 @@ export default async function TabsAccount({ user }: { user?: string }) {
             Documentos
           </TabsTrigger>
         </TabsList>
-
         <TabsContent value="user">
           <Main data={datosPersonal} />
         </TabsContent>
@@ -48,7 +48,7 @@ export default async function TabsAccount({ user }: { user?: string }) {
           <UserSalarios data={datosPersonal} />
         </TabsContent>
         <TabsContent value="account">
-          {/* <UserUsuarios data={datosPersonal} /> */}
+          <FormularioChange data={datoCuenta} />
         </TabsContent>
         <TabsContent value="files">
           <UserDocumentos data={datosPersonal} />

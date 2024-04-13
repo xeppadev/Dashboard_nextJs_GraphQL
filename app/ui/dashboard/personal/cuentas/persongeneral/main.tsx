@@ -8,10 +8,10 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
-import { AlertDialogDemo } from "./dialogdelete";
+import { AlertDialogDemo } from "@/app/ui/components/dialogdelete";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {FormularioChange} from "./formuCambiarDatos";
-import { Switch } from "@/components/ui/switch";
+import { borrarPersonalModel } from "@/src/models/borrarPersonalModel";
 import { Badge } from "@/components/ui/badge";
 import { PersonalDto } from "@/src/generated/graphql";
 export default function Main({ data }: { data: PersonalDto }) {
@@ -20,7 +20,7 @@ export default function Main({ data }: { data: PersonalDto }) {
       <Card className="flex flex-col justify-between bg-background  lg:w-[75%]    xl:w-1/4">
         <CardHeader className=" m-2 pr-3 pt-3  ">
           <h3 className="ml-auto  text-green-500 bg-active-green font-semibold text-sm  px-1.5 py-1 max-w-fit rounded-md">
-            Activo
+            Personal
           </h3>
         </CardHeader>
         <CardContent className="flex flex-col items-center space-y-4 pt-5 flex-grow">
@@ -40,16 +40,16 @@ export default function Main({ data }: { data: PersonalDto }) {
         </CardContent>
 
         <CardFooter className="flex flex-col justify-center space-y-10 ">
-          {/* <div className="flex flex-row space-x-1 border rounded-xl p-3 items-center ">
-            <div className="space-y-1">
-              <CardTitle className="text-sm ">Desactivar</CardTitle>
-              <CardDescription className="text-sm">
-                Inabilita la cuenta de este cliente
-              </CardDescription>
-            </div>
-            <Switch id="airplane-mode" />
-          </div> */}
-          <AlertDialogDemo buttonText="Eliminar Cuenta" />
+        
+          <AlertDialogDemo buttonText="Eliminar Cuenta" 
+          handleDelete={async () => {
+            try {
+              await borrarPersonalModel(data._id || "");
+            } catch (error) {
+              console.log(error);
+            }
+          }}
+          />
         </CardFooter>
       </Card>
       <Card className=" bg-background  lg:w-[75%]">

@@ -1,5 +1,3 @@
-export { default } from "next-auth/middleware"
+export { default } from "next-auth/middleware";
 
-export const config = {
-    matcher: ['/((?!api|static|.*\\..*|_next).*)'],
-  };
+export const config = { matcher: ["/", "/dashboard/:path*"] };

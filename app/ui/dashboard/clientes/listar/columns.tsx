@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { DialogEdit } from "./dialog-edit";
+
 import { DataTableRowActions } from "./data-table-row-actions";
 import { Checkbox } from "@/components/ui/checkbox";
 import { StatusComponent, getInitials } from "@/app/lib/utils/utils";
@@ -127,7 +127,7 @@ export const columns: ColumnDef<Regist>[] = [
 
       return (
         <div className="flex float-right  items-center mt-1 max-w-[50px] ">
-          <DialogEdit />
+         
           <DataTableRowActions row={row} />
         </div>
       );
