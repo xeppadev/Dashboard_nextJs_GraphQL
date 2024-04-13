@@ -1,7 +1,8 @@
 import type { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { Backend_URL } from "@/lib/contants";
-
+import { jwtDecode } from "jwt-decode";
+import { MyToken } from "@/src/entieties/autentication";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -45,6 +46,7 @@ export const options: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -58,10 +60,14 @@ export const options: NextAuthOptions = {
     },
 
     async session({ token, session }) {
-      session.access_token = token.access_token; // Agrega el token de acceso a la sesión
-
-      // Imprime la sesión en la consola
-
+      if (token.access_token) {
+        // Descifra el token
+        const decodedToken = jwtDecode<MyToken>(token.access_token);
+        // Guarda el username y nivelUser en la sesión
+        session.username = decodedToken.username;
+        session.nivelUser = decodedToken.nivelUser;
+      }
+      session.access_token = token.access_token;
       return session;
     },
   },

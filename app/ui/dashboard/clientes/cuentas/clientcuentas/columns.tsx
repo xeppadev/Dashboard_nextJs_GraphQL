@@ -94,7 +94,7 @@ export const columns: ColumnDef<Regist>[] = [
       const payment = row.original;
 
       return (
-        <div className="flex float-right space-x-2  items-center mt-1  ">
+        <div className="flex float-right space-x-2  items-center mt-1 mr-3 ">
           <DialogEdit />
           <AlertDialogDemo handleDelete={
             async () => {

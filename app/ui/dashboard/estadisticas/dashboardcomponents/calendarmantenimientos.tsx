@@ -21,8 +21,8 @@ export const CalendarMantenimientos = ({
   return (
     <Card className="overflow-x-auto">
       <CardHeader>
-        <CardTitle className="font-medium">Mantenimientos Realizados</CardTitle>
-        <CardDescription>Cantidad de mantenimientos realizados al dia</CardDescription>
+        <CardTitle className="font-medium">Mantenimientos Programados</CardTitle>
+        <CardDescription>Cantidad de mantenimientos Programados</CardDescription>
       </CardHeader>
       <CardContent>
         <MyResponsiveTimeRange

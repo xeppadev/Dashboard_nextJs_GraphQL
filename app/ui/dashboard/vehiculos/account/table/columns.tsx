@@ -18,7 +18,7 @@ export const columns: ColumnDef<Regist>[] = [
 
       return (
         <Link
-          href={`/dashboard/vehiculos/unidades/mantenimientos/${column.id}`}
+          href={`/dashboard/vehiculos/mantenimientos/${column.id}`}
           className="flex item-center ml-3 min-w-[180px] "
         >
           <div className="flex space-x-4 justify-center  ">

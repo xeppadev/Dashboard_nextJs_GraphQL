@@ -138,7 +138,7 @@ export function LineChart({ className , data ,...props }: MyResponsiveLineProps)
                   }}
                 >
                   <span className={`text-[1px] mr-1 p-1 rounded-full bg-[${point.serieColor}]`}></span>
-                  {point.serieId}: <strong className="ml-1">{`${point.data.yFormatted} Mm`}</strong>
+                  {point.serieId}: <strong className="ml-1">{`${point.data.yFormatted}`}</strong>
                 </div>
               ))}
             </div>
