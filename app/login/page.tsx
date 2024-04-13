@@ -23,7 +23,7 @@ export default function Signin() {
 
     if (res?.error) setError(res.error);
 
-    if (res?.ok) router.push("/dashboard");
+    if (res?.ok) router.push("/");
   };
 
   return (

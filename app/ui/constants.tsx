@@ -123,3 +123,21 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <IcRoundSupport className="w-[24px] h-[24px]" />,
   },
 ];
+
+export const SIDENAV_ITEMS_TECNICO: SideNavItem[] = [
+  {
+    postitle: "Mantenimiento",
+    title: "Mantenimiento",
+    path: "/dashboard/registrar-mantenimiento",
+    icon: <MingcuteToolFill className="w-[23px] h-[23px]" />,
+  },
+];
+
+export const SIDENAV_ITEMS_CLIENTE: SideNavItem[] = [
+  {
+    postitle: "Mantenimiento",
+    title: "Vehiculos",
+    path: "/vehiculos/historial_clinico",
+    icon: <MingcuteCarFillDualtone className="w-[24px] h-[24px]" />,
+  },
+];

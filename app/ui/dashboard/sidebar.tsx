@@ -4,12 +4,30 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SvgComponent from "@/app/lib/logo";
-import { SIDENAV_ITEMS } from "../constants";
+import { SIDENAV_ITEMS ,SIDENAV_ITEMS_TECNICO, SIDENAV_ITEMS_CLIENTE } from "../constants";
 import { SideNavItem } from "../..//ui/types";
 import { SolarExitBoldDuotone } from "@/app/lib/icons";
 import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
+
 
 const SideNav = () => {
+  const { data: session } = useSession();
+   // Determina qué elementos de navegación mostrar en función del nivelUser de la sesión
+   let navItems: any[];
+   switch (session?.nivelUser) {
+     case 'admin':
+       navItems = SIDENAV_ITEMS;
+       break;
+     case 'tecnico':
+       navItems = SIDENAV_ITEMS_TECNICO;
+       break;
+     case 'cliente':
+       navItems = SIDENAV_ITEMS_CLIENTE;
+       break;
+     default:
+       navItems = [];
+   }
   return (
     <div
       className={`fixed hidden h-screen flex-1 border-r dark:border-[#2F3746] dark:bg-nav_bg   border-[#F3F4F6] 2xl:flex md:w-60  2xl:w-[270px] overflow-y-auto`}
@@ -32,7 +50,7 @@ const SideNav = () => {
           </Link>
 
           <div className="flex flex-col space-y-4  mt-5  md:px-5 ">
-            {SIDENAV_ITEMS.map((item, idx, array) => {
+            {navItems.map((item, idx, array) => {
               const previousItem = array[idx - 1];
               const showPostTitle =
                 !previousItem || item.postitle !== previousItem.postitle;

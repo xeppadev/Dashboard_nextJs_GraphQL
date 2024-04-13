@@ -5,6 +5,7 @@ import { useTheme } from "next-themes";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMounted } from "@/src/hooks/use-is-mounted";
 import { NotificacionDto } from "@/src/generated/graphql";
+import { useSession } from "next-auth/react";
 import {
   CiMenuAlt03,
   JamSearch,
@@ -15,14 +16,13 @@ import Modal from "./modal";
 type NavbarProps = {
   dataNotificaciones: NotificacionDto[];
   // data: NotificacionDto;
-  
-  
 };
 
-const Navbar: FC<NavbarProps> = ({ dataNotificaciones}) => {
+const Navbar: FC<NavbarProps> = ({ dataNotificaciones }) => {
   const { setTheme, theme } = useTheme();
   const isMounted = useIsMounted();
   const isSelected = theme === "light" && isMounted;
+  const { data: session } = useSession();
 
   const onChange = () => {
     theme === "dark" ? setTheme("light") : setTheme("dark");
@@ -36,7 +36,7 @@ const Navbar: FC<NavbarProps> = ({ dataNotificaciones}) => {
       </div>
 
       <div className=" content-center  justify-center mt-3 mr-3 space-x-7  flex items-center">
-        <Modal datos={dataNotificaciones} />
+        {session?.nivelUser === "admin" && <Modal datos={dataNotificaciones} />}
         <button className="w-fit h-fit  rounded-full">
           <SolarSettingsBoldDuotone className=" text-[#637381] w-6 h-6 spin360" />
         </button>

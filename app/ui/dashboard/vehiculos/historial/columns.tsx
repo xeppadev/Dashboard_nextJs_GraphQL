@@ -140,7 +140,7 @@ export const columns: ColumnDef<Regist>[] = [
               : "text-[#2970FF] bg-freelance"
           } `}
         >
-          {column?.tipo ? column.tipo.split(" ")[0] : ""}
+          {column?.tipo ? column.tipo.split(" ")[1] : ""}
         </div>
       );
     },

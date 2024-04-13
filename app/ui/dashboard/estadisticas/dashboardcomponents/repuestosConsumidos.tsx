@@ -42,7 +42,7 @@ export const RepuestosCambiados = ({
         <CardTitle className="font-medium">
           Repuestos Consumidos actualmente
         </CardTitle>
-        <CardDescription>(+2%) que el mes pasado </CardDescription>
+        <CardDescription>Cantidad de repuestos consumidos</CardDescription>
       </CardHeader>
       <CardContent className="flex flex-row">
         <PieChart
