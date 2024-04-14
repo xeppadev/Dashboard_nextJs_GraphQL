@@ -66,25 +66,25 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
 
   // Usa el índice del campo seleccionado al actualizar los valores de los campos
   React.useEffect(() => {
-    if (dataRepuestos[0].marca) {
+    if (dataRepuestos && dataRepuestos[0]) {
       form.setValue(
         `oldStock.${selectedFieldIndex}.marca`,
         dataRepuestos[0].marca || ""
       );
     }
-    if (dataRepuestos[0].cantidad) {
+    if (dataRepuestos && dataRepuestos[0]) {
       form.setValue(
         `oldStock.${selectedFieldIndex}.cantidadactual`,
         dataRepuestos[0].cantidad.toString() || ""
       );
     }
-    if (dataRepuestos[0].precio) {
+    if (dataRepuestos && dataRepuestos[0]) {
       form.setValue(
         `oldStock.${selectedFieldIndex}.precio`,
-        dataRepuestos[0].precio.toString() || ""
+        dataRepuestos[0].precio ? dataRepuestos[0].precio.toString() : ""
       );
     }
-    if (dataRepuestos[0]._id) {
+    if (dataRepuestos && dataRepuestos[0] ) {
       form.setValue(
         `oldStock.${selectedFieldIndex}._id`,
         dataRepuestos[0]._id || ""
