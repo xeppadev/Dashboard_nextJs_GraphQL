@@ -28,8 +28,8 @@ const formSchemaVehicle = formSchemaRegist.omit({
 
 type dataProps = {
   data: {
-    value: string 
-    label: string 
+    value: string;
+    label: string;
   }[];
 };
 
@@ -150,9 +150,14 @@ export function VehiculoForm({ data }: dataProps) {
               placeholder="Seleccione un tipo de contrato"
               name="tipoContrato"
               options={[
-                { value: "1", label: "Alquiler" },
-                { value: "2", label: "Venta" },
-                { value: "3", label: "Leasing" },
+                {
+                  value: "Alquiler a todo costo",
+                  label: "Alquiler a todo costo",
+                },
+                {
+                  value: "Alquiler con valorizaciones",
+                  label: "Alquiler con valorizaciones",
+                },
               ]}
               className="w-full"
               className2="h-12"
