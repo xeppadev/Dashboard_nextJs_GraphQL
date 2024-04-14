@@ -1,28 +1,28 @@
-"use client"
+"use client";
 
-import { DotsVerticalIcon } from "@radix-ui/react-icons"
-import { Row } from "@tanstack/react-table"
-
-import { Button } from "@/components/ui/button"
+import { DotsVerticalIcon } from "@radix-ui/react-icons";
+import { Row } from "@tanstack/react-table";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-   DropdownMenuShortcut,
+  DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from  "@/components/ui/dropdown-menu"
-
-
+} from "@/components/ui/dropdown-menu";
 
 interface DataTableRowActionsProps<TData> {
-  row: Row<TData>
+  row: Row<TData>;
+  ruta: string;
 }
 
 export function DataTableRowActions<TData>({
   row,
+  ruta,
 }: DataTableRowActionsProps<TData>) {
-  const task = row.original
-
+  const task = row.original;
+ 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -34,14 +34,14 @@ export function DataTableRowActions<TData>({
           <span className="sr-only">Open menu</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" >
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        
-        <DropdownMenuItem>
-          Delete
-        <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+      <DropdownMenuContent align="end">
+        <Link href={ruta}>
+        <DropdownMenuItem >
+          Edit
         </DropdownMenuItem>
+        </Link>
+       
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }

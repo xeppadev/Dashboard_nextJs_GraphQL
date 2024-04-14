@@ -39,7 +39,7 @@ export async function estadisticasModel(placa: string, fecha: string) {
 
     return {
       x: monthName,
-      y: (item.kmRecorridoTotal ?? 0) / 1000,
+      y: (item.kmRecorridoTotal ?? 0) ,
     };
   });
   const operatividad = data?.estadisticas_web?.operatividad?.map((item) => {

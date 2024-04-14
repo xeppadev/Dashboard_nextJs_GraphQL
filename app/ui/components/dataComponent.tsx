@@ -45,7 +45,7 @@ export function DatePickerComponent({ label, paramName }: DatePickerComponentPro
         <Button
           variant={"outline"}
           className={cn(
-            "w-[18%] justify-start text-left font-normal h-[42px] rounded-[10px]",
+            "lg:w-[18%]  w-full  justify-start text-left font-normal h-[42px] rounded-[10px]",
             !date && "text-muted-foreground"
           )}
         >

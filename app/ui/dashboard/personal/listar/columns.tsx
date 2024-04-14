@@ -6,17 +6,17 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { DataTableRowActions } from "../../clientes/listar/data-table-row-actions";
-import { DialogEdit } from "./accionedit";
+import { DataTableRowActions } from "@/app/ui/components/data-table-row-actions";
+
 import { PersonalDto } from "@/src/generated/graphql";
-import { getInitials,salarioMasReciente } from "@/app/lib/utils/utils";
+import { getInitials, salarioMasReciente } from "@/app/lib/utils/utils";
 import { es } from "date-fns/locale";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
-export type Regist = PersonalDto 
+export type Regist = PersonalDto;
 
-export const columns: ColumnDef<Regist>[]    = [
+export const columns: ColumnDef<Regist>[] = [
   {
     id: "select",
     header: ({ table }) => (
@@ -98,14 +98,11 @@ export const columns: ColumnDef<Regist>[]    = [
       const salario = salarioMasReciente(column.salarioFecha);
       return (
         <div className="flex max-w-fit items-center font-bold bg-freelance text-[#2970FF]  text-xs px-1.5 py-1 rounded-md">
-          S/.{salario?.salario}
-          
+          ${salario?.salario}
         </div>
       );
     },
   },
-
-  
 
   {
     accessorKey: "numero",
@@ -119,11 +116,10 @@ export const columns: ColumnDef<Regist>[]    = [
       return (
         <div className="font-normal max-w-fit   text-center  justify-center flex flex-col">
           <span className="text-sm">
-            {format(parseISO(row.getValue("fechaIngreso")), "dd MMM yyyy" , {locale:es})}
+            {format(parseISO(row.getValue("fechaIngreso")), "dd MMM yyyy", {
+              locale: es,
+            })}
           </span>
-          {/* <span className="text-xs text-[#637381]">
-          {format(parseISO(row.getValue("vencimiento")), "h:mm a")}
-        </span> */}
         </div>
       );
     },
@@ -132,10 +128,13 @@ export const columns: ColumnDef<Regist>[]    = [
     id: "actions",
 
     cell: ({ row }) => {
+      const column = row.original;
       return (
         <div className="flex float-right  items-center mt-1 max-w-[50px] ">
-          <DialogEdit />
-          <DataTableRowActions row={row} />
+          <DataTableRowActions
+            row={row}
+            ruta={`/dashboard/personal/cuentas/${column._id}`}
+          />
         </div>
       );
     },

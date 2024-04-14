@@ -6,6 +6,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
 import { Form } from "@/components/ui/form";
 import * as z from "zod";
+import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardTitle } from "@/components/ui/card";
 import { FormTextComponent } from "../../components/formText";
@@ -30,9 +31,9 @@ type FormularioProps = {
   };
 };
 
-type AccountFormValues = z.infer<typeof formSchemaMantenimiento>;
-
 function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
+  const { data: session } = useSession();
+ 
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchemaMantenimiento>>({
     resolver: zodResolver(formSchemaMantenimiento),
@@ -43,8 +44,8 @@ function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
       kmMedido: "",
       kmPrevio: "",
       fechaSoat: "",
-      Cliente: "",
-      tecnico: "1242",
+      Cliente: obtenerInfo.cliente || "sin cliente",
+      tecnico: "web",
       file: [],
       placa: "",
       fecha: new Date().toISOString(),
@@ -71,13 +72,18 @@ function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
   > = async (data) => {
     const formData = new FormData();
     const { file } = form.getValues();
+    // Crea una nueva matriz de repuestos donde cada objeto tiene una propiedad 'id' en lugar de '_id'
+    const datosrepuestos = repuestos.map(({ _id, ...repuesto }) => {
+      return { id: _id, ...repuesto };
+    });
+
     formData.append("placa", data.placa);
     formData.append("fechaSoat", obtenerInfo.fechaSoat);
     formData.append("kmPrevio", obtenerInfo.kmActual?.toString() || "");
     formData.append("kmMedido", data.kmMedido);
-    formData.append("repuestos", JSON.stringify(repuestos));
+    formData.append("repuestos", JSON.stringify(datosrepuestos));
     formData.append("Cliente", obtenerInfo.cliente?.toString() || "");
-    formData.append("tecnico", data.tecnico);
+    formData.append("tecnico", session?.username || "");
     formData.append("diagnostico", data.diagnostico);
     formData.append("tipo", data.tipo);
     formData.append("fecha", data.fecha);
@@ -130,6 +136,7 @@ function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
                 name="fechaSoat"
                 placeholder="Fecha de Soat"
                 className="w-1/4"
+                noeditable={true}
               />
 
               <FormFieldComponent
@@ -137,6 +144,7 @@ function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
                 name="kmPrevio"
                 placeholder="kilometraje Previo"
                 className="w-1/4"
+                noeditable={true}
               />
               <FormFieldComponent
                 control={form.control}
@@ -181,7 +189,7 @@ function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
         </Card>
 
         <div className="flex justify-end space-x-3">
-          <Link href="/dashboard/proveedores/listar_proveedores">
+          <Link href="/">
             <Button variant="ghost" className="rounded-[10px]">
               Cancelar
             </Button>

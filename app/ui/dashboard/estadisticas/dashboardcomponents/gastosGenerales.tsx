@@ -48,7 +48,7 @@ export function GastosGeneralesDashboard({
         />
         <div className="text-center">
           <p className="text-3xl font-semibold">
-            S/. {gastoTotalMensualUltimoMes}
+            ${gastoTotalMensualUltimoMes}
           </p>
           <p className="text-sm text-gray-500">TOTAL BALANCE DEL MES</p>
         </div>
@@ -59,7 +59,7 @@ export function GastosGeneralesDashboard({
 
               <p>Personal</p>
             </div>
-            <p>S/. {gastoPersonalMes}</p>
+            <p>${gastoPersonalMes}</p>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -67,7 +67,7 @@ export function GastosGeneralesDashboard({
 
               <p>insumos</p>
             </div>
-            <p>S/. {gastoFacturasMes}</p>
+            <p>${gastoFacturasMes}</p>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -75,7 +75,7 @@ export function GastosGeneralesDashboard({
 
               <p>Otros</p>
             </div>
-            <p>S/. {gastoOtrosMes}</p>
+            <p>${gastoOtrosMes}</p>
           </div>
         </div>
         

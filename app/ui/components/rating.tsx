@@ -22,11 +22,11 @@ export default function Rating({
   onValueChange,
 }: selectGroupProps) {
   const elementos = [
-    "Elemento 1",
-    "Elemento 2",
-    "Elemento 3",
-    "Elemento 4",
-    "Elemento 5",
+    "Computadora del equipo",
+    "Turbo",
+    "Sistema Eléctrico",
+    "Disco de embrague ",
+    "Frenos",
   ];
   const options = [
     { value: "1", label: "⭐ 1" },
@@ -56,20 +56,24 @@ export default function Rating({
             <h4>{element}</h4>
           </Container>
           <div className={className}>
-          <Select onValueChange={(value) => onValueChange && onValueChange(value, index)} >
-            <SelectTrigger className={className2}>
-              <SelectValue placeholder={placeholder} />
-            </SelectTrigger>
+            <Select
+              onValueChange={(value) =>
+                onValueChange && onValueChange(value, index)
+              }
+            >
+              <SelectTrigger className={className2}>
+                <SelectValue placeholder={placeholder} />
+              </SelectTrigger>
 
-            <SelectContent>
-              {options.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-           </div>
+              <SelectContent>
+                {options.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       ))}
     </>

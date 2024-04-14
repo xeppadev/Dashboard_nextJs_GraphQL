@@ -10,6 +10,7 @@ import {
 import { SolarPenBold } from "@/app/lib/icons";
 import FormContrato from "./changeCuenta/formularicontrato";
 import FormCuenta from "./changeCuenta/formulariCuenta";
+import FormDocumento from "./changeCuenta/formulariDocument";
 
 
 
@@ -23,20 +24,24 @@ export function AgregarOpciones({ id }: { id: string | undefined }) {
           Agregar
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[450px]">
+      <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
           <DialogTitle>Editar Cuenta</DialogTitle>
         </DialogHeader>
-        <Tabs defaultValue="account" className="w-[400px]">
-          <TabsList className="grid w-full grid-cols-2">
+        <Tabs defaultValue="contrato" className="w-[500px]">
+          <TabsList className="grid w-full grid-cols-3">
             <TabsTrigger value="contrato">Contrato</TabsTrigger>
             <TabsTrigger value="cuenta">Usuario</TabsTrigger>
+            <TabsTrigger value="documento">Documento</TabsTrigger>
           </TabsList>
           <TabsContent value="contrato">
             <FormContrato id={id} />
           </TabsContent>
           <TabsContent value="cuenta">
             <FormCuenta id={id} />
+          </TabsContent>
+          <TabsContent value="documento">
+            <FormDocumento id={id} />
           </TabsContent>
         </Tabs>
       </DialogContent>

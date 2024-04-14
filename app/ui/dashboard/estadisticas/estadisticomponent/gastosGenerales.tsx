@@ -53,7 +53,7 @@ export function GastosGenerales({ datosResponsiveBar }: GastosGeneralesProps) {
             <p className="text-sm text-[#637381] ">
               TOTAL BALANCE {datosResponsiveBar?.mes && convertMonth(datosResponsiveBar?.mes)}
             </p>
-            <p className="text-3xl font-semibold ">S/. {totalCosto}</p>
+            <p className="text-3xl font-semibold">${totalCosto}</p>
           </div>
           <div className="flex flex-col space-y-3.5 mt-4 text-sm">
             <h3 className="text-[#637381] text-sm ">GASTO ACTUAL</h3>
@@ -63,7 +63,7 @@ export function GastosGenerales({ datosResponsiveBar }: GastosGeneralesProps) {
 
                 <p>{datosResponsiveBar?.repuesto1?.producto}</p>
               </div>
-              <p>S/. {datosResponsiveBar?.repuesto1?.costo}</p>
+              <p>${datosResponsiveBar?.repuesto1?.costo}</p>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
@@ -71,7 +71,7 @@ export function GastosGenerales({ datosResponsiveBar }: GastosGeneralesProps) {
 
                 <p>{datosResponsiveBar?.repuesto2?.producto}</p>
               </div>
-              <p>S/. {datosResponsiveBar?.repuesto2?.costo}</p>
+              <p>${datosResponsiveBar?.repuesto2?.costo}</p>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
@@ -79,7 +79,7 @@ export function GastosGenerales({ datosResponsiveBar }: GastosGeneralesProps) {
 
                 <p>{datosResponsiveBar?.repuesto3?.producto}</p>
               </div>
-              <p>S/. {datosResponsiveBar?.repuesto3?.costo}</p>
+              <p>${datosResponsiveBar?.repuesto3?.costo}</p>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
@@ -87,7 +87,7 @@ export function GastosGenerales({ datosResponsiveBar }: GastosGeneralesProps) {
 
                 <p>{datosResponsiveBar?.repuesto4?.producto}</p>
               </div>
-              <p>S/. {datosResponsiveBar?.repuesto4?.costo}</p>
+              <p>${datosResponsiveBar?.repuesto4?.costo}</p>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
@@ -95,7 +95,7 @@ export function GastosGenerales({ datosResponsiveBar }: GastosGeneralesProps) {
 
                 <p>{datosResponsiveBar?.otros ? "Otros" : ""} </p>
               </div>
-              <p>S/. {datosResponsiveBar?.otros}</p>
+              <p>${datosResponsiveBar?.otros}</p>
             </div>
           </div>
           <div className="flex justify-between mt-4"></div>

@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/sheet";
 
 import { SolarBellBoldDuotone } from "@/app/lib/icons";
-import{SolarNotificationUnreadBold} from "@/app/lib/icons";
+import { SolarNotificationUnreadBold } from "@/app/lib/icons";
 import { NotificacionDto } from "@/src/generated/graphql";
 
 type ModalProps = {
@@ -28,8 +28,10 @@ type ModalProps = {
 
 export default function Modal({ datos }: ModalProps) {
   const datosFacturas = datos.filter((data) => data.tipo === "factura");
-  const datosMantenimientos = datos.filter((data) => data.tipo === "mantenimiento");
-  
+  const datosMantenimientos = datos.filter(
+    (data) => data.tipo === "mantenimiento"
+  );
+
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -54,9 +56,7 @@ export default function Modal({ datos }: ModalProps) {
               <span>Todos</span>
               <span className="py-[3px] px-[6px] bg-black rounded-md text-white">
                 {" "}
-                {datos.length < 10
-                  ? `0${datos.length}`
-                  : datos.length}
+                {datos.length < 10 ? `0${datos.length}` : datos.length}
               </span>
             </TabsTrigger>
             <TabsTrigger className="space-x-[5px]" value="program">
@@ -86,10 +86,10 @@ export default function Modal({ datos }: ModalProps) {
                 className="flex flex-col border-b border-dashed p-5 space-y-2"
                 key={data._id}
               >
-                <div className="flex flex-row  space-x-3">
-                  <SolarNotificationUnreadBold className="w-12 h-12 text-black" />
-                 
-                  <div className="flex flex-col space-y-1">
+                <div className="flex flex-row justify-between  ">
+                  <SolarNotificationUnreadBold className="w-10 h-10 text-black" />
+
+                  <div className="flex flex-col space-y-1 w-[82%]">
                     <span className="text-sm ">
                       <strong>{data.titulo}</strong>
                     </span>
@@ -97,26 +97,26 @@ export default function Modal({ datos }: ModalProps) {
                     <span className="w-fit rounded-[64px] border text-center font-semibold transition-all duration-300 ease-in-out h-5 px-2 py-0.5 text-xs leading-tight border-blue-300 bg-blue-50 text-blue-600 dark:bg-black dark:text-white dark:border-black">
                       {data.tipo}
                     </span>
+                    <span className="text-xs  text-gray-500 ">
+                      {formatDistanceToNow(new Date(data.fecha), {
+                        addSuffix: false,
+                      })}
+                    </span>
                   </div>
                 </div>
-                <span className="text-xs pl-[52px] text-gray-500">
-                  {formatDistanceToNow(new Date(data.fecha), {
-                    addSuffix: false,
-                  })}
-                </span>
               </div>
             ))}
           </TabsContent>
           <TabsContent value="program">
-          {datosMantenimientos.map((data) => (
+            {datosMantenimientos.map((data) => (
               <div
                 className="flex flex-col border-b border-dashed p-5 space-y-2"
                 key={data._id}
               >
-                <div className="flex flex-row  space-x-3">
-                  <SolarNotificationUnreadBold className="w-12 h-12 text-black" />
-                 
-                  <div className="flex flex-col space-y-1">
+                <div className="flex flex-row justify-between  ">
+                  <SolarNotificationUnreadBold className="w-10 h-10 text-black" />
+
+                  <div className="flex flex-col space-y-1 w-[82%]">
                     <span className="text-sm ">
                       <strong>{data.titulo}</strong>
                     </span>
@@ -124,26 +124,26 @@ export default function Modal({ datos }: ModalProps) {
                     <span className="w-fit rounded-[64px] border text-center font-semibold transition-all duration-300 ease-in-out h-5 px-2 py-0.5 text-xs leading-tight border-blue-300 bg-blue-50 text-blue-600 dark:bg-black dark:text-white dark:border-black">
                       {data.tipo}
                     </span>
+                    <span className="text-xs  text-gray-500 ">
+                      {formatDistanceToNow(new Date(data.fecha), {
+                        addSuffix: false,
+                      })}
+                    </span>
                   </div>
                 </div>
-                <span className="text-xs pl-[52px] text-gray-500">
-                  {formatDistanceToNow(new Date(data.fecha), {
-                    addSuffix: false,
-                  })}
-                </span>
               </div>
             ))}
           </TabsContent>
           <TabsContent value="confirm">
-          {datosFacturas.map((data) => (
+            {datosFacturas.map((data) => (
               <div
                 className="flex flex-col border-b border-dashed p-5 space-y-2"
                 key={data._id}
               >
-                <div className="flex flex-row  space-x-3">
-                  <SolarNotificationUnreadBold className="w-12 h-12 text-black" />
-                 
-                  <div className="flex flex-col space-y-1">
+                <div className="flex flex-row justify-between  ">
+                  <SolarNotificationUnreadBold className="w-10 h-10 text-black" />
+
+                  <div className="flex flex-col space-y-1 w-[82%]">
                     <span className="text-sm ">
                       <strong>{data.titulo}</strong>
                     </span>
@@ -151,16 +151,15 @@ export default function Modal({ datos }: ModalProps) {
                     <span className="w-fit rounded-[64px] border text-center font-semibold transition-all duration-300 ease-in-out h-5 px-2 py-0.5 text-xs leading-tight border-blue-300 bg-blue-50 text-blue-600 dark:bg-black dark:text-white dark:border-black">
                       {data.tipo}
                     </span>
+                    <span className="text-xs  text-gray-500 ">
+                      {formatDistanceToNow(new Date(data.fecha), {
+                        addSuffix: false,
+                      })}
+                    </span>
                   </div>
                 </div>
-                <span className="text-xs pl-[52px] text-gray-500">
-                  {formatDistanceToNow(new Date(data.fecha), {
-                    addSuffix: false,
-                  })}
-                </span>
               </div>
             ))}
-
           </TabsContent>
         </Tabs>
         <SheetFooter>

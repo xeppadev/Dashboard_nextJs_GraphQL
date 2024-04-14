@@ -167,6 +167,7 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
                         placeholder="Ingrese Marca"
                         className=" w-[25%]"
                         className2="h-10"
+                        noeditable={true}
                       />
                       <FormFieldComponent
                         label="Cantidad Actual "
@@ -175,6 +176,7 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
                         placeholder="Ingrese Cantidad"
                         className="w-[16.667%]"
                         className2="h-10"
+                        noeditable={true}
                       />
 
                       <FormFieldComponent
@@ -187,7 +189,7 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
                       />
 
                       <FormFieldComponent
-                        label="Precio Repuesto (S/.)"
+                        label="Precio Repuesto ($)"
                         control={form.control}
                         name={`oldStock.${index}.precio`}
                         placeholder="Ingrese Precio"
@@ -266,7 +268,7 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
                       />
 
                       <FormFieldComponent
-                        label="Precio Repuesto (S/.)"
+                        label="Precio Repuesto ($)"
                         control={form.control}
                         name={`newStock.${index}.precio`}
                         placeholder="Ingrese Precio"

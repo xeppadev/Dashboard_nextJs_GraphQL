@@ -62,44 +62,40 @@ export default function FormCuenta({ id }: { id: string | undefined }) {
   };
 
   return (
-    <Card className="pt-4">
-      <CardContent>
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-            <FormFieldComponent
-              control={form.control}
-              name="name"
-              label="Nombre"
-              placeholder="Ingrese un nombre"
-            />
-            <FormFieldComponent
-              control={form.control}
-              name="email"
-              label="Email"
-              placeholder="Ingrese un email"
-            />
-            <FormFieldComponent
-              control={form.control}
-              name="username"
-              label="Username"
-              placeholder="Ingrese un username"
-            />
-            <FormFieldComponent
-              control={form.control}
-              name="password"
-              label="Password"
-              placeholder="Ingrese un password"
-              type="password"
-            />
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
+        <FormFieldComponent
+          control={form.control}
+          name="name"
+          label="Nombre"
+          placeholder="Ingrese un nombre"
+        />
+        <FormFieldComponent
+          control={form.control}
+          name="email"
+          label="Email"
+          placeholder="Ingrese un email"
+        />
+        <FormFieldComponent
+          control={form.control}
+          name="username"
+          label="Username"
+          placeholder="Ingrese un username"
+        />
+        <FormFieldComponent
+          control={form.control}
+          name="password"
+          label="Password"
+          placeholder="Ingrese un password"
+          type="password"
+        />
 
-            <div className="flex justify-end space-x-3">
-              <Button type="submit" className="rounded-[10px]">
-                Guardar
-              </Button>
-            </div>
-          </form>
-        </Form>
-      </CardContent>
-    </Card>
+        <div className="flex justify-end space-x-3">
+          <Button type="submit" className="rounded-[10px]">
+            Guardar
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }

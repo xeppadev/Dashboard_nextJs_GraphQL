@@ -31,7 +31,7 @@ export const EgresosIngresosComponent = ({
     <Card className="overflow-x-auto">
       <CardHeader>
         <CardTitle className="font-medium">
-          Ingresos  vs Egresos (S/.)
+          Ingresos  vs Egresos ($)
         </CardTitle>
         <CardDescription> Comparación de ingresos y egresos</CardDescription>
       </CardHeader>

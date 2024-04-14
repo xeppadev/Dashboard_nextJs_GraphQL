@@ -9,7 +9,6 @@ import {
 import { PieChart } from "../chart/piecomponent";
 import { DashRepuestos } from "@/src/generated/graphql";
 
-
 type RepuestosCambiadosProps = {
   dataRepuestosConsumidos: DashRepuestos | undefined | null;
 };
@@ -53,7 +52,7 @@ export const RepuestosCambiados = ({
         <div className="space-y-5 w-1/2">
           <div className="text-start">
             <p className="text-sm text-[#637381] ">TOTAL BALANCE MES</p>
-            <p className="text-3xl font-semibold  ">S/. {totalCosto}</p>
+            <p className="text-3xl font-semibold  ">${totalCosto}</p>
           </div>
           <div className="flex flex-col space-y-3.5 mt-4 text-sm">
             <h3 className="text-[#637381] text-sm ">GASTO ACTUAL</h3>
@@ -63,14 +62,23 @@ export const RepuestosCambiados = ({
 
                 <p>{dataRepuestosConsumidos?.prod1?.producto}</p>
               </div>
-              <p>S/. {dataRepuestosConsumidos?.prod1?.cantidadConsumida}</p>
+              <p>
+                {dataRepuestosConsumidos?.prod1?.cantidadConsumida
+                  ? `$${dataRepuestosConsumidos?.prod1?.cantidadConsumida}`
+                  : ""}
+              </p>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
                 <span className="p-2 rounded-sm bg-[#D93D32]"></span>
                 <p> {dataRepuestosConsumidos?.prod2?.producto}</p>
               </div>
-              <p>S/. {dataRepuestosConsumidos?.prod2?.cantidadConsumida}</p>
+              <p>
+                
+                {dataRepuestosConsumidos?.prod2?.cantidadConsumida
+                  ? `$${dataRepuestosConsumidos?.prod2?.cantidadConsumida}`
+                  : ""}
+              </p>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
@@ -78,7 +86,11 @@ export const RepuestosCambiados = ({
 
                 <p> {dataRepuestosConsumidos?.prod3?.producto}</p>
               </div>
-              <p>S/. {dataRepuestosConsumidos?.prod3?.cantidadConsumida}</p>
+              <p>
+                {dataRepuestosConsumidos?.prod3?.cantidadConsumida
+                  ? `$${dataRepuestosConsumidos?.prod3?.cantidadConsumida}`
+                  : ""}
+              </p>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
@@ -86,7 +98,11 @@ export const RepuestosCambiados = ({
 
                 <p> {dataRepuestosConsumidos?.prod4?.producto}</p>
               </div>
-              <p>S/. {dataRepuestosConsumidos?.prod4?.cantidadConsumida}</p>
+              <p>
+                {dataRepuestosConsumidos?.prod4?.cantidadConsumida
+                  ? `$${dataRepuestosConsumidos?.prod4?.cantidadConsumida}`
+                  : ""}
+              </p>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
@@ -94,7 +110,11 @@ export const RepuestosCambiados = ({
 
                 <p> {dataRepuestosConsumidos?.prod5?.producto}</p>
               </div>
-              <p>S/. {dataRepuestosConsumidos?.prod5?.cantidadConsumida}</p>
+              <p>
+                {dataRepuestosConsumidos?.prod5?.cantidadConsumida
+                  ? `$${dataRepuestosConsumidos?.prod5?.cantidadConsumida}`
+                  : ""}
+              </p>
             </div>
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-2">
@@ -102,7 +122,11 @@ export const RepuestosCambiados = ({
 
                 <p>{dataRepuestosConsumidos?.otros?.producto}</p>
               </div>
-              <p> S/. {dataRepuestosConsumidos?.otros?.cantidadConsumida}</p>
+              <p>
+                {dataRepuestosConsumidos?.otros?.cantidadConsumida
+                  ? `$${dataRepuestosConsumidos?.otros?.cantidadConsumida}`
+                  : ""}
+              </p>
             </div>
           </div>
         </div>

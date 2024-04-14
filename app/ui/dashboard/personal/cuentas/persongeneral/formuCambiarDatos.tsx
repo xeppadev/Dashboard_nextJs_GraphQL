@@ -113,7 +113,7 @@ export function FormularioChange({ data }: { data: PersonalDto }) {
           <FormFieldComponent
             control={form.control}
             name="salario"
-            label="Salario Actual (S/.)"
+            label="Salario Actual ($)"
             placeholder="Ingrese un salario"
           />
           <FormFieldate
@@ -126,7 +126,7 @@ export function FormularioChange({ data }: { data: PersonalDto }) {
           <FormFieldComponent control={form.control} name="id" type="hidden" />
         </div>
         <div className="flex justify-end space-x-4">
-          <Link href="/dashboard/clientes/listar_clientes">
+          <Link href="/dashboard/personal/listar_personal">
             <Button className="rounded-[10px]" variant={"ghost"}>
               Cancel
             </Button>

@@ -96,7 +96,7 @@ export const columns: ColumnDef<Regist>[] = [
     cell: ({ row }) => {
       return (
         <span className="font-medium text-[#6c737f] dark:text-foreground">
-          S/. {row.getValue("precio")}
+          ${row.getValue("precio")}
         </span>
       );
     },

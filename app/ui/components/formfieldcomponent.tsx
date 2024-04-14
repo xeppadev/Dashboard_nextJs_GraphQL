@@ -1,4 +1,4 @@
-import { FieldValues, Control } from "react-hook-form";
+
 import {
   Form,
   FormControl,
@@ -20,6 +20,7 @@ interface FormFieldComponentProps {
   className2?: string;
   className?: string;
   type?: string;
+  noeditable?: boolean;
  
 
 }
@@ -29,7 +30,7 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
   control,
   name,
   label,
-  
+  noeditable,
   placeholder,
   description,
   className2,
@@ -49,7 +50,7 @@ export const FormFieldComponent: React.FC<FormFieldComponentProps> = ({
             type={type}
             className="w-full h-12 rounded-[10px]"
             value={value ? value : field.value}
-            
+            readOnly={noeditable}
           />
         </FormControl>
         <FormDescription>{description}</FormDescription>

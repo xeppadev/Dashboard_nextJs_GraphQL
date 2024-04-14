@@ -3,7 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
-import { DataTableRowActions } from "../../../clientes/listar/data-table-row-actions";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { SalarioFechaDto } from "@/src/generated/graphql";
 
@@ -54,7 +54,7 @@ export const columns: ColumnDef<SalarioFechaDto | undefined | null>[] = [
       return (
         <div className="flex max-w-fit items-center font-bold  text-xs px-1.5 py-1 rounded-md text-[#2970FF] bg-freelance">
          
-          S/.{column?.salario}
+          ${column?.salario}
         </div>
       );
     },
@@ -67,8 +67,8 @@ export const columns: ColumnDef<SalarioFechaDto | undefined | null>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex float-right  items-center mt-1  ">
-          {/* <DialogEdit /> */}
-          <DataTableRowActions row={row} />
+          
+         
         </div>
       );
     },

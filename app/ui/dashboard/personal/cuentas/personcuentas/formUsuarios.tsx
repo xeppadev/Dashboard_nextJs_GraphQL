@@ -129,7 +129,7 @@ export function FormularioChange({ data }: { data: UserOutput }) {
         </Card>
 
         <div className="flex justify-end space-x-4">
-          <Link href="/dashboard/clientes/listar_clientes">
+          <Link href="/dashboard/personal/listar_personal">
             <Button className="rounded-[10px]" variant={"ghost"}>
               Cancel
             </Button>

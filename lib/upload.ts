@@ -16,7 +16,7 @@ export async function sentToExternalAPI(formData: FormData, queries: queries) {
     url.searchParams.append("query2", queries.query2);
   }
   try {
-    const response = await fetch(url.toString(), {
+    await fetch(url.toString(), {
       method: "POST",
       body: formData,
       headers: {

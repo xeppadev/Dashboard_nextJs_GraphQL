@@ -146,7 +146,7 @@ export default function FormPersonal() {
             <FormFieldComponent
               control={form.control}
               name="salario"
-              label="Ingrese el Salario actual (S/.)"
+              label="Ingrese el Salario actual ($)"
               placeholder="Ingrese un salario"
             />
           </CardContent>
@@ -214,7 +214,7 @@ export default function FormPersonal() {
         </Card>
 
         <div className="flex justify-end space-x-3">
-          <Link href="/dashboard/clientes/listar_clientes">
+          <Link href="/dashboard/personal/listar_personal">
             <Button variant="ghost" className="rounded-[10px]">
               Cancelar
             </Button>

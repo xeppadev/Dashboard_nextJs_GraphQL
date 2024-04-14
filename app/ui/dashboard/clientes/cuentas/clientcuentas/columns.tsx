@@ -2,14 +2,12 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 
-
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DialogEdit } from "./editarusers";
 import { UserOutput } from "@/src/generated/graphql";
 import { AlertDialogDemo } from "@/app/ui/components/dialogdelete";
 import { eliminarUserModel } from "@/src/models/eliminarUserModel";
-import { useRouter } from 'next/navigation'
-
+import { useRouter } from "next/navigation";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
@@ -65,7 +63,6 @@ export const columns: ColumnDef<Regist>[] = [
           <span className="text-sm text-[#6c737f] ">
             {column?.clienteAsociado}
           </span>
-         
         </div>
       );
     },
@@ -77,9 +74,7 @@ export const columns: ColumnDef<Regist>[] = [
     cell: ({ row }) => {
       const column = row.original;
       return (
-        <div
-          className="flex max-w-fit items-center font-bold  text-xs px-1.5 py-1 rounded-md text-[#2970FF] bg-freelance"           
-        >
+        <div className="flex max-w-fit items-center font-bold  text-xs px-1.5 py-1 rounded-md text-[#2970FF] bg-freelance">
           {column?.nivelUser}
         </div>
       );
@@ -95,19 +90,15 @@ export const columns: ColumnDef<Regist>[] = [
 
       return (
         <div className="flex float-right space-x-2  items-center mt-1 mr-3 ">
-          <DialogEdit />
-          <AlertDialogDemo handleDelete={
-            async () => {
+          <AlertDialogDemo
+            handleDelete={async () => {
               try {
-              await eliminarUserModel(payment._id);
+                await eliminarUserModel(payment._id);
               } catch (error) {
                 console.log(error);
-            }
-            
-          }
-        
-           
-          }  />
+              }
+            }}
+          />
         </div>
       );
     },

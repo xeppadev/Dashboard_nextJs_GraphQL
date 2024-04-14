@@ -61,10 +61,9 @@ export default function FormContrato({ id }: { id: string | undefined }) {
   };
 
   return (
-    <Card className="pt-4">
-      <CardContent>
+    
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 px-3">
             <FormFieldComponent
               control={form.control}
               name="numeroContrato"
@@ -91,7 +90,6 @@ export default function FormContrato({ id }: { id: string | undefined }) {
             </div>
           </form>
         </Form>
-      </CardContent>
-    </Card>
+    
   );
 }

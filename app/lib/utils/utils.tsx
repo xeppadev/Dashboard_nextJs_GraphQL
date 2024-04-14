@@ -41,7 +41,7 @@ export const StatusComponent: React.FC<StatusComponentProps> = ({
           ? "text-green-500 bg-active-green"
           : status == "Por vencer"
           ? "text-[#f79009] bg-paused"
-          : "text-[#f79009] bg-paused"
+          : "text-[#E11D48] bg-inactive-red"
       } `}
     >
       {status}

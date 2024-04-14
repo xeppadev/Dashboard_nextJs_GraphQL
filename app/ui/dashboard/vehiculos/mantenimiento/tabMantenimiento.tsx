@@ -10,8 +10,7 @@ import Main from "./mainMantenimiento";
 import UserDiagnostico from "./diagnosmantenimiento";
 import {
   SolarChecklistMinimalisticBold,
-  MingcuteToolFill,
-  SolarFileSendBold,
+   SolarFileSendBold,
   FluentToolbox20Filled,
 } from "@/app/lib/icons";
 import { mantenimientosforIDModel } from "@/src/models/mantenimientosforIDModel";
@@ -31,10 +30,6 @@ export default async function TabsMantenimiento({ user }: { user?: string }) {
             <SolarChecklistMinimalisticBold className="lg:mr-1 mr-1 w-[19px] h-[19px]" />
             Diagnosticos
           </TabsTrigger>
-          <TabsTrigger value="repuestos">
-          <MingcuteToolFill className="lg:mr-1 mr-1 w-[20px] h-[20px]" />
-            Repuestos
-          </TabsTrigger>
           <TabsTrigger value="documents">
             <SolarFileSendBold className="lg:mr-1 mr-1 w-[19px] h-[19px]" />
             Documentos
@@ -46,9 +41,6 @@ export default async function TabsMantenimiento({ user }: { user?: string }) {
         </TabsContent>
         <TabsContent value="diagnosticos">
           <UserDiagnostico data={datosMantenimiento} />
-        </TabsContent>
-        <TabsContent value="repuestos">
-          <UserRepuestos data={datosMantenimiento} />
         </TabsContent>
         <TabsContent value="documents">
           <UserDocumentos data={datosMantenimiento} />

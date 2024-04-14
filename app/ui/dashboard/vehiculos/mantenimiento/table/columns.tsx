@@ -70,7 +70,7 @@ export const columns: ColumnDef<Regist>[] = [
       return (
         <div className="font-normal max-w-fit    text-center  justify-center flex flex-col">
           <span className="text-sm">Precio</span>
-          <span className="text-sm text-[#6c737f] ">S/.{column.precio}</span>
+          <span className="text-sm text-[#6c737f] ">${column.precio}</span>
         </div>
       );
     },

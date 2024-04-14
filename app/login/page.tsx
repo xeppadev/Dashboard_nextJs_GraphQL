@@ -35,6 +35,7 @@ export default function Signin() {
           width="1920"
           height="1080"
           className="h-full w-full object-cover "
+          priority 
         />
       </div>
       <div className="flex items-center justify-center py-12">

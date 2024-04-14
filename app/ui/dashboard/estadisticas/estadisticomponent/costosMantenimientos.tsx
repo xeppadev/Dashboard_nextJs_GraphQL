@@ -43,7 +43,7 @@ export function CostosMantenimientos({
           colors={["#F69009", "#D93D32"]}
         />
         <div className="text-center">
-          <p className="text-3xl font-semibold">S/. {totalCostos}</p>
+          <p className="text-3xl font-semibold">${totalCostos}</p>
           <p className="text-sm text-gray-500">Costos por Mantenimientos</p>
         </div>
         <div className="flex flex-col space-y-2 mt-4">
@@ -53,7 +53,7 @@ export function CostosMantenimientos({
 
               <p>M. Preventivos</p>
             </div>
-            <p>S/. {costoPreventivos}</p>
+            <p>${costoPreventivos}</p>
           </div>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
@@ -61,7 +61,7 @@ export function CostosMantenimientos({
 
               <p>M. Correctivos</p>
             </div>
-            <p>S/. {costoCorrectivos}</p>
+            <p>${costoCorrectivos}</p>
           </div>
         </div>
       </CardContent>

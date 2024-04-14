@@ -141,7 +141,7 @@ export default function FormProveedor() {
         </Card>
 
         <div className="flex justify-end space-x-3">
-          <Link href="/dashboard/clientes/listar_clientes">
+          <Link href="/dashboard/proveedores/listar_proveedores">
             <Button variant="ghost" className="rounded-[10px]">
               Cancelar
             </Button>

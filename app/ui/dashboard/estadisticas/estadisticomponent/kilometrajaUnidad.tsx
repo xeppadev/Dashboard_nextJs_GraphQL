@@ -36,7 +36,7 @@ export function KilometrajeUnidad({
     <Card>
       <CardHeader>
         <CardTitle className="font-medium">
-          Recorrido Actual de la Unidad Vehicular(Mm)
+          Recorrido Actual de la Unidad Vehicular(Km)
         </CardTitle>
         <CardDescription>
           (+{porcentajeCambio.toFixed(2)}%) que el último mes
@@ -59,7 +59,7 @@ export function KilometrajeUnidad({
           </div>
           <div className="text-center">
           <p className=" text-gray-500">Recorrido Actual</p>
-            <p className="text-3xl font-semibold">{kmActual} Mm</p>
+            <p className="text-3xl font-semibold">{kmActual} Km</p>
             
           </div>
          

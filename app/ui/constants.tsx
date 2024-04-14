@@ -137,7 +137,7 @@ export const SIDENAV_ITEMS_CLIENTE: SideNavItem[] = [
   {
     postitle: "Mantenimiento",
     title: "Vehiculos",
-    path: "/vehiculos/historial_clinico",
+    path: "/dashboard/vehiculos/historial_clinico",
     icon: <MingcuteCarFillDualtone className="w-[24px] h-[24px]" />,
   },
 ];

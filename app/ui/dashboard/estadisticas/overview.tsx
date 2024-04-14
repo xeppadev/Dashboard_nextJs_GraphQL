@@ -23,8 +23,8 @@ export default async function Dashboard() {
 
   return (
     <>
-      <div className="grid lg:grid-cols-6 grid-cols-1 gap-7">
-        <div className="lg:col-span-2 col-span-1  ">
+      <div className="grid lg:grid-cols-6 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-7">
+      <div className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1">
           <CardIngresos
             title="Ingresos Mensuales"
             value={ingresosMensuales?.ingresos || 0}
@@ -34,7 +34,7 @@ export default async function Dashboard() {
             data={data3}
           />
         </div>
-        <div className="lg:col-span-2 col-span-1  ">
+        <div className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1">
           <CustomCard
             title="Mantenimientos Realizados"
             value={data.mantenimientosRealizados?.toString() || "0"}
@@ -43,7 +43,7 @@ export default async function Dashboard() {
             data={data4}
           />
         </div>
-        <div className="lg:col-span-2 col-span-1  ">
+        <div className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1">
           <CustomCard
             title="Mantenimientos Denegados"
             value={data.mantenimientosDenegados?.toString() || "0"}
@@ -52,29 +52,29 @@ export default async function Dashboard() {
             data={data5}
           />
         </div>
-        <div className="lg:col-span-4 col-span-1  ">
+        <div className="lg:col-span-4 md:col-span-3 sm:col-span-2 col-span-1">
           <GastosGeneralesDashboard datos={datosGastosGeneralesInvertidos} />
         </div>
 
-        <div className="col-span-2">
+        <div className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1">
           <TiempoOperatividad datosOperatividad={datosOperatividad} />
         </div>
-        <div className="col-span-3">
+        <div className="lg:col-span-3 md:col-span-3 sm:col-span-2 col-span-1">
           <CalendarMantenimientos data={datosCalendar} />
         </div>
 
-        <div className="col-span-3">
+        <div className="lg:col-span-3 md:col-span-3 sm:col-span-2 col-span-1">
           <EgresosIngresosComponent
             dataIngresos={dataIngresos}
             dataEgresos={dataEgresos}
           />
         </div>
-        <div className="lg:col-span-4  col-span-1 ">
+        <div className="lg:col-span-4 md:col-span-3 sm:col-span-2 col-span-1">
           <RepuestosCambiados
             dataRepuestosConsumidos={dataRepuestosConsumidos}
           />
         </div>
-        <div className="col-span-2">
+        <div className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1">
           <Monitoreo />
         </div>
       </div>

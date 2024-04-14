@@ -3,16 +3,15 @@ import React from "react";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardHeader,
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
 
-import { OptionsTab } from "./optionsTab";
+
 import { Input } from "@/components/ui/input";
 import MantenimienForm from "./formul-mantenimientos";
-import { Car, Plus } from "lucide-react";
+import {  Plus } from "lucide-react";
 import ScrollProduct from "./scroll-mantenimientos";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -115,8 +114,7 @@ export default function Mantenimientos({
       </Card>
 
       <div className=" px-1 flex-col flex  w-full  2xl:w-3/4  space-y-2 ">
-        {/* <OptionsTab /> */}
-        <InfoMantenimiento
+          <InfoMantenimiento
           data={finalProducts}
           setFinalProducts={setFinalProducts}
         />

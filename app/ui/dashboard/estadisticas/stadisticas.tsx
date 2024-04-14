@@ -34,11 +34,11 @@ export default async function Stadistic({
         {/* <Search placeholder="Buscar Vehiculo" width="w-[35%]" /> */}
         <DatePickerComponent label="Fecha" paramName="fecha" />
       </div>
-      <div className="grid lg:grid-cols-6 grid-cols-1 gap-7 mt-10">
-        <div className="lg:col-span-2 col-span-1 ">
+      <div className="grid lg:grid-cols-6 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-7 mt-10">
+      <div className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1">
           <PuntuacionUnidad data={data} />
         </div>
-        <div className="lg:col-span-2 col-span-1">
+        <div className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1">
           <CustomCard
             title="Mantenimientos Completados"
             value={data.cantidadMatenimientos?.toString() || "0"}
@@ -47,7 +47,7 @@ export default async function Stadistic({
             data={data1}
           />
         </div>
-        <div className="lg:col-span-2 col-span-1">
+        <div className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1">
           <CustomCard
             title="Mantenimientos Cancelados"
             value={data.cantidadMatDenegados?.toString() || "0"}
@@ -56,22 +56,22 @@ export default async function Stadistic({
             data={data2}
           />
         </div>
-        <div className="col-span-4">
+        <div className="lg:col-span-4 md:col-span-3 sm:col-span-2 col-span-1">
           <GastosGenerales datosResponsiveBar={datosResponsiveBar} />
         </div>
-        <div className="col-span-2">
+        <div className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1">
           <CostosMantenimientos datosMantenimientos={data.costos} />
         </div>
-        <div className="col-span-6 ">
+        <div className="lg:col-span-6 md:col-span-3 sm:col-span-2 col-span-1">
           <KilometrajeUnidad
             datosKilometraje={datosKilometraje}
             placa={data.placa}
           />
         </div>
-        <div className="col-span-4">
+        <div className="lg:col-span-4 md:col-span-3 sm:col-span-2 col-span-1">
           <Operatividad datosOperatividad={operatividad} />
         </div>
-        <div className="col-span-2">
+        <div className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1">
           <Monitoreo />
         </div>
       </div>

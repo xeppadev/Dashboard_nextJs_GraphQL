@@ -172,13 +172,13 @@ export default function FormFactura({
             <FormFieldComponent
               control={form.control}
               name="montoParcial"
-              label="Monto Parcial (S/.)"
+              label="Monto Parcial ($)"
               placeholder="Ingrese un monto"
             />
             <FormFieldComponent
               control={form.control}
               name="igv"
-              label="IGV (S/.)"
+              label="IGV ($)"
               placeholder="Ingrese un valor"
             />
             {(form.watch("tipoFactura") === "Factura a Propietario Vehicular" ||
@@ -196,7 +196,7 @@ export default function FormFactura({
               <FormFieldComponent
                 control={form.control}
                 name="detraccion"
-                label="Detracción (S/.)"
+                label="Detracción ($)"
                 placeholder="Ingrese un valor"
               />
             )}
@@ -220,7 +220,7 @@ export default function FormFactura({
         </Card>
 
         <div className="flex justify-end space-x-3">
-          <Link href="/dashboard/clientes/listar_clientes">
+          <Link href="/dashboard/facturacion/listar_facturas">
             <Button variant="ghost" className="rounded-[10px]">
               Cancelar
             </Button>

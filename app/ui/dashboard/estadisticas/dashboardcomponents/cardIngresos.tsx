@@ -32,7 +32,7 @@ export const CardIngresos = ({
     <CardContent className=" justify-between items-center  w-full py-6 ">
       <div className="flex items-start flex-col space-y-4 ">
         <p className="text-[15px] font-medium">{title}</p>
-        <p className="text-3xl font-semibold">{value}</p>
+        <p className="text-3xl font-semibold">${value}</p>
         <div className="flex-row flex space-x-3 items-center">
           <div className="fle-row flex space-x-1 items-center">
             
@@ -43,7 +43,7 @@ export const CardIngresos = ({
                 Detraccion:
               </span>
               <span className="text-[14px] text-gray-500 font-medium ">
-                S/. {detraccion}
+                $ {detraccion}
               </span>
             </div>
           </div>
@@ -56,7 +56,7 @@ export const CardIngresos = ({
                 IGV:
               </span>
               <span className="text-[14px] text-gray-500 font-medium ">
-                S/. {igv}
+                $ {igv}
               </span>
             </div>
           </div>

@@ -33,14 +33,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
-  // const [sorting, setSorting] = React.useState<SortingState>([]);
-  // const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-  //   []
-  // );
-  // const [columnVisibility, setColumnVisibility] =
-  //   React.useState<VisibilityState>({});
-  // const [rowSelection, setRowSelection] = React.useState({});
-  // const [openRowId, setOpenRowId] = React.useState<string | null>(null);
+  
   const table = useReactTable({
     data,
     columns,
@@ -95,8 +88,8 @@ export function DataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
-                >
+                  className="h-24 text-center hidden"
+                > 
                   No results.
                 </TableCell>
               </TableRow>

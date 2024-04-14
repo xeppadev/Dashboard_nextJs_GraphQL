@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ViewDownload } from "./dialog-edit";
-import { DataTableRowActions } from "./data-table-row-actions";
+
 import { Checkbox } from "@/components/ui/checkbox";
 import { format, parseISO } from "date-fns";
 import { FacturaDto } from "@/src/generated/graphql";
@@ -87,8 +87,8 @@ export const columns: ColumnDef<Regist>[] = [
     cell: ({ row }) => {
       const column = row.original;
       return (
-        <div className="flex max-w-fit items-center font-bold bg-freelance text-[#2970FF]  text-xs px-1.5 py-1 rounded-md">
-          S/.{column.monto}
+        <div className="flex max-w-fit items-center font-medium   text-sm px-1.5 py-1 rounded-md">
+          ${column.monto}
         </div>
       );
     },
@@ -100,8 +100,8 @@ export const columns: ColumnDef<Regist>[] = [
     cell: ({ row }) => {
       const column = row.original;
       return (
-        <div className="flex max-w-fit items-center font-bold bg-inactive-red text-[#E11D48]  text-xs px-1.5 py-1 rounded-md">
-          S/.{column.igv}
+        <div className="flex max-w-fit items-center font-medium   text-sm px-1.5 py-1 rounded-md">
+          ${column.igv}
         </div>
       );
     },
@@ -113,8 +113,8 @@ export const columns: ColumnDef<Regist>[] = [
     cell: ({ row }) => {
       const column = row.original;
       return (
-        <div className="flex max-w-fit items-center font-bold bg-inactive-red text-[#E11D48]  text-xs px-1.5 py-1 rounded-md">
-          S/.{column.detraccion}
+        <div className="flex max-w-fit items-center font-medium   text-sm px-1.5 py-1 rounded-md">
+          ${column.detraccion}
         </div>
       );
     },
@@ -141,9 +141,9 @@ export const columns: ColumnDef<Regist>[] = [
     cell: ({ row }) => {
       const column = row.original;
       return (
-        <div className="flex float-right  items-center mt-1 max-w-[50px] ">
+        <div className="flex float-right  items-center mt-1 mr-3 max-w-[50px] ">
           <ViewDownload datos={column.documentos} />
-          <DataTableRowActions row={row} />
+         
         </div>
       );
     },

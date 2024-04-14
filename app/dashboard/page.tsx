@@ -1,17 +1,12 @@
-import Dashboard from "../ui/dashboard/estadisticas/overview"
+import Dashboard from "../ui/dashboard/estadisticas/overview";
 
 export default function Page() {
-    return (
-        <div className="flex flex-col  mx-1 lg:mx-10 space-y-5  w-full sm:w-auto">
+  return (
+    <div className="flex flex-col  mx-1 lg:mx-10 space-y-5  w-full sm:w-auto">
       <div className="flex  items-center  ">
-        <h2 className="  text-[1.6667rem]  font-bold ">
-          Dashboard
-        </h2>
-        </div>
-          <Dashboard/>
-        
-      
+        <h2 className="  text-[1.6667rem]  font-bold ">Dashboard</h2>
+      </div>
+      <Dashboard />
     </div>
-    )
+  );
 }
-    

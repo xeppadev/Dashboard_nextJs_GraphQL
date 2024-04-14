@@ -209,7 +209,7 @@ export function VehiculoForm({ data }: dataProps) {
         </Card>
 
         <div className="flex justify-end space-x-3">
-          <Link href="/dashboard/proveedores/listar_proveedores">
+          <Link href="/dashboard/vehiculos/listar_vehiculos">
             <Button variant="ghost" className="rounded-[10px]">
               Cancelar
             </Button>

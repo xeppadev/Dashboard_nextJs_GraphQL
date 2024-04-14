@@ -4,7 +4,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DialogEdit } from "./dialog-edit";
-import { DataTableRowActions } from "./data-table-row-actions";
+import { DataTableRowActions } from "../../../components/data-table-row-actions";
 import { Checkbox } from "@/components/ui/checkbox";
 import { getInitials } from "@/app/lib/utils/utils";
 import { GetPlacasDto } from "@/src/generated/graphql";
@@ -112,10 +112,11 @@ export const columns: ColumnDef<Regist>[] = [
     id: "actions",
 
     cell: ({ row }) => {
+      const column = row.original;
       return (
         <div className="flex float-right  items-center mt-1 max-w-[50px] ">
-          <DialogEdit />
-          <DataTableRowActions row={row} />
+         
+          <DataTableRowActions row={row} ruta={`/dashboard/vehiculos/unidades/${column.placa}`} />
         </div>
       );
     },

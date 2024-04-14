@@ -2,8 +2,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { format, parseISO } from "date-fns";
-import { DialogEdit } from "../../personal/listar/accionedit";
-import { DataTableRowActions } from "../../clientes/listar/data-table-row-actions";
+import { DataTableRowActions } from "@/app/ui/components/data-table-row-actions";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ArrowUpDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -153,11 +152,11 @@ export const columns: ColumnDef<Regist>[] = [
       return (
         <div className="flex items-center justify-center  ">
           <span className="font-medium text-normal">
-           S/ {column.costoRepuestos}
+            ${column.costoRepuestos}
           </span>
         </div>
       );
-    }
+    },
   },
 
   {
@@ -170,7 +169,7 @@ export const columns: ColumnDef<Regist>[] = [
       );
     },
     cell: ({ row }) => {
-       const column = row.original;
+      const column = row.original;
       return (
         <div className="flex items-center justify-center  ">
           <span className="font-medium text-normal">
@@ -185,11 +184,14 @@ export const columns: ColumnDef<Regist>[] = [
     id: "actions",
 
     cell: ({ row }) => {
-      
+      const column = row.original;
+
       return (
         <div className="flex float-right  items-center mt-1 max-w-[50px] ">
-          <DialogEdit />
-          <DataTableRowActions row={row} />
+          <DataTableRowActions
+            row={row}
+            ruta={`/dashboard/vehiculos/unidades/${column.placa}`}
+          />
         </div>
       );
     },

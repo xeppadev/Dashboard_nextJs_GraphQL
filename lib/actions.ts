@@ -24,6 +24,7 @@ import { agregarContratoModel } from "@/src/models/agregarContratoModel";
 import { formSchemaContratos } from "@/app/ui/dashboard/clientes/cuentas/changeCuenta/schema";
 import { agregarUsuarioModel } from "@/src/models/agregarUsuarioModel";
 import { formSchemaUsuarios } from "@/app/ui/dashboard/clientes/cuentas/changeCuenta/schema";
+import { id } from "date-fns/locale";
 
 const ClienteSchema = formSchemaClient.omit({
   file: true,
@@ -191,6 +192,7 @@ const MantenimientoSchema = formSchemaMantenimiento
         cantidad: z.number(),
         precio: z.any(),
         marca: z.any(),
+        id: z.string(),
       })
     ),
     fechaSoat: z.string().min(1, { message: "La fecha es inválida." }),
@@ -212,21 +214,21 @@ export async function registrarMantenimiento(formData: FormData) {
   });
   const file = formData.getAll("file") as File[];
 
-  // const result = await registrarMantenimientoModel(dataRegister);
+  const result = await registrarMantenimientoModel(dataRegister);
   const fileData = new FormData();
   file.forEach((f, index) => {
     fileData.append("files", f);
   });
 
-  // const dataFromMutation = result?.regisrar_mantenimiento_no_programado;
+  const dataFromMutation = result?.regisrar_mantenimiento_no_programado;
 
-  // await sentToExternalAPI(fileData, {
-  //   query1: "mantenimientos",
-  //   query2: dataFromMutation,
-  // });
+  await sentToExternalAPI(fileData, {
+    query1: "mantenimientos",
+    query2: dataFromMutation,
+  });
 
-  // revalidatePath("/dashboard/mantenimientos/listar_mantenimientos");
-  // redirect("/dashboard/mantenimientos/listar_mantenimientos");
+  revalidatePath("/dashboard/vehiculos/unidades/[id]", "page");
+  redirect("/");
 }
 
 export async function registrarRepuestos(formData: FormData) {
@@ -295,9 +297,6 @@ export async function registrarFactura(formData: FormData) {
   redirect("/dashboard/facturacion/listar_facturas");
 }
 
-
-
-
 export async function agregarContrato(formData: FormData) {
   const dataRegister = formSchemaContratos.parse({
     numeroContrato: formData.get("numeroContrato"),
@@ -311,7 +310,6 @@ export async function agregarContrato(formData: FormData) {
   redirect(`/dashboard/clientes/cuentas/${dataRegister.agregarContratoId}`);
 }
 
-
 export async function agregarUsuario(formData: FormData) {
   const dataRegister = formSchemaUsuarios.parse({
     idCliente: formData.get("idCliente"),
@@ -324,4 +322,21 @@ export async function agregarUsuario(formData: FormData) {
   await agregarUsuarioModel(dataRegister);
   revalidatePath("/dashboard/clientes/cuentas/[id]", "page");
   redirect(`/dashboard/clientes/cuentas/${dataRegister.idCliente}`);
+}
+
+export async function addFilesToFormData(
+  formData: FormData,
+  id: string | undefined
+) {
+  const file = formData.getAll("file") as File[];
+  const fileData = new FormData();
+  file.forEach((f, index) => {
+    fileData.append("files", f);
+  });
+  await sentToExternalAPI(fileData, {
+    query1: "clientes",
+    query2: id,
+  });
+  revalidatePath("/dashboard/clientes/cuentas/[id]", "page");
+  redirect(`/dashboard/clientes/cuentas/${id}`);
 }

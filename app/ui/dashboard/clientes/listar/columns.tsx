@@ -3,8 +3,7 @@
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
-import { DataTableRowActions } from "./data-table-row-actions";
+import { DataTableRowActions } from "@/app/ui/components/data-table-row-actions";
 import { Checkbox } from "@/components/ui/checkbox";
 import { StatusComponent, getInitials } from "@/app/lib/utils/utils";
 import { ClienteDto } from "@/src/generated/graphql";
@@ -128,7 +127,7 @@ export const columns: ColumnDef<Regist>[] = [
       return (
         <div className="flex float-right  items-center mt-1 max-w-[50px] ">
          
-          <DataTableRowActions row={row} />
+          <DataTableRowActions row={row} ruta={`/dashboard/clientes/cuentas/${row.original._id}`} />
         </div>
       );
     },
