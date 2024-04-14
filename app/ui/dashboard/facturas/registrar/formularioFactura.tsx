@@ -84,15 +84,15 @@ export default function FormFactura({
       // Crear un nuevo objeto FormData
       toast({
         title: "Operación exitosa",
-        description: "El cliente ha sido registrado correctamente",
+        description: "La factura se ha sido registrado correctamente",
         action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
     } catch (error) {
       console.error("Error al enviar los archivos a la API externa:", error);
       toast({
         variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
+        title: "Ocurrio un error.",
+        description: "Ocurrio un problema con la solicitud.",
         action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
     }

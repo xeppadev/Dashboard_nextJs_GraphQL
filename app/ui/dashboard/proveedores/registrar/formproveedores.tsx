@@ -62,8 +62,8 @@ export default function FormProveedor() {
       console.error("Error al enviar los archivos a la API externa:", error);
       toast({
         variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
+        title: "Ocurrio un error.",
+        description: "Ocurrio un problema con la solicitud.",
         action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
     }

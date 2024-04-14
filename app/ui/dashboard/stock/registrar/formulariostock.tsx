@@ -119,16 +119,16 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
       await registrarRepuestos(formData);
       toast({
         title: "Operación exitosa",
-        description: "El cliente ha sido registrado correctamente",
+        description: "El stock se ha sido registrado correctamente",
         action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
     } catch (error) {
       console.error("Error al enviar los archivos a la API externa:", error);
       toast({
         variant: "destructive",
-        title: "Uh oh! Something went wrong.",
-        description: "There was a problem with your request.",
-        action: <ToastAction altText="Try again"> Try again</ToastAction>,
+        title: "Ocurrio un error.",
+        description: "Ocurrio un problema con la solicitud.",
+        action: <ToastAction altText="Try again">Try again</ToastAction>,
       });
     }
   };
@@ -142,7 +142,7 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
               <CardContent className="flex flex-col border-b border-dashed px-2 mx-4">
                 <CardTitle className="text-lg font-semibold mr-auto ">
                   {" "}
-                  Agregar Stock
+                 Incrementar Stock Actual
                 </CardTitle>
 
                 {fields.map((item, index) => (
@@ -236,7 +236,7 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
               <CardContent className="flex flex-col border-b border-dashed px-2 mx-4">
                 <CardTitle className="text-lg font-semibold mr-auto ">
                   {" "}
-                  Agregar Stock Nuevo
+                  Registrar Stock Nuevo
                 </CardTitle>
 
                 {fields2.map((item, index) => (
