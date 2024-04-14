@@ -1,7 +1,6 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import Link from "next/link";
 import { format, parseISO } from "date-fns";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -11,7 +10,7 @@ import { SalarioFechaDto } from "@/src/generated/graphql";
 
 export const columns: ColumnDef<SalarioFechaDto | undefined | null>[] = [
   {
-    id: "salario",
+    id: "name",
     cell: ({ row }) => {
       return (
         <div className="flex space-x-4 ml-4 items-center min-w-[180px]">

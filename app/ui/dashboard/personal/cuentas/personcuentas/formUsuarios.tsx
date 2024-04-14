@@ -95,12 +95,15 @@ export function FormularioChange({ data }: { data: UserOutput }) {
               name="username"
               label="Username del Personal"
               placeholder="Ingrese un username"
+              noeditable={true}
+              
             />
             <FormFieldComponent
               control={form.control}
               name="correo"
               label="Direccion de Correo"
               placeholder="Ingrese un correo electronico"
+
             />
               <FormFieldComponent
               control={form.control}
@@ -116,6 +119,7 @@ export function FormularioChange({ data }: { data: UserOutput }) {
               label="Nivel de Usuario"
               placeholder="Ingrese una nivel de usuario"
               className="w-full mt-2.5"
+              noeditable={true}
             />
             <FormFieldComponent
               control={form.control}
@@ -123,6 +127,7 @@ export function FormularioChange({ data }: { data: UserOutput }) {
               label="Cliente Asociado"
               placeholder="Ingrese una cliete asociado"
               className="w-full mt-2.5"
+              noeditable={true}
             />
            
           </CardContent>

@@ -41,7 +41,7 @@ export default function Main({ data }: { data: PersonalDto }) {
 
         <CardFooter className="flex flex-col justify-center space-y-10 ">
         
-          <AlertDialogDemo buttonText="Eliminar Cuenta" 
+          {/* <AlertDialogDemo buttonText="Eliminar Cuenta" 
           handleDelete={async () => {
             try {
               await borrarPersonalModel(data._id || "");
@@ -49,7 +49,7 @@ export default function Main({ data }: { data: PersonalDto }) {
               console.log(error);
             }
           }}
-          />
+          /> */}
         </CardFooter>
       </Card>
       <Card className=" bg-background  lg:w-[75%]">

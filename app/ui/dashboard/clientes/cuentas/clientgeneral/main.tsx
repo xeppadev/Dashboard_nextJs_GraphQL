@@ -39,7 +39,7 @@ export default function Main({ data }: { data: Cliente2Dto }) {
         </CardContent>
 
         <CardFooter className="flex flex-col justify-center space-y-10 ">
-          <AlertDialogDemo
+          {/* <AlertDialogDemo
             buttonText="Eliminar Cuenta"
             handleDelete={async () => {
               try {
@@ -48,7 +48,7 @@ export default function Main({ data }: { data: Cliente2Dto }) {
                 console.log(error);
               }
             }}
-          />
+          /> */}
         </CardFooter>
       </Card>
       <Card className=" bg-background  lg:w-[75%]">
