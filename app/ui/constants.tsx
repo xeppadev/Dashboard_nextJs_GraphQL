@@ -119,7 +119,7 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   {
     postitle: "Otros",
     title: "Soporte",
-    path: "/soporte",
+    path: "/dashboard/soporte",
     icon: <IcRoundSupport className="w-[24px] h-[24px]" />,
   },
 ];
@@ -131,6 +131,12 @@ export const SIDENAV_ITEMS_TECNICO: SideNavItem[] = [
     path: "/dashboard/registrar-mantenimiento",
     icon: <MingcuteToolFill className="w-[23px] h-[23px]" />,
   },
+  {
+    postitle: "Otros",
+    title: "Soporte",
+    path: "/dashboard/soporte",
+    icon: <IcRoundSupport className="w-[24px] h-[24px]" />,
+  },
 ];
 
 export const SIDENAV_ITEMS_CLIENTE: SideNavItem[] = [
@@ -139,5 +145,11 @@ export const SIDENAV_ITEMS_CLIENTE: SideNavItem[] = [
     title: "Vehiculos",
     path: "/dashboard/vehiculos/historial_clinico",
     icon: <MingcuteCarFillDualtone className="w-[24px] h-[24px]" />,
+  },
+  {
+    postitle: "Otros",
+    title: "Soporte",
+    path: "/dashboard/soporte",
+    icon: <IcRoundSupport className="w-[24px] h-[24px]" />,
   },
 ];

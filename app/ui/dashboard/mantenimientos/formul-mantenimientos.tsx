@@ -87,7 +87,7 @@ function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
     formData.append("diagnostico", data.diagnostico);
     formData.append("tipo", data.tipo);
     formData.append("fecha", data.fecha);
-
+  
     // Agregar el archivo al objeto formData
     file.forEach((f, index) => {
       formData.append("file", f.file);

@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-const MAX_FILE_SIZE = 2500000;
+const MAX_FILE_SIZE = 25000000;
 const ACCEPTED_IMAGE_TYPES = [
   "application/pdf", // PDF
   "image/jpeg", // JPEG images

@@ -1,11 +1,14 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { DialogEdit } from "../personcuentas/editarusers";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Maybe } from "graphql/jsutils/Maybe";
 import { processColumn } from "@/app/lib/utils/utils";
-import { SolarTrashBinTrashBoldDuotone, SolarFileDownloadBoldDuotone} from "@/app/lib/icons";
+import {
+  SolarTrashBinTrashBoldDuotone,
+  SolarFileDownloadBoldDuotone,
+} from "@/app/lib/icons";
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 type StringOutput = Maybe<string>;

@@ -213,7 +213,6 @@ export async function registrarMantenimiento(formData: FormData) {
     diagnostico: formData.get("diagnostico"),
   });
   const file = formData.getAll("file") as File[];
-
   const result = await registrarMantenimientoModel(dataRegister);
   const fileData = new FormData();
   file.forEach((f, index) => {
