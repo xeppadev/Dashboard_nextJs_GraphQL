@@ -36,7 +36,7 @@ export const CardIngresos = ({
         <div className="flex-row flex space-x-3 items-center">
           <div className="fle-row flex space-x-1 items-center">
             
-              <SolarRoundArrowDownBoldDuotone className=" w-[22px] h-[22px]  text-[#c3362d]" />
+              <SolarRoundArrowDownBoldDuotone className=" w-[22px] h-[22px]  text-[#c3362d] lg:inline hidden" />
             
             <div className="flex-row flew space-x-1 ">
               <span className="text-[14px] text-gray-500 font-medium ">
@@ -49,7 +49,7 @@ export const CardIngresos = ({
           </div>
           <div className="fle-row flex space-x-1 items-center">
            
-            <SolarRoundArrowDownBoldDuotone className=" w-[22px] h-[22px]  text-[#c3362d]" />
+            <SolarRoundArrowDownBoldDuotone className=" w-[22px] h-[22px]  text-[#c3362d] lg:inline hidden" />
             
             <div className="flex-row flew space-x-1 ">
               <span className="text-[14px] text-gray-500 font-medium ">
