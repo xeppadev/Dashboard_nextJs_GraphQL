@@ -36,7 +36,7 @@ export default async function Dashboard() {
         </div>
         <div className="lg:col-span-2 md:col-span-3 sm:col-span-2 col-span-1">
           <CustomCard
-            title="Mantenimientos Realizados"
+            title="Mantenimientos Completados"
             value={data.mantenimientosRealizados?.toString() || "0"}
             placa=""
             color="#dd8108"
