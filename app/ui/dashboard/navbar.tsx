@@ -6,6 +6,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMounted } from "@/src/hooks/use-is-mounted";
 import { NotificacionDto } from "@/src/generated/graphql";
 import { useSession } from "next-auth/react";
+import { ToggleMenu } from "../components/toglemenu";
 import {
   CiMenuAlt03,
   JamSearch,
@@ -15,7 +16,7 @@ import {
 import Modal from "./modal";
 type NavbarProps = {
   dataNotificaciones: NotificacionDto[];
-  // data: NotificacionDto;
+ 
 };
 
 const Navbar: FC<NavbarProps> = ({ dataNotificaciones }) => {
@@ -31,7 +32,7 @@ const Navbar: FC<NavbarProps> = ({ dataNotificaciones }) => {
   return (
     <header className=" z-50 flex h-[52px] sticky items-center justify-between   backdrop-blur  w-auto top-0 md:w-full  ">
       <div className="flex items-center mt-3 ml-5 space-x-5">
-        <CiMenuAlt03 className=" text-[#637381] w-6 h-6" />
+        <ToggleMenu />
         <JamSearch className=" text-[#637381] w-6 h-6" />
       </div>
 

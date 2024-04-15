@@ -43,7 +43,7 @@ export function FormularioChange({ data }: { data: Cliente2Dto }) {
 
   return (
     <Form {...form} >
-      <form className="space-y-4 m-2" action={actualizarCliente}>
+      <form className="space-y-4 md:m-2" action={actualizarCliente}>
         <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
         
           <FormFieldComponent

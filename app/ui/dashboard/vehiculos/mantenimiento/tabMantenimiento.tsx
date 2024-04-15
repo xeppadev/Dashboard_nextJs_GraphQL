@@ -19,19 +19,19 @@ export default async function TabsMantenimiento({ user }: { user?: string }) {
     user || ""
   );
   return (
-    <div className="lg:container mx-auto my-8">
+    <div className="lg:container md:mx-auto my-8">
       <Tabs defaultValue="mantenimiento" className="w-full space-y-8">
         <TabsList className=" inline-flex lg:space-x-8 space-x-3">
           <TabsTrigger value="mantenimiento">
-            <FluentToolbox20Filled className="lg:mr-1 mr-1 w-[19px] h-[19px]" />
+            <FluentToolbox20Filled className="lg:mr-1 mr-1 w-[19px] h-[19px] lg:inline hidden" />
             General
           </TabsTrigger>
           <TabsTrigger value="diagnosticos">
-            <SolarChecklistMinimalisticBold className="lg:mr-1 mr-1 w-[19px] h-[19px]" />
+            <SolarChecklistMinimalisticBold className="lg:mr-1 mr-1 w-[19px] h-[19px] lg:inline hidden" />
             Diagnosticos
           </TabsTrigger>
           <TabsTrigger value="documents">
-            <SolarFileSendBold className="lg:mr-1 mr-1 w-[19px] h-[19px]" />
+            <SolarFileSendBold className="lg:mr-1 mr-1 w-[19px] h-[19px] lg:inline hidden" />
             Documentos
           </TabsTrigger>
         </TabsList>

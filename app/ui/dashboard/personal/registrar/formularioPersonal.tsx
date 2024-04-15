@@ -90,8 +90,8 @@ export default function FormPersonal() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className=" grid grid-cols-1 md:grid-cols-5 md:gap-4 justify-between">
+          <CardHeader className="md:col-span-2">
             <CardTitle className="text-lg font-bold">
               {" "}
               Datos del Personal
@@ -99,7 +99,7 @@ export default function FormPersonal() {
             <CardDescription>Ingrese los datos del Personal</CardDescription>
           </CardHeader>
 
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5 ">
             <FormFieldComponent
               control={form.control}
               name="nombre"
@@ -127,8 +127,8 @@ export default function FormPersonal() {
           </CardContent>
         </Card>
 
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className=" grid grid-cols-1 md:grid-cols-5 gap-4 justify-between ">
+          <CardHeader className=" md:col-span-2">
             <CardTitle className="text-lg font-bold">
               {" "}
               Informacion del Salario
@@ -136,7 +136,7 @@ export default function FormPersonal() {
             <CardDescription>Ingrese los datos del Salario</CardDescription>
           </CardHeader>
 
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5 ">
             <FormFieldate
               control={form.control}
               name="fecha"
@@ -152,14 +152,14 @@ export default function FormPersonal() {
           </CardContent>
         </Card>
 
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className="grid grid-cols-1 md:grid-cols-5 gap-4 justify-between">
+          <CardHeader className="md:col-span-2 pb-2">
             <CardTitle className="text-lg font-bold">
               Subida de Documentos
             </CardTitle>
             <CardDescription>Suba los documentos del Personal</CardDescription>
           </CardHeader>
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5 ">
             <FormFileComponent
               control={form.control}
               name="file"
@@ -167,14 +167,14 @@ export default function FormPersonal() {
             />
           </CardContent>
         </Card>
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className="grid grid-cols-1 md:grid-cols-5 gap-4 justify-between">
+          <CardHeader className="md:col-span-2 pb-2">
             <CardTitle className="text-lg font-bold">
               Registro de Personal
             </CardTitle>
             <CardDescription>Agregue la Cuenta del Personal</CardDescription>
           </CardHeader>
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-4 md:py-7 md:col-start-3 space-y-5 pb-5">
             <FormFieldComponent
               control={form.control}
               name="name"
@@ -213,9 +213,9 @@ export default function FormPersonal() {
           </CardContent>
         </Card>
 
-        <div className="flex justify-end space-x-3">
+        <div className="flex flex-col md:flex-row justify-end space-y-3 md:space-y-0 md:space-x-3">
           <Link href="/dashboard/personal/listar_personal">
-            <Button variant="ghost" className="rounded-[10px]">
+            <Button variant="ghost" className="rounded-[10px] w-full">
               Cancelar
             </Button>
           </Link>

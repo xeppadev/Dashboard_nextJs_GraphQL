@@ -69,7 +69,7 @@ export const FormFileComponent: React.FC<FieldValues> = ({
         className="p-12 mb-6"
       />
       {fields.map((field, index) => (
-        <div key={field.id} className="flex flex-row  ">
+        <div key={field.id} className="flex flex-row mb-2 ">
           <FormField
             control={control}
             name={`${name}[${index}].file`}

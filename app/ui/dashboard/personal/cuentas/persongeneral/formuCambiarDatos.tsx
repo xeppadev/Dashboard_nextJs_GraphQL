@@ -79,7 +79,7 @@ export function FormularioChange({ data }: { data: PersonalDto }) {
   };
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 m-2">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 ">
         <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
           <FormFieldComponent
             control={form.control}

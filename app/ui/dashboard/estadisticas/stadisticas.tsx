@@ -29,9 +29,9 @@ export default async function Stadistic({
 
   return (
     <section>
-      <div className="flex flex-col items-center space-x-2 justify-between  lg:flex-row lg:space-x-3 lg:items-start lg:w-full space-y-3 lg:space-y-0">
+      <div className="flex flex-col items-center  justify-between  lg:flex-row lg:space-x-3 lg:items-start lg:w-full space-y-3 lg:space-y-0">
         <SearchBar placeholder="Buscar Vehiculo" data={dataplacas} />
-        {/* <Search placeholder="Buscar Vehiculo" width="w-[35%]" /> */}
+        
         <DatePickerComponent label="Fecha" paramName="fecha" />
       </div>
       <div className="grid lg:grid-cols-6 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-7 mt-10">

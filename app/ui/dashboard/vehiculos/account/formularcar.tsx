@@ -37,7 +37,7 @@ export function FormularioChange({ data }: { data: CarInfo }) {
 
   return (
     <Form {...form}>
-      <form className="space-y-4 m-2">
+      <form className="space-y-4 ">
         <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
           <FormFieldComponent
             control={form.control}

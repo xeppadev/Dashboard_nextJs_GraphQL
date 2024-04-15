@@ -24,7 +24,7 @@ import { agregarContratoModel } from "@/src/models/agregarContratoModel";
 import { formSchemaContratos } from "@/app/ui/dashboard/clientes/cuentas/changeCuenta/schema";
 import { agregarUsuarioModel } from "@/src/models/agregarUsuarioModel";
 import { formSchemaUsuarios } from "@/app/ui/dashboard/clientes/cuentas/changeCuenta/schema";
-import { id } from "date-fns/locale";
+
 
 const ClienteSchema = formSchemaClient.omit({
   file: true,

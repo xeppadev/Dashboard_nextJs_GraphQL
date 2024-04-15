@@ -20,7 +20,10 @@ export function GastosGenerales({ datosResponsiveBar }: GastosGeneralesProps) {
   ];
 
   const data = repuestos.map((repuesto, index) => ({
-    id: repuesto?.producto == "-" ? `Repuesto ${index + 1}` : repuesto?.producto?.toString() || `Repuesto ${index + 1}`,
+    id:
+      repuesto?.producto == "-"
+        ? `Repuesto ${index + 1}`
+        : repuesto?.producto?.toString() || `Repuesto ${index + 1}`,
     value: repuesto?.costo || 0,
     label: repuesto?.producto || `Repuesto ${index + 1}`,
   }));
@@ -41,17 +44,18 @@ export function GastosGenerales({ datosResponsiveBar }: GastosGeneralesProps) {
         <CardTitle className="font-medium">Costos por Repuestos</CardTitle>
         <CardDescription>Balance de costos por repuestos</CardDescription>
       </CardHeader>
-      <CardContent className="w-full flex flex-row">
+      <CardContent className="w-full flex flex-col sm:flex-row">
         <PieChart
-          className="w-1/2 h-[450px] overflow-hidden"
+          className="w-full sm:w-1/2 h-[450px] overflow-hidden"
           data={data}
           colors={["#2563EB", "#06AED4", "#F69009", "#D93D32", "#E5E7EB"]}
         />
 
-        <div className="space-y-5 w-1/2 mt-14">
+        <div className="space-y-5 w-full sm:w-1/2 mt-14 sm:mt-0">
           <div className="text-start">
             <p className="text-sm text-[#637381] ">
-              TOTAL BALANCE {datosResponsiveBar?.mes && convertMonth(datosResponsiveBar?.mes)}
+              TOTAL BALANCE{" "}
+              {datosResponsiveBar?.mes && convertMonth(datosResponsiveBar?.mes)}
             </p>
             <p className="text-3xl font-semibold">${totalCosto}</p>
           </div>

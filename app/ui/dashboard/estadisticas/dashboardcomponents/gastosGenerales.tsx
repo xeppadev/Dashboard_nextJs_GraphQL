@@ -37,15 +37,17 @@ export function GastosGeneralesDashboard({
         <CardTitle className="font-medium">Gastos Generales</CardTitle>
         <CardDescription>Balance de gastos generales del mes</CardDescription>
       </CardHeader>
-      <CardContent className="w-full">
+      <CardContent className="w-full ">
+      <div className="overflow-x-auto">
         <Overview
-          className="w-full h-[300px] overflow-hidden"
+          className="w-full h-[300px] min-w-[600px]"
           data={datos || []}
           enableLabel={false}
           groupMode="grouped"
           borderRadius={3}
           tickPadding={3}
         />
+        </div>
         <div className="text-center">
           <p className="text-3xl font-semibold">
             ${gastoTotalMensualUltimoMes}

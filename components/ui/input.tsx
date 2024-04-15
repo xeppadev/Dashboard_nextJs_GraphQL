@@ -20,7 +20,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           />
           <div
             className={cn(
-              "flex justify-center items-center border-input rounded-xl border-dashed border text-muted-foreground  bg-transparent px-3 py-1.5  text-sm  transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
+              "flex justify-center items-center flex-col md:flex-row border-input rounded-xl border-dashed border text-muted-foreground  bg-transparent px-3 py-1.5  text-sm  transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50",
               className
             )}
           >

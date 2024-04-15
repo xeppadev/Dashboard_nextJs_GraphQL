@@ -22,23 +22,23 @@ export default async function TabsAccount({ user }: { user?: string }) {
   const { data: datosUserCliente } = await datosUserClienteIdModel(user || "");
 
   return (
-    <div className="lg:container mx-auto my-8">
+    <div className="lg:container md:mx-auto my-8">
       <Tabs defaultValue="user" className="w-full space-y-8">
         <TabsList className=" inline-flex lg:space-x-8 space-x-3">
           <TabsTrigger value="user">
-            <SolarUserIdBold className="lg:mr-2 mr-1 w-[22px] h-[22px]" />
+            <SolarUserIdBold className="lg:mr-2 mr-1 w-[22px] h-[22px] lg:inline hidden" />
             General
           </TabsTrigger>
           <TabsTrigger value="contratos" className="ml-3">
-            <SolarDocumentAddBold className="lg:mr-2 mr[3px] w-[19px] h-[19px]" />
+            <SolarDocumentAddBold className="lg:mr-2 mr[3px] w-[19px] h-[19px] lg:inline hidden" />
             Contratos
           </TabsTrigger>
           <TabsTrigger value="account">
-            <FaSolidUserCog className="lg:mr-2 mr-1 w-[19px] h-[19px]" />
+            <FaSolidUserCog className="lg:mr-2 mr-1 w-[19px] h-[19px] lg:inline hidden" />
             Cuentas
           </TabsTrigger>
           <TabsTrigger value="files">
-            <SolarFileSendBold className="lg:mr-2 mr-1 w-[19px] h-[19px]" />
+            <SolarFileSendBold className="lg:mr-2 mr-1 w-[19px] h-[19px] lg:inline hidden" />
             Documentos
           </TabsTrigger>
         </TabsList>

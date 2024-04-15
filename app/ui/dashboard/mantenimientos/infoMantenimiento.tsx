@@ -25,8 +25,8 @@ import {
     <div className="space-y-2">
       {data.map((item, index) => (
         <>
-          <div className="flex flex-col  " key={item._id}>
-            <Card className="p-3 flex flex-row items-center justify-between  ">
+          <div className="flex flex-col " key={item._id}>
+            <Card className="p-3 flex flex-row items-center justify-between overflow-auto ">
               <div className="flex items-center space-x-3">
                 <Avatar className="bg-freelance h-[48px] w-[48px] flex items-center justify-center">
                   <AvatarImage

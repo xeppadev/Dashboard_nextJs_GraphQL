@@ -46,7 +46,7 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
         },
       ],
     },
-    
+
     mode: "onChange",
   });
 
@@ -84,7 +84,7 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
         dataRepuestos[0].precio ? dataRepuestos[0].precio.toString() : ""
       );
     }
-    if (dataRepuestos && dataRepuestos[0] ) {
+    if (dataRepuestos && dataRepuestos[0]) {
       form.setValue(
         `oldStock.${selectedFieldIndex}._id`,
         dataRepuestos[0]._id || ""
@@ -142,18 +142,18 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
               <CardContent className="flex flex-col border-b border-dashed px-2 mx-4">
                 <CardTitle className="text-lg font-semibold mr-auto ">
                   {" "}
-                 Incrementar Stock Actual
+                  Incrementar Stock Actual
                 </CardTitle>
-
+  
                 {fields.map((item, index) => (
                   <div key={item.id}>
-                    <CardContent className=" p-0 space-x-3 flex-row flex pt-2">
+                    <CardContent className=" p-0 md:space-x-3 flex-col md:flex-row flex pt-2">
                       <ComponentOptions
                         label="Repuestos Actuales"
                         options={productos}
                         placeholder="Buscar Repuesto"
                         paramName="producto"
-                        className="w-[25%]"
+                        className="w-full md:w-[25%]"
                         className2="w-full h-12 mt-2"
                         onValueChange={(value) => {
                           form.setValue(`oldStock.${index}.producto`, value);
@@ -165,7 +165,7 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
                         control={form.control}
                         name={`oldStock.${index}.marca`}
                         placeholder="Ingrese Marca"
-                        className=" w-[25%]"
+                        className="w-full md:w-[25%]"
                         className2="h-10"
                         noeditable={true}
                       />
@@ -174,26 +174,26 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
                         control={form.control}
                         name={`oldStock.${index}.cantidadactual`}
                         placeholder="Ingrese Cantidad"
-                        className="w-[16.667%]"
+                        className="w-full md:w-[16.667%]"
                         className2="h-10"
                         noeditable={true}
                       />
-
+  
                       <FormFieldComponent
                         label="Cantidad Agregar "
                         control={form.control}
                         name={`oldStock.${index}.cantidad`}
                         placeholder="Ingrese Cantidad"
-                        className="w-[16.667%]"
+                        className="w-full md:w-[16.667%]"
                         className2="h-10"
                       />
-
+  
                       <FormFieldComponent
                         label="Precio Repuesto ($)"
                         control={form.control}
                         name={`oldStock.${index}.precio`}
                         placeholder="Ingrese Precio"
-                        className="w-[16.667%]"
+                        className="w-full md:w-[16.667%]"
                         className2="h-10"
                       />
                     </CardContent>
@@ -238,16 +238,16 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
                   {" "}
                   Registrar Stock Nuevo
                 </CardTitle>
-
+  
                 {fields2.map((item, index) => (
                   <div key={item.id}>
-                    <CardContent className=" p-0 space-x-3 flex-row flex pt-2">
+                    <CardContent className=" p-0 md:space-x-3 flex-col md:flex-row flex pt-2">
                       <FormFieldComponent
                         label="Nombre Repuesto"
                         control={form.control}
                         name={`newStock.${index}.producto`}
                         placeholder="Ingrese Repuesto"
-                        className="w-[30%]"
+                        className="w-full md:w-[30%]"
                         className2="h-10"
                       />
                       <FormFieldComponent
@@ -255,7 +255,7 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
                         control={form.control}
                         name={`newStock.${index}.marca`}
                         placeholder="Ingrese Marca"
-                        className=" w-[30%]"
+                        className="w-full md:w-[30%]"
                         className2="h-10"
                       />
                       <FormFieldComponent
@@ -263,16 +263,16 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
                         control={form.control}
                         name={`newStock.${index}.cantidad`}
                         placeholder="Ingrese Cantidad"
-                        className="w-[20%]"
+                        className="w-full md:w-[20%]"
                         className2="h-10"
                       />
-
+  
                       <FormFieldComponent
                         label="Precio Repuesto ($)"
                         control={form.control}
                         name={`newStock.${index}.precio`}
                         placeholder="Ingrese Precio"
-                        className="w-[20%]"
+                        className="w-full md:w-[20%]"
                         className2="h-10"
                       />
                     </CardContent>
@@ -311,9 +311,9 @@ function FormularioStock({ productos, dataRepuestos }: FormularyProps) {
             </Card>
           </div>
         </div>
-        <div className="flex justify-end space-x-3 ">
+        <div className="flex flex-col md:flex-row justify-end space-y-3 md:space-y-0 md:space-x-3">
           <Link href="/dashboard/stock/listar_stock">
-            <Button variant="ghost" className="rounded-[10px]">
+            <Button variant="ghost" className="rounded-[10px] w-full">
               Cancelar
             </Button>
           </Link>

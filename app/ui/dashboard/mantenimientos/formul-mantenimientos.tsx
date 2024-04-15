@@ -33,7 +33,7 @@ type FormularioProps = {
 
 function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
   const { data: session } = useSession();
- 
+
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchemaMantenimiento>>({
     resolver: zodResolver(formSchemaMantenimiento),
@@ -87,7 +87,7 @@ function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
     formData.append("diagnostico", data.diagnostico);
     formData.append("tipo", data.tipo);
     formData.append("fecha", data.fecha);
-  
+
     // Agregar el archivo al objeto formData
     file.forEach((f, index) => {
       formData.append("file", f.file);
@@ -120,12 +120,12 @@ function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
               Detalles del Mantenimiento
             </CardTitle>
 
-            <div className=" p-0 space-x-3 flex-row flex w-full  ">
+            <div className=" p-0 md:space-x-3 flex-col md:flex-row flex w-full  ">
               <ComponentOptions
                 paramName="placa"
                 placeholder="Placa de vehículo"
                 options={placas}
-                className="w-1/4"
+                className="w-full md:w-1/4"
                 className2="w-full h-12 mt-2"
                 onValueChange={(value) => {
                   form.setValue("placa", value);
@@ -135,7 +135,7 @@ function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
                 control={form.control}
                 name="fechaSoat"
                 placeholder="Fecha de Soat"
-                className="w-1/4"
+                className="w-full md:w-1/4"
                 noeditable={true}
               />
 
@@ -143,20 +143,21 @@ function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
                 control={form.control}
                 name="kmPrevio"
                 placeholder="kilometraje Previo"
-                className="w-1/4"
+                className="w-full md:w-1/4"
                 noeditable={true}
               />
               <FormFieldComponent
                 control={form.control}
                 name="kmMedido"
                 placeholder="kilometraje Medido"
-                className="w-1/4"
+                className="w-full md:w-1/4"
               />
               <FormSelectComponent
                 placeholder="Tipo de Mantenimiento"
                 control={form.control}
                 name="tipo"
-                className2="h-12"
+                className2="h-12 "
+                className="md:w-auto mt-2 w-full"
                 options={[
                   {
                     value: "mantenimiento preventivo",
@@ -188,9 +189,9 @@ function MantenimienForm({ repuestos, placas, obtenerInfo }: FormularioProps) {
           </CardContent>
         </Card>
 
-        <div className="flex justify-end space-x-3">
+        <div className="flex flex-col md:flex-row justify-end space-y-3 md:space-y-0 md:space-x-3">
           <Link href="/">
-            <Button variant="ghost" className="rounded-[10px]">
+            <Button variant="ghost" className="rounded-[10px] w-full">
               Cancelar
             </Button>
           </Link>

@@ -31,14 +31,16 @@ export function Operatividad({ datosOperatividad }: MyComponentProps) {
         </CardDescription>
       </CardHeader>
       <CardContent className="w-full">
+      <div className="overflow-x-auto">
         <Overview
-          className="w-full h-[380px]"
+          className="w-full h-[380px] min-w-[600px]"
           data={datosOperatividad || []}
           groupMode="grouped"
           borderRadius={5}
           tickPadding={3}
           enableLabel={true}
         />
+        </div>
         <div className="text-center">
           <p className="text-3xl font-semibold">{totalHoras} h</p>
           <p className="text-sm text-gray-500">Horas Operativas</p>

@@ -84,7 +84,7 @@ export default async function BarraOptions({
             Kilometraje Actual
           </CardTitle>
           <CardDescription>
-            {`${data?.kmActual} km` || "sin datos"}
+            {data?.kmActual ? `${data?.kmActual} km` : "sin datos"}
           </CardDescription>
         </CardContent>
       </div>

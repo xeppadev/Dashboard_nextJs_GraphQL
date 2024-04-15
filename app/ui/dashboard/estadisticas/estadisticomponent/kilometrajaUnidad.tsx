@@ -42,9 +42,9 @@ export function KilometrajeUnidad({
           (+{porcentajeCambio.toFixed(2)}%) que el último mes
         </CardDescription>
       </CardHeader>
-      <CardContent className="w-full flex flex-row">
+      <CardContent className="w-full flex flex-col sm:flex-row">
         <LineChart
-          className="w-2/3 h-[330px] "
+          className="w-full sm:w-2/3 h-[330px]"
           data={[
             {
               id: "Recorrido Actual",
@@ -52,17 +52,15 @@ export function KilometrajeUnidad({
             },
           ]}
         />
-        <div className="space-y-7 w-1/3 flex flex-col mt-5 items-center">
-        <div className="text-center">
+        <div className="space-y-7 w-full sm:w-1/3 flex flex-col mt-5 items-center">
+          <div className="text-center">
             <p className=" text-gray-500">Placa</p>
             <p className="text-3xl font-semibold">{placa || ""}</p>
           </div>
           <div className="text-center">
-          <p className=" text-gray-500">Recorrido Actual</p>
+            <p className=" text-gray-500">Recorrido Actual</p>
             <p className="text-3xl font-semibold">{kmActual} Km</p>
-            
           </div>
-         
         </div>
       </CardContent>
     </Card>

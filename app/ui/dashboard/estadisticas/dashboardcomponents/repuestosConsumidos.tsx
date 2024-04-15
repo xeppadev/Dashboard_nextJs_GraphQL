@@ -43,13 +43,14 @@ export const RepuestosCambiados = ({
         </CardTitle>
         <CardDescription>Cantidad de repuestos consumidos</CardDescription>
       </CardHeader>
-      <CardContent className="flex flex-row">
+      <CardContent className="flex sm:flex-row  flex-col">
+
         <PieChart
-          className="w-1/2 h-[360px]"
+          className=" sm:w-1/2 h-[360px]  w-full"
           data={data}
           colors={["#2563EB", "#06AED4", "#F69009", "#D93D32", "#E5E7EB"]}
         />
-        <div className="space-y-5 w-1/2">
+        <div className="space-y-5 sm:w-1/2 w-full ">
           <div className="text-start">
             <p className="text-sm text-[#637381] ">TOTAL BALANCE MES</p>
             <p className="text-3xl font-semibold  ">${totalCosto}</p>

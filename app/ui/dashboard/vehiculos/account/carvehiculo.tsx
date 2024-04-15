@@ -14,7 +14,7 @@ import { PhStarFill } from "@/app/lib/icons";
 
 export default function CardVehiculo({ data }: { data: CarInfo }) {
   return (
-    <Card className="flex flex-col justify-between bg-background  lg:w-[75%]  xl:w-1/4 ">
+    <Card className="flex flex-col justify-between bg-background  lg:w-full  xl:w-1/4 ">
       <CardHeader className=" m-2 pr-3 pt-3   ">
         <div className="ml-auto flex flex-row items-center space-x-1  bg-[#fff5cc] dark:bg-card dark:px-0 font-semibold text-sm  px-1.5 py-1 max-w-fit rounded-lg">
           <PhStarFill className="w-5 h-5 text-[#ffab00] " />

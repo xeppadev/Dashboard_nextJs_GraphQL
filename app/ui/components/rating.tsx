@@ -51,11 +51,11 @@ export default function Rating({
         <CardTitle className="text-sm font-medium"> Estado Actual</CardTitle>
       </div>
       {elementos.map((element, index) => (
-        <div key={index} className="inline-flex  w-full space-x-4">
-          <Container className="2xl:w-[86%] w-[85%] border-input ">
+        <div key={index} className="inline-flex  w-full md:space-x-4 space-x-2">
+          <Container className="md:w-[90%] w-[75%] border-input ">
             <h4>{element}</h4>
           </Container>
-          <div className={className}>
+          <div className={className} >
             <Select
               onValueChange={(value) =>
                 onValueChange && onValueChange(value, index)

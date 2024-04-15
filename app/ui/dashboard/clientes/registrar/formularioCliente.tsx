@@ -126,8 +126,8 @@ export default function FormCliente() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className=" grid grid-cols-1 md:grid-cols-5 md:gap-4 justify-between">
+          <CardHeader className=" md:col-span-2">
             <CardTitle className="text-lg font-bold">
               {" "}
               Datos del Cliente
@@ -135,7 +135,7 @@ export default function FormCliente() {
             <CardDescription>Ingrese los datos del clientes</CardDescription>
           </CardHeader>
 
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5 ">
             <FormFieldComponent
               control={form.control}
               name="nombreCliente"
@@ -163,8 +163,8 @@ export default function FormCliente() {
           </CardContent>
         </Card>
 
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className=" grid grid-cols-1 md:grid-cols-5 gap-4 justify-between ">
+          <CardHeader className=" md:col-span-2 pb-2">
             <CardTitle className="text-lg font-bold">
               {" "}
               Datos del Contacto
@@ -172,7 +172,7 @@ export default function FormCliente() {
             <CardDescription>Ingrese los datos del contacto</CardDescription>
           </CardHeader>
 
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5">
             <FormFieldComponent
               control={form.control}
               name="nombre"
@@ -195,8 +195,8 @@ export default function FormCliente() {
           </CardContent>
         </Card>
 
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className="grid grid-cols-1 md:grid-cols-5 gap-4 justify-between">
+          <CardHeader className="md:col-span-2 pb-2">
             <CardTitle className="text-lg font-bold">
               Informacion de Contratos
             </CardTitle>
@@ -204,7 +204,7 @@ export default function FormCliente() {
               Ingrese la informacion de documentos
             </CardDescription>
           </CardHeader>
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5 ">
             {fields2.map((item, index) => (
               <div key={item.id}>
                 <FormFieldComponent
@@ -256,14 +256,14 @@ export default function FormCliente() {
             </button>
           </CardContent>
         </Card>
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className="grid grid-cols-1 md:grid-cols-5 gap-4 justify-between ">
+          <CardHeader className="md:col-span-2 pb-2">
             <CardTitle className="text-lg font-bold">
               Subida de Documentos
             </CardTitle>
             <CardDescription>Suba los documentos del cliente</CardDescription>
           </CardHeader>
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5 ">
             <FormFileComponent
               control={form.control}
               name="file"
@@ -271,14 +271,14 @@ export default function FormCliente() {
             />
           </CardContent>
         </Card>
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className=" grid grid-cols-1 md:grid-cols-5 gap-4 justify-between ">
+          <CardHeader className="md:col-span-2 pb-2">
             <CardTitle className="text-lg font-bold">
               Registro de Usuarios
             </CardTitle>
             <CardDescription>Agregue los usuarios que requiera</CardDescription>
           </CardHeader>
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5 ">
             {fields.map((item, index) => (
               <div key={item.id} className="  space-y-1 ">
                 <FormFieldComponent
@@ -351,9 +351,9 @@ export default function FormCliente() {
           </CardContent>
         </Card>
 
-        <div className="flex justify-end space-x-3">
+        <div className="flex flex-col md:flex-row justify-end space-y-3 md:space-y-0 md:space-x-3">
           <Link href="/dashboard/clientes/listar_clientes">
-            <Button variant="ghost" className="rounded-[10px]">
+            <Button variant="ghost" className="rounded-[10px] w-full">
               Cancelar
             </Button>
           </Link>

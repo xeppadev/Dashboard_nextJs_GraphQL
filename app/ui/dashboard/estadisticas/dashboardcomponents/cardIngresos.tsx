@@ -64,7 +64,7 @@ export const CardIngresos = ({
       </div>
     </CardContent>
     <MyResponsiveLine
-      className="w-1/5 md:w-2/5 h-[50px] pr-6"
+      className="w-[30%] md:w-2/5 h-[50px] pr-6 "
       color={color}
       data={data}
     />

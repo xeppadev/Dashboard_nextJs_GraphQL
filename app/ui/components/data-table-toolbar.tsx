@@ -12,9 +12,9 @@ type DataTableToolbarProps = {
 
 export function DataTableToolbar (props : DataTableToolbarProps) {
   return (
-    <div className="flex  pt-5 pb-4  flex-row space-x-4 items-start w-full">
-      <Search placeholder={`${props.placeholder}`} />
-      <div className="flex lspace-y-0 space-x-4 flex-row ">
+    <div className="flex flex-col sm:flex-row pt-5 pb-4 space-y-4 sm:space-y-0 sm:space-x-4 items-start w-full">
+      <Search placeholder={`${props.placeholder}` } width="sm:w-full w-full" />
+      <div className="flex space-y-4 sm:space-y-0 sm:space-x-4 flex-col sm:flex-row">
         <Link href={`/dashboard${props.url}`}>
           <Button className="pr-3 pl-4 py-[21px] text-sm font-semibold rounded-[10px] dark:text-foreground">
            {props.buttonName}

@@ -90,8 +90,8 @@ export function VehiculoForm({ data }: dataProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-10">
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className="grid grid-cols-1 md:grid-cols-5 gap-4 justify-between">
+          <CardHeader className="md:col-span-2 pb-2">
             <CardTitle className="text-lg font-semibold">
               {" "}
               Datos de la Unidad
@@ -99,7 +99,7 @@ export function VehiculoForm({ data }: dataProps) {
             <CardDescription>Ingrese los datos del Vehiculo</CardDescription>
           </CardHeader>
 
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5">
             <FormFieldComponent
               control={form.control}
               label="Placa del Vehiculo"
@@ -128,8 +128,8 @@ export function VehiculoForm({ data }: dataProps) {
           </CardContent>
         </Card>
 
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className="grid grid-cols-1 md:grid-cols-5 gap-4 justify-between">
+          <CardHeader className="md:col-span-2 pb-2">
             <CardTitle className="text-lg font-semibold">
               {" "}
               Datos del Contrato
@@ -137,7 +137,7 @@ export function VehiculoForm({ data }: dataProps) {
             <CardDescription>Ingrese los datos del Contrato</CardDescription>
           </CardHeader>
 
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5">
             <FormFieldComponent
               control={form.control}
               label="Propietario del Vehiculo"
@@ -180,8 +180,8 @@ export function VehiculoForm({ data }: dataProps) {
           </CardContent>
         </Card>
 
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className="grid grid-cols-1 md:grid-cols-5 gap-4 justify-between">
+          <CardHeader className="md:col-span-2 pb-2">
             <CardTitle className="text-lg font-semibold">
               {" "}
               Evaluacion de la Unidad
@@ -191,11 +191,10 @@ export function VehiculoForm({ data }: dataProps) {
             </CardDescription>
           </CardHeader>
 
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5 pb-5">
             <Rating
-              className="2xl:w-[10%] w-[15%]"
+              className="md:w-[10%] w-[25%]"
               className2="h-12"
-              placeholder=""
               onValueChange={(value, index) => {
                 // Actualizar el valor del estado
                 const estados = [...form.getValues().estados];
@@ -213,9 +212,9 @@ export function VehiculoForm({ data }: dataProps) {
           </CardContent>
         </Card>
 
-        <div className="flex justify-end space-x-3">
+        <div className="flex flex-col md:flex-row justify-end space-y-3 md:space-y-0 md:space-x-3">
           <Link href="/dashboard/vehiculos/listar_vehiculos">
-            <Button variant="ghost" className="rounded-[10px]">
+            <Button variant="ghost" className="rounded-[10px] w-full">
               Cancelar
             </Button>
           </Link>

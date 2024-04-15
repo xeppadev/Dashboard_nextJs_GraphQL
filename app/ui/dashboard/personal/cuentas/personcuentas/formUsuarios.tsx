@@ -75,15 +75,15 @@ export function FormularioChange({ data }: { data: UserOutput }) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 m-2">
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className="grid grid-cols-1 md:grid-cols-5 md:gap-4 justify-between">
+          <CardHeader className=" md:col-span-2">
             <CardTitle className="text-lg font-bold">
               {" "}
               Datos del Cuenta
             </CardTitle>
             <CardDescription>Datos del usuario</CardDescription>
           </CardHeader>
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5">
             <FormFieldComponent
               control={form.control}
               name="name"
@@ -133,9 +133,9 @@ export function FormularioChange({ data }: { data: UserOutput }) {
           </CardContent>
         </Card>
 
-        <div className="flex justify-end space-x-4">
+        <div className="flex flex-col md:flex-row justify-end space-y-3 md:space-y-0 md:space-x-3">
           <Link href="/dashboard/personal/listar_personal">
-            <Button className="rounded-[10px]" variant={"ghost"}>
+            <Button className="rounded-[10px] w-full" variant={"ghost"}>
               Cancel
             </Button>
           </Link>

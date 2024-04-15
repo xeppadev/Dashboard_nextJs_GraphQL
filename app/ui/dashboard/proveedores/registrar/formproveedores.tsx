@@ -72,8 +72,8 @@ export default function FormProveedor() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className="grid grid-cols-1 md:grid-cols-5 md:gap-4 justify-between">
+          <CardHeader className=" md:col-span-2">
             <CardTitle className="text-lg font-bold">
               {" "}
               Datos del Proveedor
@@ -81,7 +81,7 @@ export default function FormProveedor() {
             <CardDescription>Ingrese los datos del Proveedor</CardDescription>
           </CardHeader>
 
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5">
             <FormFieldComponent
               control={form.control}
               name="nombre"
@@ -109,8 +109,8 @@ export default function FormProveedor() {
           </CardContent>
         </Card>
 
-        <Card className=" grid grid-cols-5 gap-4 justify-between ">
-          <CardHeader className="col-span-2 ">
+        <Card className="grid grid-cols-1 md:grid-cols-5 gap-4 justify-between">
+          <CardHeader className="md:col-span-2 pb-2">
             <CardTitle className="text-lg font-bold">
               {" "}
               Datos del Contacto
@@ -118,7 +118,7 @@ export default function FormProveedor() {
             <CardDescription>Ingrese los datos del Contacto</CardDescription>
           </CardHeader>
 
-          <CardContent className="col-span-3 p-7 col-start-3 space-y-5 ">
+          <CardContent className="md:col-span-3 px-7 py-3 md:py-7 md:col-start-3 space-y-5">
             <FormFieldComponent
               control={form.control}
               name="nombreContacto"
@@ -140,9 +140,9 @@ export default function FormProveedor() {
           </CardContent>
         </Card>
 
-        <div className="flex justify-end space-x-3">
+        <div className="flex flex-col md:flex-row justify-end space-y-3 md:space-y-0 md:space-x-3">
           <Link href="/dashboard/proveedores/listar_proveedores">
-            <Button variant="ghost" className="rounded-[10px]">
+            <Button variant="ghost" className="rounded-[10px] w-full" >
               Cancelar
             </Button>
           </Link>

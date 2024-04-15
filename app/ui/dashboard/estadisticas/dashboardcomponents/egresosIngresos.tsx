@@ -35,9 +35,10 @@ export const EgresosIngresosComponent = ({
         </CardTitle>
         <CardDescription> Comparación de ingresos y egresos</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="w-full">
+      <div className="overflow-x-auto ">
         <LineChart
-          className="w-full h-[330px]  "
+          className="w-full h-[330px] min-w-[600px] "
           data={[
             {
               id: "Ingresos",
@@ -49,6 +50,7 @@ export const EgresosIngresosComponent = ({
             },
           ]}
         />
+        </div>
       </CardContent>
     </Card>
   );

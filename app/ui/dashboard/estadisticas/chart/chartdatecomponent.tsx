@@ -44,6 +44,7 @@ export const MyResponsiveTimeRange = ({
         data={completeData }
         from={formfecha}
         to={tofecha}
+        isInteractive={false}
         emptyColor="#eeeeee"
         colors={["#e9effd", "#a7c0f7", "#6691f1", "#2563EB"]}
         minValue={0}

@@ -12,15 +12,15 @@ import { adminHistoryCarsModel } from "@/src/models/carhistorialModel";
 export default async function TabsVehiculo({ user }: { user?: string }) {
   const { data: datosCar } = await adminHistoryCarsModel(user || "");
   return (
-    <div className="lg:container mx-auto my-8">
+    <div className="lg:container md:mx-auto my-8">
       <Tabs defaultValue="car" className="w-full space-y-8">
         <TabsList className=" inline-flex lg:space-x-8 space-x-3">
           <TabsTrigger value="car">
-            <RiCarFill className="lg:mr-1 mr-1 w-5 h-5" />
+            <RiCarFill className="lg:mr-1 mr-1 w-5 h-5 lg:inline hidden" />
             General
           </TabsTrigger>
           <TabsTrigger value="mantenimientos">
-            <FluentToolbox20Filled className="lg:mr-1 mr-1 w-[19px] h-[19px]" />
+            <FluentToolbox20Filled className="lg:mr-1 mr-1 w-[19px] h-[19px] lg:inline hidden" />
             Mantenimientos
           </TabsTrigger>
         </TabsList>

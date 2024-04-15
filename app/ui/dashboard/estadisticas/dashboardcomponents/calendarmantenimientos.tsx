@@ -19,16 +19,18 @@ export const CalendarMantenimientos = ({
   data,
 }: CalendarMantenimientosProps) => {
   return (
-    <Card className="overflow-x-auto">
+    <Card >
       <CardHeader>
         <CardTitle className="font-medium">Mantenimientos Programados</CardTitle>
         <CardDescription>Cantidad de mantenimientos Programados</CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="w-full ">
+      <div className="overflow-x-auto">
         <MyResponsiveTimeRange
-          className="w-full h-[330px] overflow-hidden"
+          className="w-full h-[330px] min-w-[600px]"
           data={ data || []}
         />
+        </div>
       </CardContent>
     </Card>
   );
