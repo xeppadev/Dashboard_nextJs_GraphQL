@@ -66,7 +66,7 @@ export default function Signin() {
               <div className="flex items-center">
                 <Label htmlFor="password">Password</Label>
                 <Link
-                  href="/forgot-password"
+                  href="https://api.whatsapp.com/send/?phone=%2B51933735851&text&type=phone_number&app_absent=0"
                   className="ml-auto inline-block text-sm underline"
                 >
                   Forgot your password?
@@ -78,12 +78,12 @@ export default function Signin() {
               Login
             </Button>
           </form>
-          <div className="mt-4 text-center text-sm">
+          {/* <div className="mt-4 text-center text-sm">
             Don&apos;t have an account?{" "}
             <Link href="#" className="underline">
               Sign up
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
