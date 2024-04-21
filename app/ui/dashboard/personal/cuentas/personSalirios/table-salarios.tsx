@@ -1,9 +1,9 @@
 import React from "react";
 import { DataTable } from "../../../../components/data-table";
 import { columns } from "./column";
-import { PersonalDto } from "@/src/generated/graphql";
+import { Personal3Dto } from "@/src/generated/graphql";
 
-export default function UserSalarios({ data }: { data: PersonalDto }) {
+export default function UserSalarios({ data }: { data: Personal3Dto }) {
   return (
     <div className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-4  pb-6">
       <div className=" px-2  w-full space-y-8 ">

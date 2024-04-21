@@ -2,15 +2,16 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { format, parseISO } from "date-fns";
-
+import { AlertDialogDemo } from "@/app/ui/components/dialogdelete";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { SalarioFechaDto } from "@/src/generated/graphql";
+import { SalarioFecha3Dto } from "@/src/generated/graphql";
+import { borrarContratoModel } from "@/src/models/borrarContratoModel";
 
 // This type is used to define the shape of our data.
 
-export const columns: ColumnDef<SalarioFechaDto | undefined | null>[] = [
+export const columns: ColumnDef<SalarioFecha3Dto | undefined | null>[] = [
   {
-    id: "name",
+    accessorKey: "_id",
     cell: ({ row }) => {
       return (
         <div className="flex space-x-4 ml-4 items-center min-w-[180px]">
@@ -64,10 +65,21 @@ export const columns: ColumnDef<SalarioFechaDto | undefined | null>[] = [
   {
     id: "actions",
     cell: ({ row }) => {
+      const column = row.original;
       return (
-        <div className="flex float-right  items-center mt-1  ">
-          
-         
+        <div className="flex float-right  items-center mt-1  mr-2">
+          <AlertDialogDemo
+            handleDelete={async () => {
+              try {
+                await borrarContratoModel(
+                  column?._id || "",
+                  column?.idPersonal || ""
+                );
+              } catch (error) {
+                console.log(error);
+              }
+            }}
+          />
         </div>
       );
     },

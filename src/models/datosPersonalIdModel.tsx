@@ -15,6 +15,7 @@ export async function datosPersonalIdModel(id: string) {
     },
     variables: {
       obtenerPersonalPorIdId: id,
+      
     },
   });
   return { data: data?.obtener_Personal_Por_Id };

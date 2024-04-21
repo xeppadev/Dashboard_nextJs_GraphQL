@@ -10,7 +10,7 @@ import { Form } from "@/components/ui/form";
 import { FormFieldComponent } from "@/app/ui/components/formfieldcomponent";
 import { FormFieldate } from "@/app/ui/components/formfielddate";
 import { useToast } from "@/components/ui/use-toast";
-import { PersonalDto } from "@/src/generated/graphql";
+import { Personal3Dto } from "@/src/generated/graphql";
 import { actualizarPersonal } from "@/lib/actions";
 import { salarioMasReciente } from "@/app/lib/utils/utils";
 const PeronalSchemaChange = formSchemaPersonal
@@ -29,7 +29,7 @@ const PeronalSchemaChange = formSchemaPersonal
 
 
 
-export function FormularioChange({ data }: { data: PersonalDto }) {
+export function FormularioChange({ data }: { data: Personal3Dto }) {
   const { toast } = useToast();
 
   const salario = salarioMasReciente(data.salarioFecha);

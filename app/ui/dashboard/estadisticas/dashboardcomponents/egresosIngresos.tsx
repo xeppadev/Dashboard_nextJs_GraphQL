@@ -36,7 +36,7 @@ export const EgresosIngresosComponent = ({
         <CardDescription> Comparación de ingresos y egresos</CardDescription>
       </CardHeader>
       <CardContent className="w-full">
-      <div className="overflow-x-auto ">
+      <div className="overflow-x-auto 2xl:overflow-hidden">
         <LineChart
           className="w-full h-[330px] min-w-[600px] "
           data={[

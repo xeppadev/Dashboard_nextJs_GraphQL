@@ -32,9 +32,10 @@ const documents = {
     "\n  query Mantenimiento_Info_por_ID($mantenimientoInfoPorIdId: String!) {\n    Mantenimiento_Info_por_ID(id: $mantenimientoInfoPorIdId) {\n      anotaciones\n      cambiosSolicitados\n      cliente\n      diagnostico\n      diagnosticoFinal\n      documentos\n      estado\n      fechaFin\n      fecha\n      fechaInicio\n      fechaSoat\n      kmMedido\n      kmPrevio\n      placa\n      repuestos {\n        cantidad\n        cantidadReserva\n        id\n        marca\n        precio\n        producto\n      }\n      tecnico\n      tipo\n    }\n  }\n": types.Mantenimiento_Info_Por_IdDocument,
     "\n  query Buscar_Pesonal_Search($nombre: String!, $page: Int) {\n    buscar_Pesonal(nombre: $nombre, page: $page) {\n      personal {\n        _id\n        documentos\n        email\n        fechaIngreso\n        nombre\n        numero\n        salarioFecha {\n          fecha\n          salario\n        }\n      }\n      totalPages\n    }\n  }\n": types.Buscar_Pesonal_SearchDocument,
     "\n  mutation Crear_Personal($input: PersonalUserInput!) {\n    crear_Personal(input: $input)\n  }\n": types.Crear_PersonalDocument,
-    "\n  query Obtener_Personal_Por_Id($obtenerPersonalPorIdId: String!) {\n    obtener_Personal_Por_Id(id: $obtenerPersonalPorIdId) {\n      _id\n      documentos\n      email\n      fechaIngreso\n      nombre\n      numero\n      salarioFecha {\n        fecha\n        salario\n      }\n      username\n    }\n  }\n": types.Obtener_Personal_Por_IdDocument,
+    "\n  query Obtener_Personal_Por_Id($obtenerPersonalPorIdId: String!) {\n    obtener_Personal_Por_Id(id: $obtenerPersonalPorIdId) {\n      _id\n      documentos\n      email\n      fechaIngreso\n      numero\n      nombre\n      salarioFecha {\n        _id\n        fecha\n        idPersonal\n        salario\n      }\n      username\n    }\n  }\n": types.Obtener_Personal_Por_IdDocument,
     "\n  mutation Actualizar_Info_Personal(\n    $actualizarInfoPersonalId: String!\n    $input: UpdatePersonalInput!\n    $salarioFecha: SalarioFechaInput\n  ) {\n    actualizar_Info_Personal(\n      id: $actualizarInfoPersonalId\n      input: $input\n      salarioFecha: $salarioFecha\n    )\n  }\n": types.Actualizar_Info_PersonalDocument,
     "\n  mutation Borrar_Personal($borrarPersonalId: String!) {\n    borrar_Personal(id: $borrarPersonalId)\n  }\n": types.Borrar_PersonalDocument,
+    "\n  mutation Borrar_contrato_personal(\n    $idContrato: String!\n    $idPersonal: String!\n  ) {\n    borrar_contrato_personal(id_contrato: $idContrato, id_personal: $idPersonal)\n  }\n": types.Borrar_Contrato_PersonalDocument,
     "\n  query Buscar_Proveedor($nombre: String!, $page: Int) {\n    buscar_Proveedor(nombre: $nombre, page: $page) {\n      proveedor {\n        _id\n        direccion\n        documentos\n        email\n        nombre\n        nombreContacto\n        numeroContacto\n        rubro\n        ruc\n      }\n      totalPages\n    }\n  }\n": types.Buscar_ProveedorDocument,
     "\n  mutation Crear_Proveedor($input: ProveedorInput!) {\n    crear_Proveedor(input: $input)\n  }\n": types.Crear_ProveedorDocument,
     "\n  query QueryProveedores {\n    obtener_nombres_proveedor\n  }\n": types.QueryProveedoresDocument,
@@ -153,7 +154,7 @@ export function gql(source: "\n  mutation Crear_Personal($input: PersonalUserInp
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function gql(source: "\n  query Obtener_Personal_Por_Id($obtenerPersonalPorIdId: String!) {\n    obtener_Personal_Por_Id(id: $obtenerPersonalPorIdId) {\n      _id\n      documentos\n      email\n      fechaIngreso\n      nombre\n      numero\n      salarioFecha {\n        fecha\n        salario\n      }\n      username\n    }\n  }\n"): (typeof documents)["\n  query Obtener_Personal_Por_Id($obtenerPersonalPorIdId: String!) {\n    obtener_Personal_Por_Id(id: $obtenerPersonalPorIdId) {\n      _id\n      documentos\n      email\n      fechaIngreso\n      nombre\n      numero\n      salarioFecha {\n        fecha\n        salario\n      }\n      username\n    }\n  }\n"];
+export function gql(source: "\n  query Obtener_Personal_Por_Id($obtenerPersonalPorIdId: String!) {\n    obtener_Personal_Por_Id(id: $obtenerPersonalPorIdId) {\n      _id\n      documentos\n      email\n      fechaIngreso\n      numero\n      nombre\n      salarioFecha {\n        _id\n        fecha\n        idPersonal\n        salario\n      }\n      username\n    }\n  }\n"): (typeof documents)["\n  query Obtener_Personal_Por_Id($obtenerPersonalPorIdId: String!) {\n    obtener_Personal_Por_Id(id: $obtenerPersonalPorIdId) {\n      _id\n      documentos\n      email\n      fechaIngreso\n      numero\n      nombre\n      salarioFecha {\n        _id\n        fecha\n        idPersonal\n        salario\n      }\n      username\n    }\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -162,6 +163,10 @@ export function gql(source: "\n  mutation Actualizar_Info_Personal(\n    $actual
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function gql(source: "\n  mutation Borrar_Personal($borrarPersonalId: String!) {\n    borrar_Personal(id: $borrarPersonalId)\n  }\n"): (typeof documents)["\n  mutation Borrar_Personal($borrarPersonalId: String!) {\n    borrar_Personal(id: $borrarPersonalId)\n  }\n"];
+/**
+ * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function gql(source: "\n  mutation Borrar_contrato_personal(\n    $idContrato: String!\n    $idPersonal: String!\n  ) {\n    borrar_contrato_personal(id_contrato: $idContrato, id_personal: $idPersonal)\n  }\n"): (typeof documents)["\n  mutation Borrar_contrato_personal(\n    $idContrato: String!\n    $idPersonal: String!\n  ) {\n    borrar_contrato_personal(id_contrato: $idContrato, id_personal: $idPersonal)\n  }\n"];
 /**
  * The gql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

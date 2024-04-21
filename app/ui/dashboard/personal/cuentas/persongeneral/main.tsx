@@ -13,8 +13,8 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {FormularioChange} from "./formuCambiarDatos";
 // import { borrarPersonalModel } from "@/src/models/borrarPersonalModel";
 import { Badge } from "@/components/ui/badge";
-import { PersonalDto } from "@/src/generated/graphql";
-export default function Main({ data }: { data: PersonalDto }) {
+import { Personal3Dto } from "@/src/generated/graphql";
+export default function Main({ data }: { data: Personal3Dto }) {
   return (
     <div className="flex flex-col xl:flex-row space-y-4 xl:space-y-0 xl:space-x-5 pb-6 px-2 pt-2">
       <Card className="flex flex-col justify-between bg-background    lg:w-full    xl:w-1/4">

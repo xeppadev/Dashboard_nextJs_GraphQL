@@ -31,7 +31,7 @@ export function Operatividad({ datosOperatividad }: MyComponentProps) {
         </CardDescription>
       </CardHeader>
       <CardContent className="w-full">
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto 2xl:overflow-hidden">
         <Overview
           className="w-full h-[380px] min-w-[600px]"
           data={datosOperatividad || []}

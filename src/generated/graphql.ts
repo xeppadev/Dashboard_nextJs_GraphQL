@@ -473,6 +473,7 @@ export type Mutation = {
   borrar_Personal: Scalars['Boolean']['output'];
   /** Esta Función elimina un proveedor de la base de datos y retorna un booleano indicando si se eliminó correctamente o no */
   borrar_Proveedor: Scalars['Boolean']['output'];
+  borrar_contrato_personal: Scalars['Boolean']['output'];
   /** Esta Función elimina un usuario de la base de datos */
   borrar_usuario_por_id: Scalars['String']['output'];
   /** Esta función cambia el estado de un mantenimiento a "revision" y realiza una corrección de repuestos, esta corrección es quitar los repuestos que estaban reservados */
@@ -498,6 +499,8 @@ export type Mutation = {
   createUser: Scalars['Boolean']['output'];
   /** Esta Función elimina un contrato de un cliente en la base de datos y retorna el documento actualizado */
   eliminar_Contrato: Scalars['Boolean']['output'];
+  /** envia un string de notificación de emergencia */
+  emergencia_notificacion: Scalars['Boolean']['output'];
   /** Esta funcion programa un mantenimiento */
   programar_mantenimiento: Scalars['String']['output'];
   /** Esta Función es para probar las notifaciones */
@@ -578,6 +581,12 @@ export type MutationBorrar_ProveedorArgs = {
 };
 
 
+export type MutationBorrar_Contrato_PersonalArgs = {
+  id_contrato: Scalars['String']['input'];
+  id_personal: Scalars['String']['input'];
+};
+
+
 export type MutationBorrar_Usuario_Por_IdArgs = {
   _id: Scalars['String']['input'];
 };
@@ -650,6 +659,11 @@ export type MutationEliminar_ContratoArgs = {
 };
 
 
+export type MutationEmergencia_NotificacionArgs = {
+  emergencia: Scalars['String']['input'];
+};
+
+
 export type MutationProgramar_MantenimientoArgs = {
   programarMantInput: PrograMantenimientoDto;
 };
@@ -710,6 +724,18 @@ export type OperatividadPorMes = {
   operatividad?: Maybe<Scalars['Float']['output']>;
 };
 
+export type Personal3Dto = {
+  __typename?: 'Personal3Dto';
+  _id?: Maybe<Scalars['String']['output']>;
+  documentos?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  email?: Maybe<Scalars['String']['output']>;
+  fechaIngreso?: Maybe<Scalars['DateTime']['output']>;
+  nombre: Scalars['String']['output'];
+  numero?: Maybe<Scalars['Int']['output']>;
+  salarioFecha?: Maybe<Array<Maybe<SalarioFecha3Dto>>>;
+  username: Scalars['String']['output'];
+};
+
 export type PersonalDto = {
   __typename?: 'PersonalDto';
   _id?: Maybe<Scalars['String']['output']>;
@@ -719,7 +745,7 @@ export type PersonalDto = {
   nombre: Scalars['String']['output'];
   numero?: Maybe<Scalars['Int']['output']>;
   salarioFecha?: Maybe<Array<Maybe<SalarioFechaDto>>>;
-  username?: Scalars['String']['output'];
+  username: Scalars['String']['output'];
 };
 
 export type PersonalInput = {
@@ -847,7 +873,7 @@ export type Query = {
   /** Esta Función retorna la información de un cliente en base a su ID */
   obtener_Cliente_ID: Cliente2Dto;
   /** Esta Función retorna la información de un personal por su id */
-  obtener_Personal_Por_Id: PersonalDto;
+  obtener_Personal_Por_Id: Personal3Dto;
   /** Esta Función retorna el total de salarios de todo el personal en la base de dato */
   obtener_Salari_Total: Scalars['Float']['output'];
   /** Esta Función retorna la información de todo el personal en la base de datos */
@@ -1087,8 +1113,17 @@ export type RepuestosResult = {
   totalPages: Scalars['Int']['output'];
 };
 
+export type SalarioFecha3Dto = {
+  __typename?: 'SalarioFecha3Dto';
+  _id?: Maybe<Scalars['String']['output']>;
+  fecha: Scalars['DateTime']['output'];
+  idPersonal?: Maybe<Scalars['String']['output']>;
+  salario: Scalars['Float']['output'];
+};
+
 export type SalarioFechaDto = {
   __typename?: 'SalarioFechaDto';
+  _id?: Maybe<Scalars['String']['output']>;
   fecha: Scalars['DateTime']['output'];
   salario: Scalars['Float']['output'];
 };
@@ -1337,7 +1372,7 @@ export type Obtener_Personal_Por_IdQueryVariables = Exact<{
 }>;
 
 
-export type Obtener_Personal_Por_IdQuery = { __typename?: 'Query', obtener_Personal_Por_Id: { __typename?: 'PersonalDto', _id?: string | null, documentos?: Array<string | null> | null, email?: string | null, fechaIngreso?: any | null, nombre: string, numero?: number | null, username: string, salarioFecha?: Array<{ __typename?: 'SalarioFechaDto', fecha: any, salario: number } | null> | null } };
+export type Obtener_Personal_Por_IdQuery = { __typename?: 'Query', obtener_Personal_Por_Id: { __typename?: 'Personal3Dto', _id?: string | null, documentos?: Array<string | null> | null, email?: string | null, fechaIngreso?: any | null, numero?: number | null, nombre: string, username: string, salarioFecha?: Array<{ __typename?: 'SalarioFecha3Dto', _id?: string | null, fecha: any, idPersonal?: string | null, salario: number } | null> | null } };
 
 export type Actualizar_Info_PersonalMutationVariables = Exact<{
   actualizarInfoPersonalId: Scalars['String']['input'];
@@ -1354,6 +1389,14 @@ export type Borrar_PersonalMutationVariables = Exact<{
 
 
 export type Borrar_PersonalMutation = { __typename?: 'Mutation', borrar_Personal: boolean };
+
+export type Borrar_Contrato_PersonalMutationVariables = Exact<{
+  idContrato: Scalars['String']['input'];
+  idPersonal: Scalars['String']['input'];
+}>;
+
+
+export type Borrar_Contrato_PersonalMutation = { __typename?: 'Mutation', borrar_contrato_personal: boolean };
 
 export type Buscar_ProveedorQueryVariables = Exact<{
   nombre: Scalars['String']['input'];
@@ -1531,9 +1574,10 @@ export const Regisrar_Mantenimiento_No_ProgramadoDocument = {"kind":"Document","
 export const Mantenimiento_Info_Por_IdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Mantenimiento_Info_por_ID"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"mantenimientoInfoPorIdId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"Mantenimiento_Info_por_ID"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"mantenimientoInfoPorIdId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"anotaciones"}},{"kind":"Field","name":{"kind":"Name","value":"cambiosSolicitados"}},{"kind":"Field","name":{"kind":"Name","value":"cliente"}},{"kind":"Field","name":{"kind":"Name","value":"diagnostico"}},{"kind":"Field","name":{"kind":"Name","value":"diagnosticoFinal"}},{"kind":"Field","name":{"kind":"Name","value":"documentos"}},{"kind":"Field","name":{"kind":"Name","value":"estado"}},{"kind":"Field","name":{"kind":"Name","value":"fechaFin"}},{"kind":"Field","name":{"kind":"Name","value":"fecha"}},{"kind":"Field","name":{"kind":"Name","value":"fechaInicio"}},{"kind":"Field","name":{"kind":"Name","value":"fechaSoat"}},{"kind":"Field","name":{"kind":"Name","value":"kmMedido"}},{"kind":"Field","name":{"kind":"Name","value":"kmPrevio"}},{"kind":"Field","name":{"kind":"Name","value":"placa"}},{"kind":"Field","name":{"kind":"Name","value":"repuestos"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cantidad"}},{"kind":"Field","name":{"kind":"Name","value":"cantidadReserva"}},{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"marca"}},{"kind":"Field","name":{"kind":"Name","value":"precio"}},{"kind":"Field","name":{"kind":"Name","value":"producto"}}]}},{"kind":"Field","name":{"kind":"Name","value":"tecnico"}},{"kind":"Field","name":{"kind":"Name","value":"tipo"}}]}}]}}]} as unknown as DocumentNode<Mantenimiento_Info_Por_IdQuery, Mantenimiento_Info_Por_IdQueryVariables>;
 export const Buscar_Pesonal_SearchDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Buscar_Pesonal_Search"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"nombre"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"buscar_Pesonal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"nombre"},"value":{"kind":"Variable","name":{"kind":"Name","value":"nombre"}}},{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"personal"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"documentos"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"fechaIngreso"}},{"kind":"Field","name":{"kind":"Name","value":"nombre"}},{"kind":"Field","name":{"kind":"Name","value":"numero"}},{"kind":"Field","name":{"kind":"Name","value":"salarioFecha"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fecha"}},{"kind":"Field","name":{"kind":"Name","value":"salario"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalPages"}}]}}]}}]} as unknown as DocumentNode<Buscar_Pesonal_SearchQuery, Buscar_Pesonal_SearchQueryVariables>;
 export const Crear_PersonalDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Crear_Personal"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PersonalUserInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"crear_Personal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<Crear_PersonalMutation, Crear_PersonalMutationVariables>;
-export const Obtener_Personal_Por_IdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Obtener_Personal_Por_Id"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"obtenerPersonalPorIdId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"obtener_Personal_Por_Id"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"obtenerPersonalPorIdId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"documentos"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"fechaIngreso"}},{"kind":"Field","name":{"kind":"Name","value":"nombre"}},{"kind":"Field","name":{"kind":"Name","value":"numero"}},{"kind":"Field","name":{"kind":"Name","value":"salarioFecha"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"fecha"}},{"kind":"Field","name":{"kind":"Name","value":"salario"}}]}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode<Obtener_Personal_Por_IdQuery, Obtener_Personal_Por_IdQueryVariables>;
+export const Obtener_Personal_Por_IdDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Obtener_Personal_Por_Id"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"obtenerPersonalPorIdId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"obtener_Personal_Por_Id"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"obtenerPersonalPorIdId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"documentos"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"fechaIngreso"}},{"kind":"Field","name":{"kind":"Name","value":"numero"}},{"kind":"Field","name":{"kind":"Name","value":"nombre"}},{"kind":"Field","name":{"kind":"Name","value":"salarioFecha"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"fecha"}},{"kind":"Field","name":{"kind":"Name","value":"idPersonal"}},{"kind":"Field","name":{"kind":"Name","value":"salario"}}]}},{"kind":"Field","name":{"kind":"Name","value":"username"}}]}}]}}]} as unknown as DocumentNode<Obtener_Personal_Por_IdQuery, Obtener_Personal_Por_IdQueryVariables>;
 export const Actualizar_Info_PersonalDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Actualizar_Info_Personal"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"actualizarInfoPersonalId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"UpdatePersonalInput"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"salarioFecha"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"SalarioFechaInput"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"actualizar_Info_Personal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"actualizarInfoPersonalId"}}},{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}},{"kind":"Argument","name":{"kind":"Name","value":"salarioFecha"},"value":{"kind":"Variable","name":{"kind":"Name","value":"salarioFecha"}}}]}]}}]} as unknown as DocumentNode<Actualizar_Info_PersonalMutation, Actualizar_Info_PersonalMutationVariables>;
 export const Borrar_PersonalDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Borrar_Personal"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"borrarPersonalId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"borrar_Personal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"borrarPersonalId"}}}]}]}}]} as unknown as DocumentNode<Borrar_PersonalMutation, Borrar_PersonalMutationVariables>;
+export const Borrar_Contrato_PersonalDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Borrar_contrato_personal"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"idContrato"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"idPersonal"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"borrar_contrato_personal"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id_contrato"},"value":{"kind":"Variable","name":{"kind":"Name","value":"idContrato"}}},{"kind":"Argument","name":{"kind":"Name","value":"id_personal"},"value":{"kind":"Variable","name":{"kind":"Name","value":"idPersonal"}}}]}]}}]} as unknown as DocumentNode<Borrar_Contrato_PersonalMutation, Borrar_Contrato_PersonalMutationVariables>;
 export const Buscar_ProveedorDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Buscar_Proveedor"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"nombre"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"page"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"buscar_Proveedor"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"nombre"},"value":{"kind":"Variable","name":{"kind":"Name","value":"nombre"}}},{"kind":"Argument","name":{"kind":"Name","value":"page"},"value":{"kind":"Variable","name":{"kind":"Name","value":"page"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"proveedor"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"_id"}},{"kind":"Field","name":{"kind":"Name","value":"direccion"}},{"kind":"Field","name":{"kind":"Name","value":"documentos"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"nombre"}},{"kind":"Field","name":{"kind":"Name","value":"nombreContacto"}},{"kind":"Field","name":{"kind":"Name","value":"numeroContacto"}},{"kind":"Field","name":{"kind":"Name","value":"rubro"}},{"kind":"Field","name":{"kind":"Name","value":"ruc"}}]}},{"kind":"Field","name":{"kind":"Name","value":"totalPages"}}]}}]}}]} as unknown as DocumentNode<Buscar_ProveedorQuery, Buscar_ProveedorQueryVariables>;
 export const Crear_ProveedorDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Crear_Proveedor"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ProveedorInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"crear_Proveedor"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<Crear_ProveedorMutation, Crear_ProveedorMutationVariables>;
 export const QueryProveedoresDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"QueryProveedores"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"obtener_nombres_proveedor"}}]}}]} as unknown as DocumentNode<QueryProveedoresQuery, QueryProveedoresQueryVariables>;

@@ -1,7 +1,7 @@
 import { differenceInDays, parseISO } from "date-fns";
 import { Contrato2Dto } from "@/src/generated/graphql";
 import { ContratoDto } from "@/src/generated/graphql";
-import { SalarioFechaDto } from "@/src/generated/graphql";
+import { SalarioFecha3Dto ,SalarioFechaDto } from "@/src/generated/graphql";
 import { MantenimientoInfo } from "@/src/generated/graphql";
 import { es } from "date-fns/locale";
 import { format, parse } from "date-fns";
@@ -102,7 +102,7 @@ export function processColumn(column: string) {
 
 // Esta función toma un array de objetos salarioFecha y devuelve el salario más reciente
 export function salarioMasReciente(
-  salarioFecha: Maybe<Maybe<SalarioFechaDto>[]> | undefined 
+  salarioFecha: Maybe<Maybe<SalarioFecha3Dto>[]> | undefined  |  Maybe<Maybe<SalarioFechaDto>[]>
 ) {
   if (!salarioFecha || salarioFecha.length === 0) {
     return null;
