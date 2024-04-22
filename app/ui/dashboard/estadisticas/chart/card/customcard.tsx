@@ -5,7 +5,7 @@ import {
   SolarCalendarDateBoldDuotone,
   ChartMantenimientosRealizados,
 } from "@/app/lib/icons";
-
+import {format} from 'date-fns'
 // Define la interfaz para las props
 interface CustomCardProps {
   title: string;
@@ -45,7 +45,7 @@ export const CustomCard = ({
               {placa ? "Placa:" : "Fecha:"}
             </span>
             <span className="text-[14px] text-gray-500 font-medium ">
-              {placa ? placa : new Date().toLocaleDateString()}
+              {placa ? placa :  format(new Date(), 'dd/MM/yyyy')}
               
             </span>
           </div>
