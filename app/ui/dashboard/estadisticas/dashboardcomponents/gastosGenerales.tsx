@@ -67,7 +67,7 @@ export function GastosGeneralesDashboard({
             <div className="flex items-center space-x-2">
               <SolarBillListBoldDuotone className="text-[#06AED4] w-6 h-6" />
 
-              <p>insumos</p>
+              <p>Facturas</p>
             </div>
             <p>${gastoFacturasMes}</p>
           </div>
