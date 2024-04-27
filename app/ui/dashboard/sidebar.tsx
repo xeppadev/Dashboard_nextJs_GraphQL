@@ -170,7 +170,7 @@ const MenuItem = ({ item }: { item: SideNavItem }) => {
         <button
           onClick={() =>
             window.open(
-              "https://api.whatsapp.com/send/?phone=%2B51933735851&text&type=phone_number&app_absent=0",
+              "https://api.whatsapp.com/send?phone=51933721755&text=",
               "_blank"
             )
           }
