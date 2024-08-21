@@ -1,6 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Next.js Dashboard with GraphQL, Apollo Client, and NextAuth
+
+## Features
+
+- **Next.js App Router**: Optimized navigation and advanced routing for the application.
+- **GraphQL**: Query interface for the API, providing a flexible and efficient way to handle data.
+- **Apollo Client**: Library for managing state and data in the application, easily integrating GraphQL.
+- **NextAuth**: Comprehensive authentication solution, supporting OAuth, JWT, and more.
+
+## Installation
+
+Follow the steps below to set up and run this project on your local machine.
+
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+
+### Clone the Repository
+
+```bash
+git clone https://github.com/xeppadev/Dashboard_nextJs_GraphQL.git
+cd your-repository
+
+```
+
+### Install Dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### Environment Configuration
+
+Create a .env.local file in the root of the project and add the following environment variables:
+
+```bash
+NEXT_PUBLIC_GRAPHQL_URL = 
+NEXT_API_URL = 
+NEXT_PUBLIC_API_URL =
+NEXTAUTH_URL = 
+NEXTAUTH_SECRET=************
+```
+
+### Getting Started
 
 First, run the development server:
 
@@ -14,23 +59,55 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Authentication
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+This project uses NextAuth to manage authentication. Users can log in using OAuth providers like Google, GitHub, etc.
 
-## Learn More
+### Queries and Mutations
 
-To learn more about Next.js, take a look at the following resources:
+Apollo Client handles data management using GraphQL. You can execute queries and mutations directly from the components.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```plaintext
+Project/
+├── app/
+│ ├── page.tsx
+│ └── layout.tsx
+├── src/
+│ ├── entities/
+│ │ └── User.ts
+│ ├── generated/
+│ │ └── schema.graphql.ts
+│ ├── hooks/
+│ │ └── useAuth.ts
+│ ├── models/
+│ │ └── UserModel.ts
+│ ├── repositories/
+│ │ └── UserRepository.ts
+├── components/
+│ ├── Header.tsx
+│ ├── Footer.tsx
+├── lib/
+│ ├── apolloClient.ts
+│ ├── auth.ts
+├── styles/
+│ └── globals.css
+└── .env.local
+```
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+You can deploy this application using services like Vercel, which natively supports Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Deploy on Vercel
+
+Connect your repository to Vercel.
+Set up environment variables in Vercel.
+Deploy the application with a single click.
+
+## Screenshots
+
+<img src="./screenshots/Screenshot_Dashboard.png" alt="application" width="600"/>
